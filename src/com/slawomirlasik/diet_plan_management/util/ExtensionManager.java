@@ -1,9 +1,7 @@
 package com.slawomirlasik.diet_plan_management.util;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 public class ExtensionManager {
 
@@ -33,7 +31,53 @@ public class ExtensionManager {
 
     }
 
-    public static void saveExtensionCurrentState(){
+    // saving logic
 
+    public static void saveExtensionCurrentState() throws IOException {
+        saveExtensionsToFile(EXTENSION_FILE);
+    }
+
+    public static void saveExtensionsToFile(String filePath) throws IOException {
+        // add some basic security for not getting null pointer exception
+        if (filePath == null) filePath = EXTENSION_FILE;
+        //Create Stream for writing to a file
+        FileOutputStream fileOutputStream = new FileOutputStream(new File(filePath));
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        // write object to a file and close a stream
+        objectOutputStream.writeObject(extensions);
+        objectOutputStream.close();
+    }
+
+    // loading logic
+
+    public static Boolean loadExtensionsFromFile() throws IOException, ClassNotFoundException {
+        return loadExtensionsFromFile(EXTENSION_FILE);
+    }
+
+    public static Boolean loadExtensionsFromFile(String filePath) throws IOException, ClassNotFoundException {
+        // ad some basic security for not getting null pointer exception
+        if (filePath == null) filePath = EXTENSION_FILE;
+
+        //create Stream for reading from a file
+        File dataFile = new File(filePath);
+        if (!dataFile.exists()) return false;
+        FileInputStream fi = new FileInputStream(dataFile);
+        ObjectInputStream oi = new ObjectInputStream(fi);
+        return
+                ((extensions = (Map<Class, List<ExtensionManager>>) oi.readObject()) != null ? true : false);
+    }
+
+    public static  void printExtension(Class extensionKey) throws Exception {
+       List<ExtensionManager> extensionList = null;
+
+       if(extensions.containsKey(extensionKey)){
+           extensionList = extensions.get(extensionKey);
+       }else{
+           throw new Exception("Unknown class :" + extensionKey.getSimpleName());
+       }
+
+       for(Object object : extensionList){
+           System.out.println(object);
+       }
     }
 }
