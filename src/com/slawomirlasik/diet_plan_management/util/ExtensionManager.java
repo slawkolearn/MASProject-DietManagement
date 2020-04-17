@@ -1,5 +1,9 @@
 package com.slawomirlasik.diet_plan_management.util;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,7 +37,22 @@ public class ExtensionManager {
 
     }
 
-    public static void saveExtensionCurrentState(){
+    // saving logic
 
+    public static void saveExtensionCurrentState() throws IOException {
+        saveExtensionsToFile(EXTENSION_FILE);
     }
+
+    public static void saveExtensionsToFile(String filePath) throws IOException {
+        // add some basic security for not getting null pointer exception
+        if (filePath == null) filePath = EXTENSION_FILE;
+        //Create Stream for writing to a file
+        FileOutputStream fileOutputStream = new FileOutputStream(new File(filePath));
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        // write object to a file and close a stream
+        objectOutputStream.writeObject(extensions);
+        objectOutputStream.close();
+    }
+
+    // loading logic
 }
