@@ -1,13 +1,7 @@
 package com.slawomirlasik.diet_plan_management.util;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 public class ExtensionManager {
 
@@ -55,4 +49,21 @@ public class ExtensionManager {
     }
 
     // loading logic
+
+    public static Boolean loadExtensionsFromFile() throws IOException, ClassNotFoundException {
+        return loadExtensionsFromFile(EXTENSION_FILE);
+    }
+
+    public static Boolean loadExtensionsFromFile(String filePath) throws IOException, ClassNotFoundException {
+        // ad some basic security for not getting null pointer exception
+        if (filePath == null) filePath = EXTENSION_FILE;
+
+        //create Stream for reading from a file
+        File dataFile = new File(filePath);
+        if (!dataFile.exists()) return false;
+        FileInputStream fi = new FileInputStream(dataFile);
+        ObjectInputStream oi = new ObjectInputStream(fi);
+        return
+                ((extensions = (Map<Class, List<ExtensionManager>>) oi.readObject()) != null ? true : false);
+    }
 }
