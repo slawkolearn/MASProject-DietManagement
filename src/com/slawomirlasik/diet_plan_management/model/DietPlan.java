@@ -8,16 +8,8 @@ import java.util.List;
 
 public class DietPlan extends ExtensionManager {
 
-    private Integer proteinPerDay;
-    private Integer carbohydratesPerDay;
-    private Integer fatsPerDay;
-
-
-    public DietPlan(Integer proteinPerDay, Integer carbohydratesPerDay, Integer fatsPerDay) {
+    public DietPlan() {
         super();
-        this.proteinPerDay = proteinPerDay;
-        this.carbohydratesPerDay = carbohydratesPerDay;
-        this.fatsPerDay = fatsPerDay;
     }
 
     private static List<DietPlanDay> getDietPlanDays(Period period) {
@@ -26,15 +18,5 @@ public class DietPlan extends ExtensionManager {
         return dietPlanDayPeriod;
     }
 
-    public Integer getProteinPerDay() {
-        return proteinPerDay;
-    }
 
-    public Integer getCarbohydratesPerDay() {
-        return carbohydratesPerDay;
-    }
-
-    public Integer getFatsPerDay() {
-        return fatsPerDay;
-    }
 }

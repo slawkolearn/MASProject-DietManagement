@@ -5,7 +5,6 @@ import java.util.*;
 
 public class ExtensionManager {
 
-    // TODO:SL implement managing extensions
     // file name for storing extensions
     private static final String EXTENSION_FILE = "extensionData.dtd";
     // main container for applications extensions storage
@@ -28,7 +27,6 @@ public class ExtensionManager {
         }
         // and we add this object that is being created to the retrieved / created list of extensions
         extensionList.add(this);
-
     }
 
     // saving logic
@@ -66,6 +64,7 @@ public class ExtensionManager {
         return
                 ((extensions = (Map<Class, List<ExtensionManager>>) oi.readObject()) != null ? true : false);
     }
+
 
     public static  void printExtension(Class extensionKey) throws Exception {
        List<ExtensionManager> extensionList = null;
