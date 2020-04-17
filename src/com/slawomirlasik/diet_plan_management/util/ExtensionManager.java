@@ -66,4 +66,18 @@ public class ExtensionManager {
         return
                 ((extensions = (Map<Class, List<ExtensionManager>>) oi.readObject()) != null ? true : false);
     }
+
+    public static  void printExtension(Class extensionKey) throws Exception {
+       List<ExtensionManager> extensionList = null;
+
+       if(extensions.containsKey(extensionKey)){
+           extensionList = extensions.get(extensionKey);
+       }else{
+           throw new Exception("Unknown class :" + extensionKey.getSimpleName());
+       }
+
+       for(Object object : extensionList){
+           System.out.println(object);
+       }
+    }
 }
