@@ -2,10 +2,12 @@ package com.slawomirlasik.diet_plan_management.mp1;
 
 import com.slawomirlasik.diet_plan_management.model.*;
 import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
+import com.sun.org.glassfish.external.statistics.RangeStatistic;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -18,9 +20,6 @@ public class Mp1 {
         // TODO:SL ekstensja
         // TODO:SL ekstensja trwałość
         // TODO:SL atr. złożony
-        // TODO:SL atr.pochodny
-        // TODO:SL metoda klasowa
-        // TODO:SL override (przesłonięcie)
         // TODO:SL overload (przeciążenie)
 
         // atrybut opcjonalny
@@ -124,8 +123,22 @@ public class Mp1 {
         System.out.println(dietUser1);
         System.out.println("Dane Administratora Diety:");
         System.out.println(dietAdmin1);
+        System.out.println("-----------------------------");
         // przeciążenie (overload)
+            // wykorzystamy referencję do obiektu klasy DietUser by dodać jedną bądź listę statystyk (np. z kilku poprzednich dni)
+            // dodajmy najpierw jedną statystykę
+            // wyświetlmy ile ma obecnie statystyk dany user
+        System.out.printf("Obecnie %s ma %d  statystyk%n", dietUser1.getName(), dietUser1.getUserStatistics().size());
+        dietUser1.addStatistic(generateRandomDietUserStatistic());
+            // a teraz listę statystyk
+        dietUser1.addStatistic(Arrays.asList(
+                generateRandomDietUserStatistic(),
+                generateRandomDietUserStatistic()
+        ));
 
+        System.out.printf("Po dodaniu statystyk obecnie %s ma %d statystyk%n", dietUser1.getName(), dietUser1.getUserStatistics().size());
+        System.out.println(dietUser1);
+        System.out.println("-----------------------------");
     }
 
     private static DietStatistics generateRandomDietUserStatistic() {

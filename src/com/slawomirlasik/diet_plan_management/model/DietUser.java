@@ -23,6 +23,10 @@ public class DietUser extends Person {
         }
     }
 
+    public List<DietStatistics> getUserStatistics() {
+        return userStatistics;
+    }
+
     @Override
     public String toString() {
         return super.toString() + " DietUser{" +
