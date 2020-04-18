@@ -2,39 +2,35 @@ package com.slawomirlasik.diet_plan_management.model;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 
+import java.io.Serializable;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DietPlan extends ExtensionManager {
+public class DietPlan extends ExtensionManager implements Serializable {
 
-    private Integer proteinPerDay;
-    private Integer carbohydratesPerDay;
-    private Integer fatsPerDay;
+    List<DietPlanDay> dietPlanDaysList;
 
-
-    public DietPlan(Integer proteinPerDay, Integer carbohydratesPerDay, Integer fatsPerDay) {
+    public DietPlan(List<DietPlanDay> dietPLanDaysList) {
         super();
-        this.proteinPerDay = proteinPerDay;
-        this.carbohydratesPerDay = carbohydratesPerDay;
-        this.fatsPerDay = fatsPerDay;
+        this.dietPlanDaysList = dietPLanDaysList;
     }
 
-    private static List<DietPlanDay> getDietPlanDays(Period period) {
+    private List<DietPlanDay> getDietPlanDays(Period period) {
         List<DietPlanDay> dietPlanDayPeriod = new ArrayList<>();
         // TODO:SL implement method of getting days of diet plan within a period
         return dietPlanDayPeriod;
     }
 
-    public Integer getProteinPerDay() {
-        return proteinPerDay;
+    public static Iterable<DietPlan> getAllDietPlans(){
+        // TODO:SL implement this method getting all current diet plans in the system
+        return getExtension(DietPlan.class);
     }
 
-    public Integer getCarbohydratesPerDay() {
-        return carbohydratesPerDay;
-    }
-
-    public Integer getFatsPerDay() {
-        return fatsPerDay;
+    @Override
+    public String toString() {
+        return "DietPlan{" +
+                "dietPlanDaysList Size=" + dietPlanDaysList.size() +
+                '}';
     }
 }

@@ -2,7 +2,9 @@ package com.slawomirlasik.diet_plan_management.model;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 
-public class MealRecipe extends ExtensionManager {
+import java.io.Serializable;
+
+public class MealRecipe extends ExtensionManager implements Serializable {
 
     public MealRecipe() {
         super();

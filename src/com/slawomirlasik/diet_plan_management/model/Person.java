@@ -2,9 +2,10 @@ package com.slawomirlasik.diet_plan_management.model;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Person extends ExtensionManager {
+public abstract class Person extends ExtensionManager implements Serializable {
     private static Integer MINIMAL_AGE = 18;
 
     private String name;
@@ -12,14 +13,14 @@ public class Person extends ExtensionManager {
 
     private LocalDate birthDate;
 
-    public Person(String name, String lastName, LocalDate birthDate) {
+    public Person(String name, String lastName, LocalDate birthDate) throws Exception {
         super();
         this.name = name;
         this.lastName = lastName;
-        this.birthDate = birthDate;
+        setBirthDate(birthDate);
     }
 
-    public Integer getAge(){
+    public Integer getAge() {
         return LocalDate.now().getYear() - birthDate.getYear();
     }
 
@@ -51,7 +52,36 @@ public class Person extends ExtensionManager {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    /**
+     * the method sets the users current @param birthdate field.
+     *
+     * used only when some to update incorrect data, and when creating first Person.
+     *
+     * Throws exception when users age is under 18.
+     *
+     * @param birthDate
+     * @throws Exception
+     */
+
+    public void setBirthDate(LocalDate birthDate) throws Exception {
+        if (LocalDate.now().getYear() - birthDate.getYear() < 18) {
+            throw new Exception(
+                    String.format("%s : The %s must have at least %d years old.",
+                            ERROR_LABEL, name, MINIMAL_AGE)
+            );
+        } else {
+            this.birthDate = birthDate;
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return "Personal Data={" +
+                "name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthDate=" + birthDate +
+                '}';
     }
 }
+

@@ -1,31 +1,41 @@
 package com.slawomirlasik.diet_plan_management.model;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
+import java.io.Serializable;
 import java.util.Optional;
 
-public class RecipeIngredient extends ExtensionManager {
+public class RecipeIngredient extends ExtensionManager implements Serializable {
 
-    private Optional<Float> amountOfIngredient;
+    private Float amountOfIngredient;
 
-    private RecipeIngredient(Optional<Float> amountOfIngredient){
-        super();
-        this.amountOfIngredient = amountOfIngredient;
-    }
 
     public RecipeIngredient(Float amountOfIngredientFloat) {
-        this(Optional.ofNullable(amountOfIngredientFloat));
+        super();
+        this.amountOfIngredient = amountOfIngredientFloat;
     }
 
     public RecipeIngredient() {
-        this(Optional.empty());
+        this(null);
     }
 
     public Float getAmountOfIngredient() {
-        return amountOfIngredient.orElse(0f);
+        return checkIfAmountOfIngredientPresent() ? amountOfIngredient : 0f;
+    }
+
+    public Boolean checkIfAmountOfIngredientPresent(){
+        return this.amountOfIngredient == null ? false : true;
     }
 
     public void setAmountOfIngredient(Float amountOfIngredient) {
-        this.amountOfIngredient = Optional.ofNullable(amountOfIngredient);
+        this.amountOfIngredient = amountOfIngredient;
+    }
+
+    @Override
+    public String toString() {
+        return "RecipeIngredient{" +
+                "amountOfIngredient=" + (checkIfAmountOfIngredientPresent() ? getAmountOfIngredient() : "ilość dowolna") +
+                '}';
     }
 }
