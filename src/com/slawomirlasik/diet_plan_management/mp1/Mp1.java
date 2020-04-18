@@ -7,10 +7,7 @@ import com.sun.org.glassfish.external.statistics.RangeStatistic;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Mp1 {
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -18,16 +15,17 @@ public class Mp1 {
     public static void main(String[] args) {
 
 
-        // TODO:SL ekstensja
-        // TODO:SL ekstensja trwałość
         // TODO:SL atr. złożony
-        // TODO:SL overload (przeciążenie)
         // esktensja trwałość - wczytywanie
             // próbujemy wczytać ze standarowego pliku zawartość poprzedniej extensji (wszystkich)
         try {
             System.out.println("Próba wczytania poprzedniego statnu...");
-            ExtensionManager.loadExtensionsFromFile();
-            System.out.println("Wczytano poprzedni stan ekstensji...");
+            if(ExtensionManager.loadExtensionsFromFile()){
+                System.out.println("Wczytano poprzedni stan ekstensji...");
+            }else{
+                System.out.println("Nie udało się wczytać poprzedniego stanu ekstensji...");
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -70,14 +68,14 @@ public class Mp1 {
         try {
             dietAdmin1 = new DietAdministrator(
                     "Pablo", "Picasso", LocalDate.parse("11-10-1977", dateFormatter),
-                    "Uniwersytet Warszawski"
+                    generateDiploma("UKSW", "01-06-2010", Arrays.asList("Masaż", "Fizjoterapia", "Dietetyka"))
             );
             System.out.println(dietAdmin1);
 
             System.out.println("Próba stworzenia osoby poniżej 18 roku życia:");
             DietAdministrator dietAdmin2 = new DietAdministrator(
                     "Krzysiu", "Laskowski", LocalDate.parse("31-12-2006", dateFormatter),
-                    "UKSW"
+                    generateDiploma("UKSW", "01-06-2019", Arrays.asList("Dietetyka"))
             );
             // wyjątek -> osoba Krzysiu będzie miała poniżej 18 lat dla daty 31-12-2006
             System.out.println(dietAdmin2);
@@ -126,7 +124,8 @@ public class Mp1 {
             try {
                 dietAdmin1 = new DietAdministrator("Grzegorz", "Nowak",
                         LocalDate.parse("11-01-2012", dateFormatter),
-                        "Szkolenie Online \"Zdrowie i TY\"");
+                generateDiploma("Szkolenie Online \"Zdrowie i TY\"", "01-02-2020", Arrays.asList("Fizjoterapia", "Dietetyka")));
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -165,6 +164,12 @@ public class Mp1 {
             e.printStackTrace();
         }
 
+    }
+
+    private static Diploma generateDiploma(String schoolName, String date, List<String> asList) {
+        Set<String> skillSet = new HashSet<>();
+        asList.stream().forEach(element -> skillSet.add(element));
+        return new Diploma(schoolName, LocalDate.parse(date, dateFormatter), skillSet);
     }
 
     private static DietStatistics generateRandomDietUserStatistic() {

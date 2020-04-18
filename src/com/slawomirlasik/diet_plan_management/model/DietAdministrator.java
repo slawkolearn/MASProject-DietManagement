@@ -5,10 +5,10 @@ import java.time.LocalDate;
 
 public class DietAdministrator extends Person implements Serializable {
 
-    // field stub for storing diploma (later may be implemented differently)
-    private String diploma;
+    // field for storing diploma (later may be implemented differently)
+    private Diploma diploma;
 
-    public DietAdministrator(String name, String lastName, LocalDate birthDate, String diploma) throws Exception {
+    public DietAdministrator(String name, String lastName, LocalDate birthDate, Diploma diploma) throws Exception {
         super(name, lastName, birthDate);
         this.diploma = diploma;
     }
