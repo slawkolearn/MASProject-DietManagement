@@ -3,7 +3,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>816</x>
+      <x>976</x>
       <y>0</y>
       <w>128</w>
       <h>152</h>
@@ -21,7 +21,7 @@ getAge()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>592</x>
+      <x>752</x>
       <y>272</y>
       <w>224</w>
       <h>216</h>
@@ -38,7 +38,7 @@ showDietStatistics(period)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1024</x>
+      <x>1184</x>
       <y>264</y>
       <w>184</w>
       <h>64</h>
@@ -54,7 +54,7 @@ generateNewDietForGivenUser(dietUser)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
+      <x>1016</x>
       <y>144</y>
       <w>184</w>
       <h>160</h>
@@ -65,7 +65,7 @@ generateNewDietForGivenUser(dietUser)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
+      <x>880</x>
       <y>144</y>
       <w>160</w>
       <h>144</h>
@@ -76,7 +76,7 @@ generateNewDietForGivenUser(dietUser)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>688</x>
+      <x>848</x>
       <y>496</y>
       <w>112</w>
       <h>160</h>
@@ -90,7 +90,7 @@ dietTypes[1..n]
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>664</x>
+      <x>824</x>
       <y>792</y>
       <w>144</w>
       <h>104</h>
@@ -107,7 +107,7 @@ noOfFat
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>696</x>
+      <x>856</x>
       <y>648</y>
       <w>96</w>
       <h>160</h>
@@ -123,7 +123,7 @@ contains v</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>808</x>
+      <x>968</x>
       <y>672</y>
       <w>128</w>
       <h>152</h>
@@ -138,7 +138,7 @@ contains v</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>712</x>
+      <x>872</x>
       <y>680</y>
       <w>112</w>
       <h>56</h>
@@ -149,7 +149,7 @@ contains v</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>496</x>
+      <x>656</x>
       <y>600</y>
       <w>112</w>
       <h>168</h>
@@ -163,7 +163,7 @@ Description</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>600</x>
+      <x>760</x>
       <y>592</y>
       <w>104</w>
       <h>80</h>
@@ -174,7 +174,7 @@ Description</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>312</x>
+      <x>472</x>
       <y>856</y>
       <w>120</w>
       <h>56</h>
@@ -185,7 +185,7 @@ Description</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>344</x>
+      <x>504</x>
       <y>760</y>
       <w>232</w>
       <h>112</h>
@@ -196,7 +196,7 @@ Description</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>616</x>
+      <x>776</x>
       <y>104</y>
       <w>120</w>
       <h>56</h>
@@ -207,7 +207,7 @@ Description</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>584</x>
+      <x>744</x>
       <y>152</y>
       <w>104</w>
       <h>136</h>
@@ -218,7 +218,7 @@ Description</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>336</x>
+      <x>496</x>
       <y>424</y>
       <w>160</w>
       <h>136</h>
@@ -234,7 +234,7 @@ _getAllDietPlans()_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>408</x>
+      <x>568</x>
       <y>344</y>
       <w>200</w>
       <h>96</h>
@@ -248,8 +248,8 @@ has v</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>240</x>
-      <y>288</y>
+      <x>392</x>
+      <y>272</y>
       <w>104</w>
       <h>88</h>
     </coordinates>
@@ -262,8 +262,8 @@ to</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>96</x>
-      <y>624</y>
+      <x>64</x>
+      <y>632</y>
       <w>80</w>
       <h>32</h>
     </coordinates>
@@ -273,53 +273,35 @@ to</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>88</x>
+      <x>48</x>
       <y>328</y>
       <w>136</w>
-      <h>320</h>
+      <h>328</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=0..4
 belongs to ^</panel_attributes>
-    <additional_attributes>10.0;10.0;110.0;380.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>24</x>
-      <y>176</y>
-      <w>144</w>
-      <h>160</h>
-    </coordinates>
-    <panel_attributes>DietPlanDay
---
-proteinPerDay
-carbohydratesPerDay
-fatsPerDay
-
---
-</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes>10.0;10.0;120.0;390.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>168</x>
+      <x>136</x>
       <y>552</y>
-      <w>536</w>
-      <h>112</h>
+      <w>728</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=0..n
 made from &gt;</panel_attributes>
-    <additional_attributes>650.0;10.0;320.0;50.0;130.0;50.0;10.0;120.0</additional_attributes>
+    <additional_attributes>890.0;10.0;560.0;50.0;370.0;50.0;10.0;130.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>256</x>
+      <x>416</x>
       <y>688</y>
       <w>96</w>
       <h>112</h>
@@ -335,7 +317,7 @@ personalize();</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>328</x>
+      <x>488</x>
       <y>584</y>
       <w>80</w>
       <h>120</h>
@@ -346,7 +328,7 @@ personalize();</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
+      <x>440</x>
       <y>88</y>
       <w>152</w>
       <h>168</h>
@@ -364,7 +346,7 @@ dateOfMeasurement
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>0</x>
+      <x>160</x>
       <y>64</y>
       <w>120</w>
       <h>56</h>
@@ -375,7 +357,7 @@ dateOfMeasurement
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>112</x>
+      <x>272</x>
       <y>72</y>
       <w>184</w>
       <h>128</h>
@@ -386,18 +368,18 @@ dateOfMeasurement
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
+      <x>488</x>
       <y>344</y>
-      <w>240</w>
+      <w>200</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>280.0;50.0;170.0;10.0;10.0;40.0</additional_attributes>
+    <additional_attributes>230.0;50.0;120.0;10.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>808</x>
+      <x>968</x>
       <y>312</y>
       <w>272</w>
       <h>160</h>
@@ -413,7 +395,7 @@ r2=dietUser
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>504</x>
+      <x>664</x>
       <y>936</y>
       <w>128</w>
       <h>216</h>
@@ -424,7 +406,7 @@ r2=dietUser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>552</x>
+      <x>712</x>
       <y>824</y>
       <w>128</w>
       <h>128</h>
@@ -435,7 +417,7 @@ r2=dietUser
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>992</x>
+      <x>1152</x>
       <y>512</y>
       <w>152</w>
       <h>112</h>
@@ -446,12 +428,52 @@ r2=dietUser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>928</x>
+      <x>1088</x>
       <y>616</y>
       <w>80</w>
       <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;70.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>176</x>
+      <y>400</y>
+      <w>216</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>DietPlanDay list is generated by the DietAdministrator object by the  generateNewDietForGivenUser() method</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>384</x>
+      <y>440</y>
+      <w>128</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>192</y>
+      <w>144</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>DietPlanDay
+--
+proteinPerDay
+carbohydratesPerDay
+fatsPerDay
+day
+--
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

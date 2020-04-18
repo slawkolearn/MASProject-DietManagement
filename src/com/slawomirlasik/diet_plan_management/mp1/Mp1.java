@@ -1,12 +1,11 @@
 package com.slawomirlasik.diet_plan_management.mp1;
 
-import com.slawomirlasik.diet_plan_management.model.DietAdministrator;
-import com.slawomirlasik.diet_plan_management.model.DietType;
-import com.slawomirlasik.diet_plan_management.model.Recipe;
-import com.slawomirlasik.diet_plan_management.model.RecipeIngredient;
+import com.slawomirlasik.diet_plan_management.model.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Mp1 {
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -78,9 +77,32 @@ public class Mp1 {
                 dietAdmin1.getName(), dietAdmin1.getAge(), getYearStringPolish(dietAdmin1.getAge()));
         System.out.println("-----------------------------");
         // Metoda klasowa
+        // Tutaj symulujemy działanie metody z klasy DietAdministrator, która tworzy dla konkretnego
+            // użytkownika diety obiekt klasy DietPLan, który odpowiada planowi diety użytkownika. W niej
+                // będą przechowywane DietPlanDays odpowiadające odpowiednim dniom w diecie
+        // Tworzymy Listę z konkretnymi dniami. dla ułatwienia wszyskie dni mają taką samą wartość odżywczą
+        List<DietPlanDay> dietPlanDayList1 = generateDietPlanDayListStub(10);
+        List<DietPlanDay> dietPlanDayList2 = generateDietPlanDayListStub(20);
+        // Tworzymy nową dietę dla jakiegoś użytkownika (każda dieta będzie indywidualna dla użytkonika)
+        DietPlan dietPlan1 = new DietPlan(dietPlanDayList1);
+        DietPlan dietPlan2 = new DietPlan(dietPlanDayList1);
+        // wyświetlamy wszyskie dostępne diety jakie mamy dostępne w systemie
+        DietPlan.getAllDietPlans().forEach(System.out::println);
+        System.out.println("-----------------------------");
         // przesłonięcie (overriding)
         // przeciążenie (overload)
 
+    }
+
+    private static List<DietPlanDay> generateDietPlanDayListStub(int startAmount) {
+        List<DietPlanDay> resultList = new ArrayList<>();
+        for(int i = 0; i < 90; i++){
+            resultList.add(new DietPlanDay(
+                    startAmount - 1, startAmount - 2, startAmount - 3,
+                    LocalDate.now().plusDays(i)
+            ));
+        }
+        return resultList;
     }
 
     public static String getYearStringPolish(Integer age) {

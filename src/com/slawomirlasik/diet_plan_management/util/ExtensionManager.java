@@ -20,9 +20,9 @@ public class ExtensionManager {
         // here we add the current object to a extension
         List<ExtensionManager> extensionList = null;
         // if there is already key with the class that we are adding (under this pointer) then we retrieve it
-        if(extensions.containsKey(extensionKey)){
+        if (extensions.containsKey(extensionKey)) {
             extensionList = extensions.get(extensionKey);
-        }else{
+        } else {
             // if not we are creating empty extension List for the new key
             extensionList = new LinkedList<>(); // TODO:SL check which container should be more correct for this
             // we add container of extensions to the main container with all extensions
@@ -69,17 +69,22 @@ public class ExtensionManager {
     }
 
 
-    public static  void printExtension(Class extensionKey) throws Exception {
-       List<ExtensionManager> extensionList = null;
+    public static void printExtension(Class extensionKey) throws Exception {
+        List<ExtensionManager> extensionList = null;
 
-       if(extensions.containsKey(extensionKey)){
-           extensionList = extensions.get(extensionKey);
-       }else{
-           throw new Exception("Unknown class :" + extensionKey.getSimpleName());
-       }
+        if (extensions.containsKey(extensionKey)) {
+            extensionList = extensions.get(extensionKey);
+        } else {
+            throw new Exception("Unknown class :" + extensionKey.getSimpleName());
+        }
 
-       for(Object object : extensionList){
-           System.out.println(object);
-       }
+        for (Object object : extensionList) {
+            System.out.println(object);
+        }
+    }
+
+    // getting extension
+    public static <T> Iterable<T> getExtension(Class<T> extensionKey) {
+        return (Iterable<T>) extensions.getOrDefault(extensionKey, new ArrayList<>());
     }
 }
