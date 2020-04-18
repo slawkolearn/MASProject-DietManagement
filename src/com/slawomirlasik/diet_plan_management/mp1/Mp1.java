@@ -45,6 +45,7 @@ public class Mp1 {
         System.out.println(fetaCheeseSalat);
 
         // atrybut klasowy
+
         // atrybut pochodny
         // Metoda klasowa
         // przesłonięcie (overriding)

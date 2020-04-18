@@ -12,14 +12,14 @@ public class Person extends ExtensionManager {
 
     private LocalDate birthDate;
 
-    public Person(String name, String lastName, LocalDate birthDate) {
+    public Person(String name, String lastName, LocalDate birthDate) throws Exception {
         super();
         this.name = name;
         this.lastName = lastName;
-        this.birthDate = birthDate;
+        setBirthDate(birthDate);
     }
 
-    public Integer getAge(){
+    public Integer getAge() {
         return LocalDate.now().getYear() - birthDate.getYear();
     }
 
@@ -51,7 +51,25 @@ public class Person extends ExtensionManager {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    /**
+     * the method sets the users current @param birthdate field.
+     *
+     * used only when some to update incorrect data, and when creating first Person.
+     *
+     * Throws exception when users age is under 18.
+     *
+     * @param birthDate
+     * @throws Exception
+     */
+
+    public void setBirthDate(LocalDate birthDate) throws Exception {
+        if (LocalDate.now().getYear() - this.birthDate.getYear() < 18) {
+            throw new Exception(
+                    String.format("The %s must have at least %d years old.", name, MINIMAL_AGE)
+            );
+        } else {
+            this.birthDate = birthDate;
+        }
     }
 }
+
