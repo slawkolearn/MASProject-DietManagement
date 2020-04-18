@@ -1,11 +1,13 @@
 package com.slawomirlasik.diet_plan_management.mp1;
 
 import com.slawomirlasik.diet_plan_management.model.*;
+import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Mp1 {
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -56,13 +58,15 @@ public class Mp1 {
         DietAdministrator dietAdmin1 = null;
         try {
             dietAdmin1 = new DietAdministrator(
-                    "Pablo", "Picasso", LocalDate.parse("11-10-1977", dateFormatter)
+                    "Pablo", "Picasso", LocalDate.parse("11-10-1977", dateFormatter),
+                    "Uniwersytet Warszawski"
             );
             System.out.println(dietAdmin1);
 
             System.out.println("Próba stworzenia osoby poniżej 18 roku życia:");
             DietAdministrator dietAdmin2 = new DietAdministrator(
-                    "Krzysiu", "Laskowski", LocalDate.parse("31-12-2006", dateFormatter)
+                    "Krzysiu", "Laskowski", LocalDate.parse("31-12-2006", dateFormatter),
+                    "UKSW"
             );
             // wyjątek -> osoba Krzysiu będzie miała poniżej 18 lat dla daty 31-12-2006
             System.out.println(dietAdmin2);
@@ -90,9 +94,50 @@ public class Mp1 {
         DietPlan.getAllDietPlans().forEach(System.out::println);
         System.out.println("-----------------------------");
         // przesłonięcie (overriding)
+         // metoda toString() w klasach DietAdministrator i DietUser
+            // stwórzmy bądź weźmy jakąś obiekt klasy DietAdministrator i DietUser
+        DietUser dietUser1 = null;
+        DietAdministrator dietAdministrator1 = null;
+        if(ExtensionManager.hasExtensionType(DietUser.class)){
+            dietUser1 = ExtensionManager.getExtension(DietUser.class).iterator().next();
+        }else{
+            try {
+                dietUser1 = new DietUser("Paweł", "Kłos", LocalDate.parse("14-11-1989", dateFormatter));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        dietUser1.addStatistic(generateRandomDietUserStatistic());
+
+        if(ExtensionManager.hasExtensionType(DietAdministrator.class)){
+            dietAdmin1 = ExtensionManager.getExtension(DietAdministrator.class).iterator().next();
+        }else{
+            try {
+                dietAdmin1 = new DietAdministrator("Grzegorz", "Nowak",
+                        LocalDate.parse("11-01-2012", dateFormatter),
+                        "Szkolenie Online \"Zdrowie i TY\"");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Dane Użytkownika:");
+        System.out.println(dietUser1);
+        System.out.println("Dane Administratora Diety:");
+        System.out.println(dietAdmin1);
         // przeciążenie (overload)
 
     }
+
+    private static DietStatistics generateRandomDietUserStatistic() {
+        Random radomizer = new Random();
+        return new DietStatistics(
+                140f + radomizer.nextFloat()*100,
+                30 + radomizer.nextFloat()*100,
+                50 + radomizer.nextFloat()*100,
+                LocalDate.now()
+        );
+    }
+
 
     private static List<DietPlanDay> generateDietPlanDayListStub(int startAmount) {
         List<DietPlanDay> resultList = new ArrayList<>();

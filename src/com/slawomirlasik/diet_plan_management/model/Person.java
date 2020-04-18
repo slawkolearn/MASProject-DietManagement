@@ -4,7 +4,7 @@ import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 
 import java.time.LocalDate;
 
-public class Person extends ExtensionManager {
+public abstract class Person extends ExtensionManager {
     private static Integer MINIMAL_AGE = 18;
 
     private String name;
@@ -73,13 +73,13 @@ public class Person extends ExtensionManager {
         }
     }
 
+
     @Override
     public String toString() {
-        return "Person{" +
+        return "Personal Data={" +
                 "name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", birthDate=" + birthDate +
-                ", age: '" + getAge() + '\'' +
                 '}';
     }
 }

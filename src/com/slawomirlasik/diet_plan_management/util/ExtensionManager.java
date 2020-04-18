@@ -1,5 +1,7 @@
 package com.slawomirlasik.diet_plan_management.util;
 
+import com.slawomirlasik.diet_plan_management.model.DietUser;
+
 import java.io.*;
 import java.util.*;
 
@@ -86,5 +88,9 @@ public class ExtensionManager {
     // getting extension
     public static <T> Iterable<T> getExtension(Class<T> extensionKey) {
         return (Iterable<T>) extensions.getOrDefault(extensionKey, new ArrayList<>());
+    }
+
+    public static <T> boolean hasExtensionType(Class<T> dietUserClass) {
+        return extensions.getOrDefault(dietUserClass, new ArrayList<>() ).size() > 0;
     }
 }

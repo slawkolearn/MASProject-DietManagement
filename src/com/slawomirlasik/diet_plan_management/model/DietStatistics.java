@@ -34,4 +34,14 @@ public class DietStatistics extends ExtensionManager {
     public LocalDate getDateOfMeasurement() {
         return dateOfMeasurement;
     }
+
+    @Override
+    public String toString() {
+        return "DietStatistics{" +
+                "height=" + height +
+                ", weight=" + weight +
+                ", waistCircumference=" + waistCircumference +
+                ", dateOfMeasurement=" + dateOfMeasurement +
+                '}';
+    }
 }

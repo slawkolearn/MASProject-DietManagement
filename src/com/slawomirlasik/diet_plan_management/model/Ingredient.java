@@ -38,4 +38,13 @@ public class Ingredient extends ExtensionManager {
     public void setNumberOfFat(Float numberOfFat) {
         this.numberOfFat = numberOfFat;
     }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "numberOfProtein=" + numberOfProtein +
+                ", numberOfCarbohydrates=" + numberOfCarbohydrates +
+                ", numberOfFat=" + numberOfFat +
+                '}';
+    }
 }
