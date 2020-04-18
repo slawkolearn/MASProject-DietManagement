@@ -5,6 +5,9 @@ import java.util.*;
 
 public class ExtensionManager {
 
+    // TODO:SL make util class extending? this extensionmanager class for showing errors etc
+    // simple label for showing the same staring message for errors
+    protected static String ERROR_LABEL = "!!ERROR!!";
     // file name for storing extensions
     private static final String EXTENSION_FILE = "extensionData.dtd";
     // main container for applications extensions storage

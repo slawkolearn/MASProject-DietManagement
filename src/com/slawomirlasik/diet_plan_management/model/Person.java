@@ -63,13 +63,24 @@ public class Person extends ExtensionManager {
      */
 
     public void setBirthDate(LocalDate birthDate) throws Exception {
-        if (LocalDate.now().getYear() - this.birthDate.getYear() < 18) {
+        if (LocalDate.now().getYear() - birthDate.getYear() < 18) {
             throw new Exception(
-                    String.format("The %s must have at least %d years old.", name, MINIMAL_AGE)
+                    String.format("%s : The %s must have at least %d years old.",
+                            ERROR_LABEL, name, MINIMAL_AGE)
             );
         } else {
             this.birthDate = birthDate;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthDate=" + birthDate +
+                ", age: '" + getAge() + '\'' +
+                '}';
     }
 }
 

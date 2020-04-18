@@ -4,8 +4,12 @@ import java.time.LocalDate;
 
 public class DietUser extends Person {
 
-    public DietUser(String name, String lastName, LocalDate birthDate) {
+    public DietUser(String name, String lastName, LocalDate birthDate) throws Exception {
         super(name, lastName, birthDate);
     }
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
