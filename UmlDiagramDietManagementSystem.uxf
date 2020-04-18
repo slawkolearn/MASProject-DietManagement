@@ -138,36 +138,38 @@ contains v</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>704</x>
+      <x>712</x>
       <y>680</y>
-      <w>120</w>
+      <w>112</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;50.0;130.0;10.0</additional_attributes>
+    <additional_attributes>10.0;50.0;120.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>472</x>
-      <y>608</y>
+      <x>496</x>
+      <y>600</y>
       <w>112</w>
       <h>168</h>
     </coordinates>
     <panel_attributes>DietType
---</panel_attributes>
+--
+name
+Description</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>576</x>
-      <y>600</y>
-      <w>128</w>
-      <h>72</h>
+      <x>600</x>
+      <y>592</y>
+      <w>104</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;140.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;110.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -184,12 +186,12 @@ contains v</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>344</x>
-      <y>768</y>
-      <w>208</w>
-      <h>104</h>
+      <y>760</y>
+      <w>232</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>240.0;10.0;240.0;40.0;10.0;110.0</additional_attributes>
+    <additional_attributes>270.0;10.0;240.0;50.0;10.0;120.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -344,8 +346,8 @@ personalize();</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>232</x>
-      <y>96</y>
+      <x>280</x>
+      <y>88</y>
       <w>152</w>
       <h>168</h>
     </coordinates>
@@ -375,11 +377,11 @@ dateOfMeasurement
     <coordinates>
       <x>112</x>
       <y>72</y>
-      <w>136</w>
-      <h>136</h>
+      <w>184</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>150.0;150.0;80.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>210.0;140.0;80.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
