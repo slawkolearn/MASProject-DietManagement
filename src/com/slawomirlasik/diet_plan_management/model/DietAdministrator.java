@@ -1,8 +1,9 @@
 package com.slawomirlasik.diet_plan_management.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class DietAdministrator extends Person {
+public class DietAdministrator extends Person implements Serializable {
 
     // field stub for storing diploma (later may be implemented differently)
     private String diploma;

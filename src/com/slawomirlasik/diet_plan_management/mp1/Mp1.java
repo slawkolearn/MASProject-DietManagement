@@ -4,6 +4,7 @@ import com.slawomirlasik.diet_plan_management.model.*;
 import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 import com.sun.org.glassfish.external.statistics.RangeStatistic;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -21,6 +22,17 @@ public class Mp1 {
         // TODO:SL ekstensja trwałość
         // TODO:SL atr. złożony
         // TODO:SL overload (przeciążenie)
+        // esktensja trwałość - wczytywanie
+            // próbujemy wczytać ze standarowego pliku zawartość poprzedniej extensji (wszystkich)
+        try {
+            System.out.println("Próba wczytania poprzedniego statnu...");
+            ExtensionManager.loadExtensionsFromFile();
+            System.out.println("Wczytano poprzedni stan ekstensji...");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         // atrybut opcjonalny
         System.out.println("-----------------------------");
@@ -29,8 +41,8 @@ public class Mp1 {
         RecipeIngredient recipeIngredientAbsent = new RecipeIngredient();
 
 
-        System.out.println(recipeIngredientAbsent);
         System.out.println(recipeIngredientPresent);
+        System.out.println(recipeIngredientAbsent);
         System.out.println("-----------------------------");
         // atrybut złożony
 
@@ -139,6 +151,20 @@ public class Mp1 {
         System.out.printf("Po dodaniu statystyk obecnie %s ma %d statystyk%n", dietUser1.getName(), dietUser1.getUserStatistics().size());
         System.out.println(dietUser1);
         System.out.println("-----------------------------");
+        // ekstensje
+        Class extensionKeyToShow = DietStatistics.class;
+        System.out.printf("Obecnie ekstensje typu %s to:%n", extensionKeyToShow.getSimpleName());
+        ExtensionManager.getExtension(extensionKeyToShow).forEach(System.out::println);
+        System.out.println("-----------------------------");
+        // ektstensje trwałość - zapis
+        System.out.println("Zapisujemy stan ekstensji - dane mogą być zapisane ponownie te same podczas testowania!!!");
+        try {
+            ExtensionManager.saveExtensionCurrentState();
+            System.out.println("Zapisano pomyślnie do pliku  " + ExtensionManager.EXTENSION_FILE + " !");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private static DietStatistics generateRandomDietUserStatistic() {

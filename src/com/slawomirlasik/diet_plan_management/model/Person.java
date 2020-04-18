@@ -2,9 +2,10 @@ package com.slawomirlasik.diet_plan_management.model;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Person extends ExtensionManager {
+public abstract class Person extends ExtensionManager implements Serializable {
     private static Integer MINIMAL_AGE = 18;
 
     private String name;

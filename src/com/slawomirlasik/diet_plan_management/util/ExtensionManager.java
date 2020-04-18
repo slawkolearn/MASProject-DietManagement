@@ -11,7 +11,7 @@ public class ExtensionManager {
     // simple label for showing the same staring message for errors
     protected static String ERROR_LABEL = "!!ERROR!!";
     // file name for storing extensions
-    private static final String EXTENSION_FILE = "extensionData.dtd";
+    public static final String EXTENSION_FILE = "extensionData.dtd";
     // main container for applications extensions storage
     private static Map<Class, List<ExtensionManager>> extensions = new HashMap<>();
 

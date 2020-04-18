@@ -2,11 +2,12 @@ package com.slawomirlasik.diet_plan_management.model;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Recipe extends ExtensionManager {
+public class Recipe extends ExtensionManager implements Serializable {
 
     private List<DietType> dietPlans;
 

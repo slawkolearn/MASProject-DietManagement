@@ -2,7 +2,9 @@ package com.slawomirlasik.diet_plan_management.model;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 
-public class DietType extends ExtensionManager {
+import java.io.Serializable;
+
+public class DietType extends ExtensionManager implements Serializable {
 
     private String name;
     private String description;

@@ -1,10 +1,11 @@
 package com.slawomirlasik.diet_plan_management.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DietUser extends Person {
+public class DietUser extends Person implements Serializable {
 
     private List<DietStatistics> userStatistics;
 
