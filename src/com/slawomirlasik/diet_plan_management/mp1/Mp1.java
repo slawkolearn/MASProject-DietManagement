@@ -34,7 +34,7 @@ public class Mp1 {
 
         // atrybut opcjonalny
         System.out.println("-----------------------------");
-        System.out.println("Przykład atrybuty opcjonalnego");
+        System.out.println("Przykład atrybutu opcjonalnego");
         RecipeIngredient recipeIngredientPresent = new RecipeIngredient(10f);
         RecipeIngredient recipeIngredientAbsent = new RecipeIngredient();
 
@@ -42,8 +42,6 @@ public class Mp1 {
         System.out.println(recipeIngredientPresent);
         System.out.println(recipeIngredientAbsent);
         System.out.println("-----------------------------");
-        // atrybut złożony
-
         // atrybut powtarzalny
         DietType muscleTrainingDietType = new DietType("Dieta treningowa",
                 "Dieta przeznaczona dla osób, którzy chcą uczęszczać na siłownię i zbudować masę mięśniową");
@@ -90,6 +88,7 @@ public class Mp1 {
                 dietAdmin1.getName(), dietAdmin1.getAge(), getYearStringPolish(dietAdmin1.getAge()));
         System.out.println("-----------------------------");
         // Metoda klasowa
+        System.out.println("Przykład zastosowania metody klsowej getAllDietPlans: ");
         // Tutaj symulujemy działanie metody z klasy DietAdministrator, która tworzy dla konkretnego
             // użytkownika diety obiekt klasy DietPLan, który odpowiada planowi diety użytkownika. W niej
                 // będą przechowywane DietPlanDays odpowiadające odpowiednim dniom w diecie
@@ -100,7 +99,14 @@ public class Mp1 {
         DietPlan dietPlan1 = new DietPlan(dietPlanDayList1);
         DietPlan dietPlan2 = new DietPlan(dietPlanDayList1);
         // wyświetlamy wszyskie dostępne diety jakie mamy dostępne w systemie
+        System.out.println("Oto wszystkie dostępne diety w systemie wszystkich użytkowników:");
         DietPlan.getAllDietPlans().forEach(System.out::println);
+        System.out.println("-----------------------------");
+        // atrybut złożony
+         // atrybut diploma w klasie DietAdministrator jest to klasa opisująca, w tym przypadku, dyplom
+            // administratora diety
+        System.out.println("Przykład użycia atrybutu złożonego:");
+        printSkillsOfDietManager(dietAdmin1);
         System.out.println("-----------------------------");
         // przesłonięcie (overriding)
          // metoda toString() w klasach DietAdministrator i DietUser
@@ -164,6 +170,13 @@ public class Mp1 {
             e.printStackTrace();
         }
 
+    }
+
+    private static void printSkillsOfDietManager(DietAdministrator dietAdmin1) {
+        System.out.printf("Administrator diety %s posiada umiejętności: [ ",
+                dietAdmin1.getName() + " " +  dietAdmin1.getLastName());
+        dietAdmin1.getDiploma().getSkills().stream().forEach(skill -> System.out.print(skill + " "));
+        System.out.println("].");
     }
 
     private static Diploma generateDiploma(String schoolName, String date, List<String> asList) {

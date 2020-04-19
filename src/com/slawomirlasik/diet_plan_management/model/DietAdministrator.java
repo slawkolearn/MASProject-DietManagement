@@ -19,4 +19,8 @@ public class DietAdministrator extends Person implements Serializable {
                 "diploma='" + diploma + '\'' +
                 '}';
     }
+
+    public Diploma getDiploma() {
+        return diploma;
+    }
 }
