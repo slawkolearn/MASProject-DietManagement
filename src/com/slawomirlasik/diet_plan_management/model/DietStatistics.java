@@ -1,11 +1,11 @@
 package com.slawomirlasik.diet_plan_management.model;
 
-import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class DietStatistics extends ExtensionManager implements Serializable {
+public class DietStatistics extends ExtensionAssociationManager implements Serializable {
 
     private Float height;
     private Float weight;

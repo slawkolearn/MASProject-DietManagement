@@ -1,13 +1,13 @@
 package com.slawomirlasik.diet_plan_management.model;
 
-import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Recipe extends ExtensionManager implements Serializable {
+public class Recipe extends ExtensionAssociationManager implements Serializable {
 
     private List<DietType> dietPlans;
 
@@ -16,16 +16,16 @@ public class Recipe extends ExtensionManager implements Serializable {
         this.dietPlans = new ArrayList<>();
     }
 
-    public Recipe(DietType ...dietTypes){
+    public Recipe(DietType... dietTypes) {
         super();
         this.dietPlans = new ArrayList<>();
-        for (DietType dietType : dietTypes){
+        for (DietType dietType : dietTypes) {
             this.dietPlans.add(dietType);
         }
     }
 
-    public void addTypeOfDietForRecipe(DietType dietType){
-        if(!checkIfRecipeIsOfDietType(dietType))
+    public void addTypeOfDietForRecipe(DietType dietType) {
+        if (!checkIfRecipeIsOfDietType(dietType))
             this.dietPlans.add(dietType);
     }
 

@@ -2,7 +2,6 @@ package com.slawomirlasik.diet_plan_management.mp1;
 
 import com.slawomirlasik.diet_plan_management.model.*;
 import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
-import com.sun.org.glassfish.external.statistics.RangeStatistic;
 
 import java.io.IOException;
 import java.time.LocalDate;

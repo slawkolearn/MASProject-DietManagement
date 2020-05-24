@@ -1,13 +1,13 @@
 package com.slawomirlasik.diet_plan_management.model;
 
-import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
 
 import java.io.Serializable;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DietPlan extends ExtensionManager implements Serializable {
+public class DietPlan extends ExtensionAssociationManager implements Serializable {
 
     List<DietPlanDay> dietPlanDaysList;
 
@@ -22,7 +22,7 @@ public class DietPlan extends ExtensionManager implements Serializable {
         return dietPlanDayPeriod;
     }
 
-    public static Iterable<DietPlan> getAllDietPlans(){
+    public static Iterable<DietPlan> getAllDietPlans() {
         // TODO:SL implement this method getting all current diet plans in the system
         return getExtension(DietPlan.class);
     }

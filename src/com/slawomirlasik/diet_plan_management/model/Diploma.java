@@ -1,13 +1,12 @@
 package com.slawomirlasik.diet_plan_management.model;
 
-import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
-public class Diploma extends ExtensionManager implements Serializable {
+public class Diploma extends ExtensionAssociationManager implements Serializable {
 
     private String schoolName;
     private LocalDate finishDate;
