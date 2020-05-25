@@ -9,6 +9,10 @@ public class DietType extends ExtensionAssociationManager implements Serializabl
     private String name;
     private String description;
 
+    public DietType() {
+        super();
+    }
+
     public DietType(String name, String description) {
         super();
         this.name = name;

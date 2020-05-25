@@ -13,6 +13,7 @@ public class Diploma extends ExtensionAssociationManager implements Serializable
     private Set<String> skills;
 
     public Diploma(String schoolName, LocalDate finishDate, Set<String> skillSet) {
+        super();
         this.schoolName = schoolName;
         this.finishDate = finishDate;
         this.skills = skillSet;

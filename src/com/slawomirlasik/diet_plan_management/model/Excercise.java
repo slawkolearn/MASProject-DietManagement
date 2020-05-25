@@ -7,6 +7,7 @@ public class Excercise extends ExtensionManager {
     private String name;
 
     public Excercise() {
+        super();
     }
 
     public String getName() {
