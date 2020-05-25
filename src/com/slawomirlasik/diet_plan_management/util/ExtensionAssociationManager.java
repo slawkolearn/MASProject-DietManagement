@@ -1,9 +1,10 @@
 package com.slawomirlasik.diet_plan_management.util;
 
 import java.io.PrintStream;
+import java.io.Serializable;
 import java.util.*;
 
-public class ExtensionAssociationManager extends ExtensionManager {
+public class ExtensionAssociationManager extends ExtensionManager implements Serializable {
     /**
      * Stores information about all connections of this object.
      */
@@ -203,6 +204,13 @@ public class ExtensionAssociationManager extends ExtensionManager {
     }
 
 
+    public void printRoles(){
+        System.out.println("\n ===================================");
+        System.out.printf("The %s has roles:", this.getClass().getSimpleName());
+        for(String role : links.keySet() ){
+            System.out.println("   " + role);
+        }
+    }
 
 
 

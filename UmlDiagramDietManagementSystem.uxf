@@ -4,7 +4,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>1088</x>
-      <y>648</y>
+      <y>440</y>
       <w>128</w>
       <h>152</h>
     </coordinates>
@@ -23,7 +23,7 @@ getAge()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>864</x>
-      <y>920</y>
+      <y>712</y>
       <w>224</w>
       <h>216</h>
     </coordinates>
@@ -39,7 +39,7 @@ showDietStatistics(period)
     <id>UMLClass</id>
     <coordinates>
       <x>1288</x>
-      <y>920</y>
+      <y>712</y>
       <w>184</w>
       <h>64</h>
     </coordinates>
@@ -55,7 +55,7 @@ generateNewDietForGivenUser(dietUser)
     <id>Relation</id>
     <coordinates>
       <x>1128</x>
-      <y>792</y>
+      <y>584</y>
       <w>176</w>
       <h>168</h>
     </coordinates>
@@ -66,7 +66,7 @@ generateNewDietForGivenUser(dietUser)
     <id>Relation</id>
     <coordinates>
       <x>1064</x>
-      <y>792</y>
+      <y>584</y>
       <w>88</w>
       <h>144</h>
     </coordinates>
@@ -77,7 +77,7 @@ generateNewDietForGivenUser(dietUser)
     <id>UMLClass</id>
     <coordinates>
       <x>960</x>
-      <y>1152</y>
+      <y>944</y>
       <w>112</w>
       <h>160</h>
     </coordinates>
@@ -91,7 +91,7 @@ dietTypes[1..n]
     <id>UMLClass</id>
     <coordinates>
       <x>936</x>
-      <y>1440</y>
+      <y>1232</y>
       <w>144</w>
       <h>104</h>
     </coordinates>
@@ -108,7 +108,7 @@ noOfFat
     <id>Relation</id>
     <coordinates>
       <x>968</x>
-      <y>1304</y>
+      <y>1096</y>
       <w>96</w>
       <h>152</h>
     </coordinates>
@@ -124,7 +124,7 @@ contains v</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1168</x>
-      <y>1320</y>
+      <y>1112</y>
       <w>128</w>
       <h>152</h>
     </coordinates>
@@ -139,7 +139,7 @@ contains v</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>984</x>
-      <y>1328</y>
+      <y>1120</y>
       <w>200</w>
       <h>56</h>
     </coordinates>
@@ -150,7 +150,7 @@ contains v</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>768</x>
-      <y>1248</y>
+      <y>1040</y>
       <w>112</w>
       <h>168</h>
     </coordinates>
@@ -164,7 +164,7 @@ Description</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>584</x>
-      <y>1504</y>
+      <y>1296</y>
       <w>120</w>
       <h>56</h>
     </coordinates>
@@ -175,7 +175,7 @@ Description</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>616</x>
-      <y>1408</y>
+      <y>1200</y>
       <w>232</w>
       <h>112</h>
     </coordinates>
@@ -186,7 +186,7 @@ Description</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>888</x>
-      <y>752</y>
+      <y>544</y>
       <w>120</w>
       <h>56</h>
     </coordinates>
@@ -197,7 +197,7 @@ Description</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>856</x>
-      <y>800</y>
+      <y>592</y>
       <w>104</w>
       <h>136</h>
     </coordinates>
@@ -208,7 +208,7 @@ Description</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>608</x>
-      <y>1072</y>
+      <y>864</y>
       <w>160</w>
       <h>136</h>
     </coordinates>
@@ -224,7 +224,7 @@ _getAllDietPlans()_</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>680</x>
-      <y>992</y>
+      <y>784</y>
       <w>200</w>
       <h>96</h>
     </coordinates>
@@ -238,7 +238,7 @@ has v</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>720</x>
-      <y>840</y>
+      <y>632</y>
       <w>104</w>
       <h>88</h>
     </coordinates>
@@ -252,7 +252,7 @@ to</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>184</x>
-      <y>944</y>
+      <y>736</y>
       <w>792</w>
       <h>312</h>
     </coordinates>
@@ -266,7 +266,7 @@ made from &gt;</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>544</x>
-      <y>1336</y>
+      <y>1128</y>
       <w>96</w>
       <h>112</h>
     </coordinates>
@@ -282,7 +282,7 @@ personalize();</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>616</x>
-      <y>1232</y>
+      <y>1024</y>
       <w>64</w>
       <h>120</h>
     </coordinates>
@@ -293,7 +293,7 @@ personalize();</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>464</x>
-      <y>520</y>
+      <y>312</y>
       <w>176</w>
       <h>168</h>
     </coordinates>
@@ -311,7 +311,7 @@ dateOfMeasurement
     <id>UMLNote</id>
     <coordinates>
       <x>272</x>
-      <y>712</y>
+      <y>504</y>
       <w>120</w>
       <h>56</h>
     </coordinates>
@@ -322,7 +322,7 @@ dateOfMeasurement
     <id>Relation</id>
     <coordinates>
       <x>384</x>
-      <y>608</y>
+      <y>400</y>
       <w>96</w>
       <h>168</h>
     </coordinates>
@@ -333,7 +333,7 @@ dateOfMeasurement
     <id>Relation</id>
     <coordinates>
       <x>776</x>
-      <y>920</y>
+      <y>712</y>
       <w>64</w>
       <h>128</h>
     </coordinates>
@@ -344,23 +344,22 @@ dateOfMeasurement
     <id>Relation</id>
     <coordinates>
       <x>1080</x>
-      <y>968</y>
+      <y>760</y>
       <w>264</w>
-      <h>152</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 r1=mentor
 m2=0..n
-r2=dietUser
-&lt; mentors to </panel_attributes>
-    <additional_attributes>260.0;10.0;270.0;170.0;140.0;170.0;10.0;100.0</additional_attributes>
+r2=mentors</panel_attributes>
+    <additional_attributes>260.0;10.0;260.0;170.0;10.0;170.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
       <x>776</x>
-      <y>1584</y>
+      <y>1376</y>
       <w>128</w>
       <h>216</h>
     </coordinates>
@@ -371,7 +370,7 @@ r2=dietUser
     <id>Relation</id>
     <coordinates>
       <x>824</x>
-      <y>1472</y>
+      <y>1264</y>
       <w>128</w>
       <h>128</h>
     </coordinates>
@@ -382,7 +381,7 @@ r2=dietUser
     <id>UMLNote</id>
     <coordinates>
       <x>1264</x>
-      <y>1160</y>
+      <y>952</y>
       <w>152</w>
       <h>112</h>
     </coordinates>
@@ -393,7 +392,7 @@ r2=dietUser
     <id>Relation</id>
     <coordinates>
       <x>1256</x>
-      <y>1264</y>
+      <y>1056</y>
       <w>56</w>
       <h>72</h>
     </coordinates>
@@ -404,7 +403,7 @@ r2=dietUser
     <id>UMLNote</id>
     <coordinates>
       <x>288</x>
-      <y>1048</y>
+      <y>840</y>
       <w>216</w>
       <h>64</h>
     </coordinates>
@@ -415,7 +414,7 @@ r2=dietUser
     <id>Relation</id>
     <coordinates>
       <x>496</x>
-      <y>1088</y>
+      <y>880</y>
       <w>128</w>
       <h>32</h>
     </coordinates>
@@ -426,7 +425,7 @@ r2=dietUser
     <id>UMLClass</id>
     <coordinates>
       <x>96</x>
-      <y>792</y>
+      <y>584</y>
       <w>144</w>
       <h>160</h>
     </coordinates>
@@ -444,7 +443,7 @@ day
     <id>UMLClass</id>
     <coordinates>
       <x>1416</x>
-      <y>744</y>
+      <y>536</y>
       <w>80</w>
       <h>136</h>
     </coordinates>
@@ -461,7 +460,7 @@ skills
     <id>UMLClass</id>
     <coordinates>
       <x>672</x>
-      <y>424</y>
+      <y>216</y>
       <w>96</w>
       <h>96</h>
     </coordinates>
@@ -478,7 +477,7 @@ name
     <id>Relation</id>
     <coordinates>
       <x>640</x>
-      <y>512</y>
+      <y>304</y>
       <w>120</w>
       <h>576</h>
     </coordinates>
@@ -495,7 +494,7 @@ r2=part of
     <id>UMLClass</id>
     <coordinates>
       <x>760</x>
-      <y>656</y>
+      <y>448</y>
       <w>104</w>
       <h>88</h>
     </coordinates>
@@ -509,7 +508,7 @@ series</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>872</x>
-      <y>1264</y>
+      <y>1056</y>
       <w>104</w>
       <h>40</h>
     </coordinates>
@@ -526,7 +525,7 @@ r2=
     <id>Relation</id>
     <coordinates>
       <x>232</x>
-      <y>872</y>
+      <y>664</y>
       <w>408</w>
       <h>216</h>
     </coordinates>
@@ -540,7 +539,7 @@ m1=0..n
     <id>Relation</id>
     <coordinates>
       <x>232</x>
-      <y>816</y>
+      <y>608</y>
       <w>424</w>
       <h>272</h>
     </coordinates>
@@ -553,7 +552,7 @@ m2=90</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>1296</y>
+      <y>1088</y>
       <w>144</w>
       <h>120</h>
     </coordinates>
@@ -566,7 +565,7 @@ timeOfConsumption</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>136</x>
-      <y>1232</y>
+      <y>1024</y>
       <w>152</w>
       <h>128</h>
     </coordinates>
@@ -577,7 +576,7 @@ timeOfConsumption</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1344</x>
-      <y>752</y>
+      <y>544</y>
       <w>88</w>
       <h>184</h>
     </coordinates>
@@ -594,7 +593,7 @@ r2=belongs to
     <id>Relation</id>
     <coordinates>
       <x>632</x>
-      <y>568</y>
+      <y>360</y>
       <w>472</w>
       <h>368</h>
     </coordinates>

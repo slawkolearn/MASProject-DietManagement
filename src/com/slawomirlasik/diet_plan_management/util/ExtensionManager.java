@@ -1,11 +1,9 @@
 package com.slawomirlasik.diet_plan_management.util;
 
-import com.slawomirlasik.diet_plan_management.model.DietUser;
-
 import java.io.*;
 import java.util.*;
 
-public class ExtensionManager {
+public class ExtensionManager implements Serializable {
 
     // TODO:SL make util class extending? this extensionmanager class for showing errors etc
     // simple label for showing the same staring message for errors

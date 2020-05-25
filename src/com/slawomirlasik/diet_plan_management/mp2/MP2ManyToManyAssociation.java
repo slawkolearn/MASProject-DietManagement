@@ -6,10 +6,9 @@ import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
 import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class MP2OneToManyAssociation {
+public class MP2ManyToManyAssociation {
 
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -17,6 +16,7 @@ public class MP2OneToManyAssociation {
 
     public static void main(String[] args) {
 
+        // load extension
         try {
             System.out.println("Próba wczytania poprzedniego statnu...");
             if (ExtensionManager.loadExtensionsFromFile()) {
@@ -30,33 +30,14 @@ public class MP2OneToManyAssociation {
             e.printStackTrace();
         }
 
+        // generate association
         if (flag == 0) {
 
             // generate OneToMany assocations
-            generateOneToManyLinks();
+            generateManyToManyLinks();
 
-
+        // show association
         } else {
-            System.out.println("\n========================================");
-            System.out.println("   Printing DietUsers And DietAdministartors   ");
-            try {
-                // ===========================================
-                // show DietUser
-                System.out.println("\n========================================");
-                ExtensionAssociationManager.printExtension(DietUser.class);
-
-                // ===========================================
-                // show DietAdministrator
-                System.out.println("\n========================================");
-                ExtensionAssociationManager.printExtension(DietAdministrator.class);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
 
             // show links
             showOneToManyLinks();
@@ -103,52 +84,9 @@ public class MP2OneToManyAssociation {
         }
     }
 
-    private static void generateOneToManyLinks() {
+    private static void generateManyToManyLinks() {
         // ===========================================
-        // create sample DietUsers
-        try {
-            DietUser dietUser1 = new DietUser(
-                    "Jan",
-                    "Kowalski",
-                    LocalDate.parse("21-02-1995", dateFormatter)
-            );
-            DietUser dietUser2 = new DietUser(
-                    "Paweł",
-                    "Nowak",
-                    LocalDate.parse("15-04-2001", dateFormatter)
-            );
-            DietUser dietUser3 = new DietUser(
-                    "Filip",
-                    "Blok",
-                    LocalDate.parse("15-06-1988", dateFormatter)
-            );
 
-            // ===========================================
-            // create sample DietAdmins
-            DietAdministrator dietAdministrator1 = new DietAdministrator(
-                    "Maciej",
-                    "Sroka",
-                    LocalDate.parse("15-06-1978", dateFormatter)
-            );
-
-            DietAdministrator dietAdministrator2 = new DietAdministrator(
-                    "Stanisław",
-                    "Stog",
-                    LocalDate.parse("29-09-1968", dateFormatter)
-            );
-
-            // ===========================================
-            // ad links between them
-            dietUser1.addLink("mentor", "mentors", dietAdministrator1);
-            dietUser2.addLink("mentor", "mentors", dietAdministrator1);
-            dietUser3.addLink("mentor", "mentors", dietAdministrator2);
-
-
-            // save extensions
-            ExtensionAssociationManager.saveExtensionCurrentState();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 
     }

@@ -49,12 +49,8 @@ public class Mp1 {
         DietType glutenFreeDietType = new DietType("Dieta bezglutenowa",
                 "Dieta przeznaczona dla osób nie tolerująca glutenu");
 
-        Recipe chickenSalat = new Recipe(muscleTrainingDietType, fatReductionDietType);
-        Recipe fetaCheeseSalat = new Recipe(glutenFreeDietType);
-
         System.out.println("Poniżej wyświetlamy obiekty klasy Recipe z powtarzalnym atrybutem dietTypes");
-        System.out.println(chickenSalat);
-        System.out.println(fetaCheeseSalat);
+
 
         System.out.println("-----------------------------");
 
