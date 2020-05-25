@@ -64,15 +64,13 @@ public class Mp1 {
         DietAdministrator dietAdmin1 = null;
         try {
             dietAdmin1 = new DietAdministrator(
-                    "Pablo", "Picasso", LocalDate.parse("11-10-1977", dateFormatter),
-                    generateDiploma("UKSW", "01-06-2010", Arrays.asList("Masaż", "Fizjoterapia", "Dietetyka"))
+                    "Pablo", "Picasso", LocalDate.parse("11-10-1977", dateFormatter)
             );
             System.out.println(dietAdmin1);
 
             System.out.println("Próba stworzenia osoby poniżej 18 roku życia:");
             DietAdministrator dietAdmin2 = new DietAdministrator(
-                    "Krzysiu", "Laskowski", LocalDate.parse("31-12-2006", dateFormatter),
-                    generateDiploma("UKSW", "01-06-2019", Arrays.asList("Dietetyka"))
+                    "Krzysiu", "Laskowski", LocalDate.parse("31-12-2006", dateFormatter)
             );
             // wyjątek -> osoba Krzysiu będzie miała poniżej 18 lat dla daty 31-12-2006
             System.out.println(dietAdmin2);
@@ -121,15 +119,14 @@ public class Mp1 {
                 e.printStackTrace();
             }
         }
-        dietUser1.addStatistic(generateRandomDietUserStatistic());
 
         if(ExtensionManager.hasExtensionType(DietAdministrator.class)){
             dietAdmin1 = ExtensionManager.getExtension(DietAdministrator.class).iterator().next();
         }else{
             try {
                 dietAdmin1 = new DietAdministrator("Grzegorz", "Nowak",
-                        LocalDate.parse("11-01-2012", dateFormatter),
-                generateDiploma("Szkolenie Online \"Zdrowie i TY\"", "01-02-2020", Arrays.asList("Fizjoterapia", "Dietetyka")));
+                        LocalDate.parse("11-01-2012", dateFormatter)
+                );
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -144,15 +141,8 @@ public class Mp1 {
             // wykorzystamy referencję do obiektu klasy DietUser by dodać jedną bądź listę statystyk (np. z kilku poprzednich dni)
             // dodajmy najpierw jedną statystykę
             // wyświetlmy ile ma obecnie statystyk dany user
-        System.out.printf("Obecnie %s ma %d  statystyk%n", dietUser1.getName(), dietUser1.getUserStatistics().size());
-        dietUser1.addStatistic(generateRandomDietUserStatistic());
-            // a teraz listę statystyk
-        dietUser1.addStatistic(Arrays.asList(
-                generateRandomDietUserStatistic(),
-                generateRandomDietUserStatistic()
-        ));
 
-        System.out.printf("Po dodaniu statystyk obecnie %s ma %d statystyk%n", dietUser1.getName(), dietUser1.getUserStatistics().size());
+
         System.out.println(dietUser1);
         System.out.println("-----------------------------");
         // ekstensje
@@ -174,7 +164,6 @@ public class Mp1 {
     private static void printSkillsOfDietManager(DietAdministrator dietAdmin1) {
         System.out.printf("Administrator diety %s posiada umiejętności: [ ",
                 dietAdmin1.getName() + " " +  dietAdmin1.getLastName());
-        dietAdmin1.getDiploma().getSkills().stream().forEach(skill -> System.out.print(skill + " "));
         System.out.println("].");
     }
 
