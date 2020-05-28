@@ -7,6 +7,8 @@ public class MP2AssociationWithAttribute {
     // again in our system we must implement this association in our system diagram as two associations
     //
 
+    // TODO:SL create sample association with attribute from lecture MAS
+
 
     public static void main(String[] args) {
 
