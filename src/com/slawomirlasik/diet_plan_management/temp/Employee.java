@@ -4,6 +4,10 @@ import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
 
 public class Employee extends ExtensionAssociationManager {
 
+    // roles that coming from Emplyee to objects
+    // role of employee works in
+    public static final String ASSOCIATION_WITH_ATTRIBUTE_EMPLOYEE_WORKS_IN = "employee_works_in";
+
     private String firstName;
 
     private String lastName;

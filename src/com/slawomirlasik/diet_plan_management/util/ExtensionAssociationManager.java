@@ -24,13 +24,23 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
         super();
     }
 
+    /**
+     * checks if part already exists somewhere
+     * @param part
+     * @return
+     */
+
+    protected static boolean partAlreadyExists(ExtensionAssociationManager part) {
+
+        return allParts.contains(part);
+    }
+
 
     /**
      * Creates a new link (private, utility method).
-     * @param roleName
-     * @param reverseRoleName
-     * @param targetObject
-     * @param qualifier
+     * @param roleName is the opposite role from this class
+     * @param reverseRoleName is role from opposite class to yours which is your rolename
+     * @param targetObject any qualifier you want to be to get an object later using this qualifier
      * @param counter
      */
     private void addLink(String roleName, String reverseRoleName, ExtensionAssociationManager targetObject, Object qualifier, int counter) {
@@ -65,9 +75,10 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
 
     /**
      * Creates a new link to the given target object (optionally as quilified connection).
-     * @param roleName
-     * @param reverseRoleName
-     * @param targetObject
+     *
+     * @param roleName is the opposite role from this class
+     * @param reverseRoleName is role from opposite class to yours which is your rolename
+     * @param targetObject any qualifier you want to be to get an object later using this qualifier
      * @param qualifier Jezeli rozny od null to tworzona jest asocjacja kwalifikowana.
      */
     public void addLink(String roleName, String reverseRoleName, ExtensionAssociationManager targetObject, Object qualifier) {
@@ -76,9 +87,9 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
 
     /**
      * Creates a new link to the given target object (as an ordinary association, not the quilified one).
-     * @param roleName
-     * @param reverseRoleName
-     * @param targetObject
+     * @param roleName is the opposite role from this class
+     * @param reverseRoleName is role from opposite class to yours which is your rolename
+     * @param targetObject any qualifier you want to be to get an object later using this qualifier
      */
     public void addLink(String roleName, String reverseRoleName, ExtensionAssociationManager targetObject) {
         addLink(roleName, reverseRoleName, targetObject, targetObject);
@@ -86,8 +97,8 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
 
     /**
      * Adds an information about a connection (using a "semi" composition).
-     * @param roleName
-     * @param reverseRoleName
+     * @param roleName is the opposite role from this class
+     * @param reverseRoleName is role from opposite class to yours which is your rolename
      * @throws Exception
      */
     public void addPart(String roleName, String reverseRoleName, ExtensionAssociationManager partObject) throws Exception {
@@ -123,7 +134,7 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
 
     /**
      * Shows links to the given stream.
-     * @param roleName
+     * @param roleName this should be the role name from your class perspective looking to another class A[role1] -- B[role2]. when looking from A class you should put "role2" in this case
      * @param stream
      * @throws Exception
      */
@@ -144,6 +155,32 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
         for(Object obj : col) {
             stream.println("   " + obj);
         }
+    }
+
+    /**
+     * printing all qualifiers for a specific role name
+     * @param roleName the roleName of a oposite class
+     * @param stream
+     */
+
+    public void showQualifiers(String roleName, PrintStream stream) throws Exception {
+        Map<Object, ExtensionAssociationManager> objectLinks;
+
+        if(!links.containsKey(roleName)) {
+            // No links
+            throw new Exception("No links for the role: " + roleName);
+        }
+
+        objectLinks = links.get(roleName);
+
+        Collection qualifiers = objectLinks.keySet();
+
+
+        stream.println(this.getClass().getSimpleName() + " qualifiers, role '" + roleName + "':");
+        for ( Object qualifier : qualifiers ) {
+            System.out.println("   " + qualifier);
+        }
+
     }
 
     /**
@@ -211,7 +248,6 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
             System.out.println("   " + role);
         }
     }
-
 
 
 
