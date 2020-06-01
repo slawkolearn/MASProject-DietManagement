@@ -2,15 +2,6 @@ package com.slawomirlasik.diet_plan_management.temp;
 
 public class Employee extends ExtensionAssociationManagerEmployment<employmentAssociations> {
 
-    // roles that coming from Emplyee to objects
-    // role of employee works in
-    public static final String ASSOCIATION_WITH_ATTRIBUTE_EMPLOYEE_WORKS_IN = "employee_works_in";
-
-
-    public enum associations {
-        EMPLOYEE_WORKS_IN
-    };
-
     private String firstName;
 
     private String lastName;

@@ -4,16 +4,6 @@ import java.time.LocalDate;
 
 public class Company extends ExtensionAssociationManagerEmployment<employmentAssociations> {
 
-    // roles that coming from Comany to objects
-    // role of company employes
-    public static final String ASSOCIATION_WITH_ATTRIBUTE_COMPANY_EMPLOYS = "company_employs";
-
-
-    public enum associations {
-        COMPANY_EMPLOYS
-    };
-
-
     private String name;
 
     public Company() {
