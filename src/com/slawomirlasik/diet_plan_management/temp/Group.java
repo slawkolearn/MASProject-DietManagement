@@ -6,6 +6,10 @@ public class Group extends ExtensionAssociationManager {
 
     public static final String COMPOSITION_ROLE_ACTORS = "group_actors";
 
+    public enum associations {
+        GROUP_ACTORS
+    }
+
     private int id;
 
     public Group() {

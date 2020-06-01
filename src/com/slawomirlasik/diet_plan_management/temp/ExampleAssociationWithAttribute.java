@@ -1,7 +1,5 @@
 package com.slawomirlasik.diet_plan_management.temp;
 
-import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
-
 public class ExampleAssociationWithAttribute {
 
     // TODO:SL implement association with attribute example (ManyToMany) using Recipe -- Ingredient with attribute RecipeIngredient
@@ -31,11 +29,11 @@ public class ExampleAssociationWithAttribute {
 
         // print assocations for role "employs"
         try {
-            ExtensionAssociationManager[] employments =
-                    google.getLinks(Company.ASSOCIATION_WITH_ATTRIBUTE_COMPANY_EMPLOYS);
+            ExtensionAssociationManagerEmployment[] employments =
+                    asseco.getLinks(employmentAssociations.COMPANY_EMPLOYS);
 
             System.out.println("Oto zatrudnienia dla firmy google:");
-            for(ExtensionAssociationManager worksIn : employments ){
+            for(ExtensionAssociationManagerEmployment worksIn : employments ){
                 System.out.println(worksIn);
             }
 

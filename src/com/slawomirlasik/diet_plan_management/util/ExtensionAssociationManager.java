@@ -15,6 +15,8 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
      *  REMEMBER to make adding link in this util as protected. That all public methods
      *  of creating association is handled by the specific class methods
      */
+
+
     /**
      * Stores information about all connections of this object.
      */

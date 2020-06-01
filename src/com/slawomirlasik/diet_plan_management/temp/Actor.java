@@ -7,6 +7,11 @@ public class Actor extends ExtensionAssociationManager {
     public static final String ASSOCIATION_MANY_TO_MANY_ROLE_ACTORS = "actor_movies";
     public static final String COMPOSITION_ROLE_GROUP = "actor_group";
 
+    public enum associations {
+        ACTOR_MOVIES,
+        ACTOR_GROUP
+    };
+
 
     private String firstName;
 

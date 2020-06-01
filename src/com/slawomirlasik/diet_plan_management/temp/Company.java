@@ -1,14 +1,18 @@
 package com.slawomirlasik.diet_plan_management.temp;
 
-import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
-
 import java.time.LocalDate;
 
-public class Company extends ExtensionAssociationManager {
+public class Company extends ExtensionAssociationManagerEmployment {
 
     // roles that coming from Comany to objects
     // role of company employes
     public static final String ASSOCIATION_WITH_ATTRIBUTE_COMPANY_EMPLOYS = "company_employs";
+
+
+    public enum associations {
+        COMPANY_EMPLOYS
+    };
+
 
     private String name;
 
@@ -45,14 +49,14 @@ public class Company extends ExtensionAssociationManager {
 
         // add link to employee in employment
         employment.addLink(
-                WorksIn.ASSOCIATION_WITH_ATTRIBUTE_WORKSIN_CONCERNS_EMPLOYEE,
-                Employee.ASSOCIATION_WITH_ATTRIBUTE_EMPLOYEE_WORKS_IN,
+                employmentAssociations.WORKSIN_CONCERNS_EMPLOYEE,
+                employmentAssociations.EMPLOYEE_WORKS_IN,
                 gregory);
 
         // add link to company in employment;
         employment.addLink(
-                WorksIn.ASSOCIATION_WITH_ATTRIBUTE_WORKSIN_CONCERNS_COMPANY,
-                Company.ASSOCIATION_WITH_ATTRIBUTE_COMPANY_EMPLOYS,
+                employmentAssociations.WORKISIN_CONCERNS_COMPANY,
+                employmentAssociations.COMPANY_EMPLOYS,
                 this
         );
 

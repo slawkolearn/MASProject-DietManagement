@@ -1,10 +1,12 @@
-package com.slawomirlasik.diet_plan_management.util;
+package com.slawomirlasik.diet_plan_management.temp;
+
+import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 
 import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.*;
 
-public class ExtensionAssociationManager extends ExtensionManager implements Serializable {
+public class ExtensionAssociationManagerEmployment<T> extends ExtensionManager implements Serializable {
 
     /**
      * Stores information about what associations are avaible in the system
@@ -20,19 +22,19 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
     /**
      * Stores information about all connections of this object.
      */
-    private Map<String, Map<Object, ExtensionAssociationManager>> links = new Hashtable<>();
+    private Map<T, Map<Object, ExtensionAssociationManagerEmployment>> links = new Hashtable<>();
 
     /**
      * Stores information about all parts connected with any objects.
      */
-    private static Set<ExtensionAssociationManager> allParts = new HashSet<>();
+    private static Set<ExtensionAssociationManagerEmployment> allParts = new HashSet<>();
 
 
     /**
      * The constructor.
      *
      */
-    public ExtensionAssociationManager() {
+    public ExtensionAssociationManagerEmployment() {
         super();
     }
 
@@ -42,7 +44,7 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
      * @return
      */
 
-    protected static boolean partAlreadyExists(ExtensionAssociationManager part) {
+    protected static boolean partAlreadyExists(ExtensionAssociationManagerEmployment part) {
 
         return allParts.contains(part);
     }
@@ -55,8 +57,8 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
      * @param targetObject any qualifier you want to be to get an object later using this qualifier
      * @param counter
      */
-    private void addLink(String roleName, String reverseRoleName, ExtensionAssociationManager targetObject, Object qualifier, int counter) {
-        Map<Object, ExtensionAssociationManager> objectLinks;
+    private void addLink(T roleName, T reverseRoleName, ExtensionAssociationManagerEmployment targetObject, Object qualifier, int counter) {
+        Map<Object, ExtensionAssociationManagerEmployment> objectLinks;
 
         // Protection for the reverse connection
         if(counter < 1) {
@@ -93,7 +95,7 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
      * @param targetObject any qualifier you want to be to get an object later using this qualifier
      * @param qualifier Jezeli rozny od null to tworzona jest asocjacja kwalifikowana.
      */
-    public void addLink(String roleName, String reverseRoleName, ExtensionAssociationManager targetObject, Object qualifier) {
+    public void addLink(T roleName, T reverseRoleName, ExtensionAssociationManagerEmployment targetObject, Object qualifier) {
         addLink(roleName, reverseRoleName, targetObject, qualifier, 2);
     }
 
@@ -103,7 +105,7 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
      * @param reverseRoleName is role from opposite class to yours which is your rolename
      * @param targetObject any qualifier you want to be to get an object later using this qualifier
      */
-    public void addLink(String roleName, String reverseRoleName, ExtensionAssociationManager targetObject) {
+    public void addLink(T roleName, T reverseRoleName, ExtensionAssociationManagerEmployment targetObject) {
         addLink(roleName, reverseRoleName, targetObject, targetObject);
     }
 
@@ -113,7 +115,7 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
      * @param reverseRoleName is role from opposite class to yours which is your rolename
      * @throws Exception
      */
-    public void addPart(String roleName, String reverseRoleName, ExtensionAssociationManager partObject) throws Exception {
+    public void addPart(T roleName, T reverseRoleName, ExtensionAssociationManagerEmployment partObject) throws Exception {
         // Check if the part exist somewhere
         if(allParts.contains(partObject)) {
             throw new Exception("The part is already connected to a whole!");
@@ -131,8 +133,8 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
      * @return
      * @throws Exception
      */
-    public ExtensionAssociationManager[] getLinks(String roleName) throws Exception {
-        Map<Object, ExtensionAssociationManager> objectLinks;
+    public ExtensionAssociationManagerEmployment[] getLinks(T roleName) throws Exception {
+        Map<Object, ExtensionAssociationManagerEmployment> objectLinks;
 
         if(!links.containsKey(roleName)) {
             // No links for the role
@@ -141,7 +143,7 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
 
         objectLinks = links.get(roleName);
 
-        return (ExtensionAssociationManager[]) objectLinks.values().toArray(new ExtensionAssociationManager[0]);
+        return (ExtensionAssociationManagerEmployment[]) objectLinks.values().toArray(new ExtensionAssociationManagerEmployment[0]);
     }
 
     /**
@@ -150,8 +152,8 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
      * @param stream
      * @throws Exception
      */
-    public void showLinks(String roleName, PrintStream stream) throws Exception {
-        Map<Object, ExtensionAssociationManager> objectLinks;
+    public void showLinks(T roleName, PrintStream stream) throws Exception {
+        Map<Object, ExtensionAssociationManagerEmployment> objectLinks;
 
         if(!links.containsKey(roleName)) {
             // No links
@@ -175,8 +177,8 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
      * @param stream
      */
 
-    public void showQualifiers(String roleName, PrintStream stream) throws Exception {
-        Map<Object, ExtensionAssociationManager> objectLinks;
+    public void showQualifiers(T roleName, PrintStream stream) throws Exception {
+        Map<Object, ExtensionAssociationManagerEmployment> objectLinks;
 
         if(!links.containsKey(roleName)) {
             // No links
@@ -202,8 +204,8 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
      * @return
      * @throws Exception
      */
-    public ExtensionAssociationManager getLinkedObject(String roleName, Object qualifier) throws Exception {
-        Map<Object, ExtensionAssociationManager> objectLinks;
+    public ExtensionAssociationManagerEmployment getLinkedObject(T roleName, Object qualifier) throws Exception {
+        Map<Object, ExtensionAssociationManagerEmployment> objectLinks;
 
         if(!links.containsKey(roleName)) {
             // No links
@@ -224,12 +226,12 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
      * @param nazwaRoli
      * @return
      */
-    public boolean anyLink(String nazwaRoli) {
+    public boolean anyLink(T nazwaRoli) {
         if(!links.containsKey(nazwaRoli)) {
             return false;
         }
 
-        Map<Object, ExtensionAssociationManager> links = this.links.get(nazwaRoli);
+        Map<Object, ExtensionAssociationManagerEmployment> links = this.links.get(nazwaRoli);
         return links.size() > 0;
     }
 
@@ -239,8 +241,8 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
      * @param targetObject
      * @return
      */
-    public boolean isLink(String roleName, ExtensionAssociationManager targetObject) {
-        Map<Object, ExtensionAssociationManager> objectLink;
+    public boolean isLink(T roleName, ExtensionAssociationManagerEmployment targetObject) {
+        Map<Object, ExtensionAssociationManagerEmployment> objectLink;
 
         if(!links.containsKey(roleName)) {
             // No links for the role
@@ -256,7 +258,7 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
     public void printRoles(){
         System.out.println("\n ===================================");
         System.out.printf("The %s has roles:", this.getClass().getSimpleName());
-        for(String role : links.keySet() ){
+        for(T role : links.keySet() ){
             System.out.println("   " + role);
         }
     }

@@ -6,6 +6,11 @@ public class Movie extends ExtensionAssociationManager {
 
     public static final String ASSOCIATION_MANY_TO_MANY_ROLE_ACTORS= "movie_actors";
 
+    public enum associations {
+        MOVIE_ACTORS
+    };
+
+
     private String title;
 
     public Movie() {
