@@ -3,8 +3,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>200</x>
-      <y>570</y>
+      <x>190</x>
+      <y>290</y>
       <w>100</w>
       <h>70</h>
     </coordinates>
@@ -16,8 +16,8 @@ title</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>550</x>
-      <y>570</y>
+      <x>540</x>
+      <y>290</y>
       <w>110</w>
       <h>80</h>
     </coordinates>
@@ -31,8 +31,8 @@ lastName
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>560</x>
-      <y>770</y>
+      <x>550</x>
+      <y>490</y>
       <w>100</w>
       <h>80</h>
     </coordinates>
@@ -44,8 +44,8 @@ id</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>590</y>
+      <x>640</x>
+      <y>310</y>
       <w>150</w>
       <h>260</h>
     </coordinates>
@@ -59,8 +59,8 @@ r2=actors</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>270</x>
-      <y>580</y>
+      <x>260</x>
+      <y>300</y>
       <w>300</w>
       <h>50</h>
     </coordinates>

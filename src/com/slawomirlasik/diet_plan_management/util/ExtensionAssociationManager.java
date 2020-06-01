@@ -5,6 +5,16 @@ import java.io.Serializable;
 import java.util.*;
 
 public class ExtensionAssociationManager extends ExtensionManager implements Serializable {
+
+    /**
+     * Stores information about what associations are avaible in the system
+     *  then in the specific class in the method it is checked whether it is possible to create
+     *  this association (it is permitted by the business logic
+     *  like actor can be associated with movies but not with casettes or DVDs
+     *
+     *  REMEMBER to make adding link in this util as protected. That all public methods
+     *  of creating association is handled by the specific class methods
+     */
     /**
      * Stores information about all connections of this object.
      */

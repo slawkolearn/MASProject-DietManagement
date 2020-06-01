@@ -1,10 +1,8 @@
-package com.slawomirlasik.diet_plan_management.mp2;
+package com.slawomirlasik.diet_plan_management.temp;
 
-import com.slawomirlasik.diet_plan_management.temp.Company;
-import com.slawomirlasik.diet_plan_management.temp.Employee;
 import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
 
-public class MP2AssociationWithAttribute {
+public class ExampleAssociationWithAttribute {
 
     // TODO:SL implement association with attribute example (ManyToMany) using Recipe -- Ingredient with attribute RecipeIngredient
 

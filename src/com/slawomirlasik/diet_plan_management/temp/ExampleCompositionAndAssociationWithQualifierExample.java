@@ -1,11 +1,8 @@
-package com.slawomirlasik.diet_plan_management.mp2;
+package com.slawomirlasik.diet_plan_management.temp;
 
-import com.slawomirlasik.diet_plan_management.temp.Actor;
-import com.slawomirlasik.diet_plan_management.temp.Group;
-import com.slawomirlasik.diet_plan_management.temp.Movie;
 import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
 
-public class MP2CompositionAndAssociationWithQualifierExample {
+public class ExampleCompositionAndAssociationWithQualifierExample {
 
     public static void main(String[] args) {
 
