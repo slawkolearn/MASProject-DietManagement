@@ -1,6 +1,6 @@
 package com.slawomirlasik.diet_plan_management.temp;
 
-public class Employee extends ExtensionAssociationManagerEmployment {
+public class Employee extends ExtensionAssociationManagerEmployment<employmentAssociations> {
 
     // roles that coming from Emplyee to objects
     // role of employee works in

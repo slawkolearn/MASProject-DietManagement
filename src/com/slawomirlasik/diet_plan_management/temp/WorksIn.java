@@ -2,7 +2,7 @@ package com.slawomirlasik.diet_plan_management.temp;
 
 import java.time.LocalDate;
 
-public class WorksIn extends ExtensionAssociationManagerEmployment {
+public class WorksIn extends ExtensionAssociationManagerEmployment<employmentAssociations> {
 
     // roles that coming from WorksIn to objects
     // role of worksin concerns employee
