@@ -1,10 +1,7 @@
 package com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyOneToManyAssociation;
 
-import com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyAttribute.WorksIn;
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 import com.slawomirlasik.diet_plan_management.util.OneToManyAssociation;
-
-import java.time.LocalDate;
 
 @OneToManyAssociation(
         role = "Employs",
@@ -41,16 +38,11 @@ public class Company extends ExtensionAnnotationAssociationManager {
 
     public void hireEmployee(Employee employee, float salary) {
 
-        WorksIn employment = new WorksIn();
+        // set salary for employee
+        employee.setSalary(salary);
 
-        employment.setSalary(10000f);
-        employment.setDateFrom(LocalDate.now());
-
-        // add link to employee in employment
-
-
-        // add link to company in employment;
-
+        // add link to your system
+        addLink(employee);
 
     }
 }

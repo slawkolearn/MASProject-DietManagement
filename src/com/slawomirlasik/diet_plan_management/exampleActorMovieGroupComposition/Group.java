@@ -37,7 +37,7 @@ public class Group extends ExtensionAssociationManager {
     }
 
 
-    public Actor addActor( String firstName, String lastName) throws Exception {
+    public Actor addActor(String firstName, String lastName) throws Exception {
 
             // create actor
             Actor actor = Actor.createActor(firstName, lastName);

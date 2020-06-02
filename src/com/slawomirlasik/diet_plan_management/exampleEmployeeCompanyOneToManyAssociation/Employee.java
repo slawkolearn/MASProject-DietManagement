@@ -1,20 +1,19 @@
 package com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyOneToManyAssociation;
 
-import com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyAttribute.WorksIn;
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
-import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociationWithAttribute;
+import com.slawomirlasik.diet_plan_management.util.ManyToOneAssociation;
 
-@ManyToManyAssociationWithAttribute(
+@ManyToOneAssociation(
         role = "Works in",
-        target = Company.class,
-        attributeClass = WorksIn.class,
-        cardinality = Integer.MAX_VALUE
+        target = Company.class
 )
 public class Employee extends ExtensionAnnotationAssociationManager {
 
     private String firstName;
 
     private String lastName;
+
+    private float salary;
 
     public Employee(String firstName, String lastName) {
         super();
@@ -42,11 +41,20 @@ public class Employee extends ExtensionAnnotationAssociationManager {
         this.lastName = lastName;
     }
 
+    public float getSalary() {
+        return salary;
+    }
+
+    public void setSalary(float salary) {
+        this.salary = salary;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", salary=" + salary +
                 '}';
     }
 }

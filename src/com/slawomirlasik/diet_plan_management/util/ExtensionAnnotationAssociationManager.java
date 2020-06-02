@@ -107,6 +107,14 @@ public class ExtensionAnnotationAssociationManager extends ExtensionManager impl
         addLink(roleName, reverseRoleName, targetObject, targetObject);
     }
 
+    ////////////////
+    // add method that takes an object to be added to THIS object as an association
+    // get roles from objects (THIS, end target)
+    // determine which association is it
+    // do appriopiate link between objects depends of what association type is between objects
+
+
+
     /**
      * Adds an information about a connection (using a "semi" composition).
      * @param roleName is the opposite role from this class

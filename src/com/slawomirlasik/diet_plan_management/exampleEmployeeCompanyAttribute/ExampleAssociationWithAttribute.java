@@ -1,5 +1,8 @@
 package com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyAttribute;
 
+import com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyOneToManyAssociation.Company;
+import com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyOneToManyAssociation.Employee;
+
 public class ExampleAssociationWithAttribute {
 
     // TODO:SL implement association with attribute example (ManyToMany) using Recipe -- Ingredient with attribute RecipeIngredient
