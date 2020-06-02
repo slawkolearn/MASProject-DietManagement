@@ -1,16 +1,12 @@
 package com.slawomirlasik.diet_plan_management.developement;
 
-@ManyToManyAssociation(role = "owner", target = Human.class)
-public class Animal extends ObjectMinus {
+@ManyToManyAssociation(role = "owner", target = Human.class, middleClass = AnimalHuman.class)
+public class Animal extends ExtensionAnnotationAssociationManager {
 
     private String species;
 
     public Animal(String species) {
-        this.species = species;
-    }
-
-    public Animal(String name, String species) {
-        super(name);
+        super();
         this.species = species;
     }
 

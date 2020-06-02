@@ -1,7 +1,7 @@
 package com.slawomirlasik.diet_plan_management.developement;
 
-@ManyToManyAssociation(role = "pupil", target = Animal.class)
-public class Human extends ObjectMinus{
+@ManyToManyAssociation(role = "pupil", target = Animal.class, middleClass = AnimalHuman.class)
+public class Human extends ExtensionAnnotationAssociationManager{
 
     private int salary;
 
@@ -10,7 +10,6 @@ public class Human extends ObjectMinus{
     }
 
     public Human(String name, int salary) {
-        super(name);
         this.salary = salary;
     }
 

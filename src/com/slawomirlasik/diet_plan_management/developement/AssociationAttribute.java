@@ -7,10 +7,8 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface ManyToManyAssociation {
-    int cardinality() default Integer.MAX_VALUE;
-    String role();
-    Class<? extends ExtensionAnnotationAssociationManager> target();
-    Class<? extends ExtensionAnnotationAssociationManager> middleClass();
+public @interface AssociationAttribute {
 
 }
+
+// HOW TO ANNOTATE THE FIELDS IN THE CLASS
