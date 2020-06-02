@@ -22,8 +22,8 @@ getAge()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>840</x>
-      <y>400</y>
+      <x>864</x>
+      <y>408</y>
       <w>224</w>
       <h>216</h>
     </coordinates>
@@ -65,13 +65,13 @@ generateNewDietForGivenUser(dietUser)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1040</x>
+      <x>1064</x>
       <y>272</y>
-      <w>88</w>
-      <h>144</h>
+      <w>64</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>90.0;10.0;90.0;60.0;10.0;60.0;10.0;160.0</additional_attributes>
+    <additional_attributes>60.0;10.0;60.0;60.0;10.0;60.0;10.0;170.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -112,16 +112,15 @@ measurementType
     <coordinates>
       <x>968</x>
       <y>728</y>
-      <w>80</w>
+      <w>112</w>
       <h>184</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..n
-r1=
+r1=is part of
 m2=1..n
-r2=
-contains v</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;210.0</additional_attributes>
+r2=contains</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;210.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -142,13 +141,13 @@ contains v</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>968</x>
+      <x>992</x>
       <y>808</y>
-      <w>192</w>
-      <h>56</h>
+      <w>168</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;50.0;220.0;10.0</additional_attributes>
+    <additional_attributes>10.0;30.0;190.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -200,13 +199,13 @@ Description</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>832</x>
+      <x>856</x>
       <y>280</y>
-      <w>104</w>
-      <h>136</h>
+      <w>80</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;150.0;70.0;90.0;110.0;10.0</additional_attributes>
+    <additional_attributes>10.0;160.0;40.0;90.0;80.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -228,21 +227,22 @@ _getAllDietPlans()_</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>736</x>
-      <y>472</y>
-      <w>120</w>
-      <h>112</h>
+      <y>480</y>
+      <w>144</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
+r1=belongs to
 m2=0..n
-has v</panel_attributes>
-    <additional_attributes>130.0;10.0;10.0;120.0</additional_attributes>
+r2=has diet plans</panel_attributes>
+    <additional_attributes>160.0;10.0;10.0;110.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>712</x>
-      <y>296</y>
+      <y>288</y>
       <w>104</w>
       <h>88</h>
     </coordinates>
@@ -295,9 +295,9 @@ dateOfMeasurement
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1056</x>
+      <x>1080</x>
       <y>448</y>
-      <w>264</w>
+      <w>240</w>
       <h>160</h>
     </coordinates>
     <panel_attributes>lt=-
@@ -305,15 +305,15 @@ m1=1
 r1=mentor
 m2=0..n
 r2=mentors</panel_attributes>
-    <additional_attributes>260.0;10.0;260.0;170.0;10.0;170.0</additional_attributes>
+    <additional_attributes>230.0;10.0;230.0;170.0;10.0;170.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
       <x>752</x>
       <y>1064</y>
-      <w>128</w>
-      <h>216</h>
+      <w>280</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>These fields are aproximation of the amounts of specific fat, protein and carbohydrotes in the ingridient. Later maybe system can allow for updating this each time when the actual ingridient is bought (maybe you buy low fat or high fat meat for example);</panel_attributes>
     <additional_attributes/>
@@ -332,8 +332,8 @@ r2=mentors</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1368</x>
-      <y>696</y>
+      <x>1384</x>
+      <y>824</y>
       <w>152</w>
       <h>136</h>
     </coordinates>
@@ -345,11 +345,11 @@ r2=mentors</panel_attributes>
     <coordinates>
       <x>1264</x>
       <y>824</y>
-      <w>120</w>
-      <h>24</h>
+      <w>136</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;150.0;170.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -411,8 +411,8 @@ skills
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>624</x>
-      <y>192</y>
+      <x>616</x>
+      <y>176</y>
       <w>96</w>
       <h>96</h>
     </coordinates>
@@ -428,19 +428,19 @@ name
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>648</x>
-      <y>280</y>
-      <w>72</w>
-      <h>288</h>
+      <x>608</x>
+      <y>264</y>
+      <w>96</w>
+      <h>304</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=n
-r1=contains
+r1=excercise
 m2=n
 r2=part of
 
 </panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;340.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0;60.0;170.0;60.0;360.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -463,14 +463,16 @@ r2=concerns
     <id>Relation</id>
     <coordinates>
       <x>264</x>
-      <y>304</y>
-      <w>368</w>
-      <h>264</h>
+      <y>296</y>
+      <w>392</w>
+      <h>272</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
-m2=90</panel_attributes>
-    <additional_attributes>440.0;310.0;430.0;30.0;370.0;10.0;10.0;10.0</additional_attributes>
+r1=belongs to
+m2=90
+r2=contains</panel_attributes>
+    <additional_attributes>400.0;320.0;400.0;40.0;370.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -510,45 +512,49 @@ r2=belongs to
     <coordinates>
       <x>608</x>
       <y>48</y>
-      <w>472</w>
-      <h>368</h>
+      <w>496</w>
+      <h>376</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1..n
-r1=has
+r1=has statistics
 m2=1
 r2=belongs to
 
 </panel_attributes>
-    <additional_attributes>10.0;20.0;500.0;20.0;500.0;440.0</additional_attributes>
+    <additional_attributes>10.0;20.0;530.0;20.0;530.0;450.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>728</x>
-      <y>376</y>
-      <w>56</w>
-      <h>192</h>
+      <y>368</y>
+      <w>120</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
-m2=1</panel_attributes>
-    <additional_attributes>10.0;220.0;50.0;70.0;50.0;10.0</additional_attributes>
+r1=belongs to
+m2=1
+r2=has duration</panel_attributes>
+    <additional_attributes>10.0;230.0;10.0;120.0;50.0;120.0;50.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>24</x>
-      <y>360</y>
+      <y>352</y>
       <w>120</w>
-      <h>280</h>
+      <h>288</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
+r1=concerns
 m2=4
+r2=consists
 
 </panel_attributes>
-    <additional_attributes>130.0;10.0;50.0;10.0;10.0;70.0;10.0;330.0</additional_attributes>
+    <additional_attributes>130.0;20.0;50.0;20.0;10.0;80.0;10.0;340.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -570,10 +576,12 @@ r2=contains</panel_attributes>
     <coordinates>
       <x>1176</x>
       <y>592</y>
-      <w>152</w>
+      <w>248</w>
       <h>192</h>
     </coordinates>
-    <panel_attributes>In RecipeIngredient Attribute class is stored information about how many of particular ingredient is in the recipe (propotionally). This informations is for Meal class later to get a propotion of this ingredient based on the daily protein, carbohydrate and fat of users diet.</panel_attributes>
+    <panel_attributes>In RecipeIngredient Attribute class we store information about how many of particular ingredient is in the recipe (propotionally). This informations is for Meal class later to get a propotion of this ingredient based on the daily protein, carbohydrate and fat of users diet.
+
+This tells us that for example in Recipe "chicken soup" we have 5xchicken, which we store as an ingredient 100g for chkicken, and for this amount we give estimate calculation of fats, carbohydrates and protain.</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -590,8 +598,8 @@ r2=contains</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>744</x>
-      <y>200</y>
+      <x>472</x>
+      <y>384</y>
       <w>104</w>
       <h>88</h>
     </coordinates>
@@ -609,7 +617,7 @@ series</panel_attributes>
       <w>112</w>
       <h>96</h>
     </coordinates>
-    <panel_attributes>RecipePreference
+    <panel_attributes>TimeOfDayPreference
 --
 name
 Description</panel_attributes>
@@ -625,7 +633,7 @@ Description</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-
 m1=n
-r1=is of Type
+r1=best suited
 m2=n
 r2=concerns
 

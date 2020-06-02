@@ -7,7 +7,7 @@ import java.util.*;
 public class ExtensionAssociationManager extends ExtensionManager implements Serializable {
 
     /**
-     * Stores information about what associations are avaible in the system
+     * in AssociationsEnum we Store information about what associations are available in the system
      *  then in the specific class in the method it is checked whether it is possible to create
      *  this association (it is permitted by the business logic
      *  like actor can be associated with movies but not with casettes or DVDs
