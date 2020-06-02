@@ -1,6 +1,8 @@
-package com.slawomirlasik.diet_plan_management.temp;
+package com.slawomirlasik.diet_plan_management.developementEmployeeCompanyAttribute;
 
-public class Employee extends ExtensionAssociationManagerEmployment<employmentAssociations> {
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
+
+public class Employee extends ExtensionAnnotationAssociationManager {
 
     private String firstName;
 

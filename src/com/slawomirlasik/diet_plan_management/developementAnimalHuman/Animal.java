@@ -1,4 +1,7 @@
-package com.slawomirlasik.diet_plan_management.developement;
+package com.slawomirlasik.diet_plan_management.developementAnimalHuman;
+
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
+import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociation;
 
 @ManyToManyAssociation(role = "owner", target = Human.class, middleClass = AnimalHuman.class)
 public class Animal extends ExtensionAnnotationAssociationManager {

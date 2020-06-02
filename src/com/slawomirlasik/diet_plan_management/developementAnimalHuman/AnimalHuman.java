@@ -1,4 +1,6 @@
-package com.slawomirlasik.diet_plan_management.developement;
+package com.slawomirlasik.diet_plan_management.developementAnimalHuman;
+
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 
 public class AnimalHuman extends ExtensionAnnotationAssociationManager {
 

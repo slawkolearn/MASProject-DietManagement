@@ -1,4 +1,4 @@
-package com.slawomirlasik.diet_plan_management.developement;
+package com.slawomirlasik.diet_plan_management.util;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,9 +7,10 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface OneToManyAssociation {
+public @interface ManyToManyAssociation {
     int cardinality() default Integer.MAX_VALUE;
     String role();
     Class<? extends ExtensionAnnotationAssociationManager> target();
+    Class<? extends ExtensionAnnotationAssociationManager> middleClass();
 
 }

@@ -1,4 +1,4 @@
-package com.slawomirlasik.diet_plan_management.temp;
+package com.slawomirlasik.diet_plan_management.developementEmployeeCompanyAttribute;
 
 public enum employmentAssociations {
 
@@ -6,5 +6,4 @@ public enum employmentAssociations {
     EMPLOYEE_WORKS_IN,
     WORKSIN_CONCERNS_EMPLOYEE,
     WORKISIN_CONCERNS_COMPANY
-
 }

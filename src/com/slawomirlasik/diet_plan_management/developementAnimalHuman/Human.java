@@ -1,15 +1,15 @@
-package com.slawomirlasik.diet_plan_management.developement;
+package com.slawomirlasik.diet_plan_management.developementAnimalHuman;
+
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
+import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociation;
 
 @ManyToManyAssociation(role = "pupil", target = Animal.class, middleClass = AnimalHuman.class)
-public class Human extends ExtensionAnnotationAssociationManager{
+public class Human extends ExtensionAnnotationAssociationManager {
 
     private int salary;
 
-    public Human(int salary) {
-        this.salary = salary;
-    }
-
-    public Human(String name, int salary) {
+    public Human( int salary) {
+        super();
         this.salary = salary;
     }
 

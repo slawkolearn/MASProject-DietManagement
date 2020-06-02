@@ -1,8 +1,10 @@
-package com.slawomirlasik.diet_plan_management.temp;
+package com.slawomirlasik.diet_plan_management.developementEmployeeCompanyAttribute;
+
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 
 import java.time.LocalDate;
 
-public class WorksIn extends ExtensionAssociationManagerEmployment<employmentAssociations> {
+public class WorksIn extends ExtensionAnnotationAssociationManager {
 
     private LocalDate dateFrom;
 

@@ -1,4 +1,4 @@
-package com.slawomirlasik.diet_plan_management.temp;
+package com.slawomirlasik.diet_plan_management.developementEmployeeCompanyAttribute;
 
 public class ExampleAssociationWithAttribute {
 
@@ -22,24 +22,10 @@ public class ExampleAssociationWithAttribute {
         Company asseco = new Company("Assaco Poland S.A.");
 
         // associate them using association with attribute
-        google.hireEmployee(gregory);
-        google.hireEmployee(tadeo);
 
-        asseco.hireEmployee(cristofer);
 
         // print assocations for role "employs"
-        try {
-            ExtensionAssociationManagerEmployment[] employments =
-                    asseco.getLinks(employmentAssociations.COMPANY_EMPLOYS);
 
-            System.out.println("Oto zatrudnienia dla firmy google:");
-            for(ExtensionAssociationManagerEmployment worksIn : employments ){
-                System.out.println(worksIn);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }
 }

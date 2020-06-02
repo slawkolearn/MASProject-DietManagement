@@ -1,15 +1,17 @@
-package com.slawomirlasik.diet_plan_management.developement;
+package com.slawomirlasik.diet_plan_management.test;
 
-import java.lang.annotation.Annotation;
+import com.slawomirlasik.diet_plan_management.developementAnimalHuman.Animal;
+import com.slawomirlasik.diet_plan_management.developementAnimalHuman.Human;
+import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociation;
 
 public class AnnotationTest {
 
     public static void main(String[] args) {
         System.out.println("Testing annotations...");
 
-        Animal dog = new Animal("bleee", "dog");
+        Animal dog = new Animal("dog");
 
-        Human human1 = new Human("ahhhh", 100;
+        Human human1 = new Human(100);
 
         if(dog.getClass().isAnnotationPresent(ManyToManyAssociation.class)){
             System.out.println("Yes manyToMany annotation present...");

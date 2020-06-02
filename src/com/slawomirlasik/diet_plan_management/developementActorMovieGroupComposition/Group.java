@@ -1,4 +1,4 @@
-package com.slawomirlasik.diet_plan_management.temp;
+package com.slawomirlasik.diet_plan_management.developementActorMovieGroupComposition;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
 

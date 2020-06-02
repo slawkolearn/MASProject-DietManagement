@@ -1,8 +1,11 @@
-package com.slawomirlasik.diet_plan_management.temp;
+package com.slawomirlasik.diet_plan_management.developementEmployeeCompanyAttribute;
+
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 
 import java.time.LocalDate;
 
-public class Company extends ExtensionAssociationManagerEmployment<employmentAssociations> {
+public class Company extends ExtensionAnnotationAssociationManager {
+
 
     private String name;
 
@@ -38,17 +41,10 @@ public class Company extends ExtensionAssociationManagerEmployment<employmentAss
         employment.setDateFrom(LocalDate.now());
 
         // add link to employee in employment
-        employment.addLink(
-                employmentAssociations.WORKSIN_CONCERNS_EMPLOYEE,
-                employmentAssociations.EMPLOYEE_WORKS_IN,
-                gregory);
+
 
         // add link to company in employment;
-        employment.addLink(
-                employmentAssociations.WORKISIN_CONCERNS_COMPANY,
-                employmentAssociations.COMPANY_EMPLOYS,
-                this
-        );
+
 
     }
 }
