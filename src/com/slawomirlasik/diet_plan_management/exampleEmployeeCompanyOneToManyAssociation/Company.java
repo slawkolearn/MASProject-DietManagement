@@ -42,7 +42,6 @@ public class Company extends ExtensionAnnotationAssociationManager {
         employee.setSalary(salary);
 
         // add link to your system
-        addLink(employee);
 
     }
 }
