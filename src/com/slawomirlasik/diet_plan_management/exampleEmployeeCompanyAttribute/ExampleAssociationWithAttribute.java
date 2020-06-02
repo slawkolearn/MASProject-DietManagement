@@ -1,4 +1,4 @@
-package com.slawomirlasik.diet_plan_management.developementEmployeeCompanyAttribute;
+package com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyAttribute;
 
 public class ExampleAssociationWithAttribute {
 
@@ -22,7 +22,7 @@ public class ExampleAssociationWithAttribute {
         Company asseco = new Company("Assaco Poland S.A.");
 
         // associate them using association with attribute
-
+        google.hireEmployee(gregory, 10000);
 
         // print assocations for role "employs"
 

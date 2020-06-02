@@ -1,9 +1,15 @@
-package com.slawomirlasik.diet_plan_management.developementEmployeeCompanyAttribute;
+package com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyOneToManyAssociation;
 
+import com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyAttribute.WorksIn;
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
+import com.slawomirlasik.diet_plan_management.util.OneToManyAssociation;
 
 import java.time.LocalDate;
 
+@OneToManyAssociation(
+        role = "Employs",
+        target = Employee.class
+)
 public class Company extends ExtensionAnnotationAssociationManager {
 
 
@@ -33,7 +39,7 @@ public class Company extends ExtensionAnnotationAssociationManager {
                 '}';
     }
 
-    public void hireEmployee(Employee gregory) {
+    public void hireEmployee(Employee employee, float salary) {
 
         WorksIn employment = new WorksIn();
 

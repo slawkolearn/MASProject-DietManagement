@@ -1,9 +1,14 @@
-package com.slawomirlasik.diet_plan_management.developementEmployeeCompanyAttribute;
+package com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyAttribute;
 
+import com.slawomirlasik.diet_plan_management.util.AttributeClass;
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 
 import java.time.LocalDate;
 
+@AttributeClass(
+        role1 = "Concerns employee", target1 = Employee.class,
+        role2 = "Concerns company", target2 = Company.class
+)
 public class WorksIn extends ExtensionAnnotationAssociationManager {
 
     private LocalDate dateFrom;

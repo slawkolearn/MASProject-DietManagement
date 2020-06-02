@@ -7,13 +7,10 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface ManyToOneAssociation {
-
-    // here we do not have cardinality
-    // this annotation enforce of using cardinality of 1 later in Util class on the target side
-    // with the given role
-
+public @interface ManyToManyAssociationWithAttribute {
+    int cardinality();
     String role();
     Class<? extends ExtensionAnnotationAssociationManager> target();
+    Class<? extends ExtensionAnnotationAssociationManager> attributeClass();
 
 }
