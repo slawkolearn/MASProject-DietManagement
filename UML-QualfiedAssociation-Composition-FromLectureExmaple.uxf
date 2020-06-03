@@ -72,4 +72,19 @@ r2=actor
 </panel_attributes>
     <additional_attributes>30.0;20.0;280.0;20.0</additional_attributes>
   </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>120</y>
+      <w>410</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+r1=stars in
+m2=0..n
+r2=has actors</panel_attributes>
+    <additional_attributes>10.0;170.0;10.0;10.0;320.0;10.0;320.0;170.0</additional_attributes>
+  </element>
 </diagram>

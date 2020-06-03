@@ -118,7 +118,8 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
             addLink(sourceRoleName, targetRoleName, target);
         } else {
             System.out.println("Created Qualified association");
-        } ;
+        }
+        ;
 
 
     }
@@ -357,9 +358,11 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         }
 
         // check if whole is appriopiate class type
-        if (partClass.equals(wholeObject.getClass().getAnnotation(CompositionWhole.class).partTarget())
-                &&
-                wholeObject.getClass().getAnnotation(CompositionWhole.class).partTarget().equals(partClass)) {
+        if (
+                wholeObject.getClass().isAnnotationPresent(CompositionWhole.class) &&
+                partClass.equals(wholeObject.getClass().getAnnotation(CompositionWhole.class).partTarget()) &&
+                wholeObject.getClass().getAnnotation(CompositionWhole.class).partTarget().equals(partClass)
+        ) {
 
             return true;
         }

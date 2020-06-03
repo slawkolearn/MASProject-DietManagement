@@ -40,6 +40,30 @@ public class ExampleCompositionAndAssociationWithQualifierExample {
                     "Ruffalo"
             );
 
+
+
+            // create sample movies
+            Movie terminator = new Movie("Terminator");
+            Movie avengers = new Movie("Avengers");
+            Movie topgun = new Movie("Top Gun");
+
+            // trying creating actor that has no proper whole
+/*            Actor twinky = Actor.createActor(terminator, "Twinky", "Winky");
+            System.out.println(twinky);
+            OUTPUT : java.lang.Exception: There is no valid composition association between whole Movie and part Actor
+            */
+
+            // trying to create actor that aleady exists with proper whole
+/*            Actor robert2 = Actor.createActor(g1, "Robert", "Downey Jr.");
+            System.out.println(robert2);
+            OUTPUT: java.lang.Exception: The part is already connected to a whole!
+
+            */
+
+            // trying to create actor (that does not exists) with proper whole outside the whole
+            Actor drNo = Actor.createActor(g2, "Dr.", "No");
+            System.out.println(drNo);
+
             // print links between group and actor composition
 
             g1.printRoles();
@@ -49,12 +73,6 @@ public class ExampleCompositionAndAssociationWithQualifierExample {
 
             arnold.printRoles();
             arnold.showLinks("group", System.out);
-
-
-            // create sample movies
-            Movie terminator = new Movie("Terminator");
-            Movie avengers = new Movie("Avengers");
-            Movie topgun = new Movie("Top Gun");
 
             // add links between actors and movies
             // Its with qualifier
@@ -67,7 +85,6 @@ public class ExampleCompositionAndAssociationWithQualifierExample {
             robert.addLink(topgun);
 
 
-
             // show links
             robert.showLinks("movies", System.out);
 
@@ -75,10 +92,9 @@ public class ExampleCompositionAndAssociationWithQualifierExample {
             System.out.println(topgun.getLinkedObject("actor", robert.getQualifier()));
 
 
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         System.out.println("Ending the program normally");
 
