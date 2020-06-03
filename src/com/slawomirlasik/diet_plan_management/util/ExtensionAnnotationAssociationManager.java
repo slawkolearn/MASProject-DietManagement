@@ -2,6 +2,8 @@ package com.slawomirlasik.diet_plan_management.util;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -10,6 +12,33 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
     public ExtensionAnnotationAssociationManager() {
         super();
+    }
+
+    public static <T extends ExtensionAnnotationAssociationManager> String getRoleNameForTarget(
+            T source,
+            Class<? extends ExtensionAnnotationAssociationManager> targetClass) {
+        Annotation[] sourceAnnotations = source.getClass().getAnnotations();
+
+        for(Annotation annotation : sourceAnnotations){
+            try {
+                Method targetMethod = annotation.annotationType().getMethod("target");
+                Class<?> sourceTargetClass = (Class<?>) targetMethod.invoke(annotation);
+
+                if(sourceTargetClass.equals(targetClass)){
+                    System.out.println("sourceTargetClass : " + sourceTargetClass);
+                    return (String) annotation.annotationType().getMethod("role").invoke(annotation);
+                }
+
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return "";
     }
 
     public <T extends ExtensionAnnotationAssociationManager> void addLink(
