@@ -1,8 +1,5 @@
 package com.slawomirlasik.diet_plan_management.exampleActorMovieGroupComposition;
 
-import com.slawomirlasik.diet_plan_management.ActorMovie.Actor;
-import com.slawomirlasik.diet_plan_management.ActorMovie.Group;
-import com.slawomirlasik.diet_plan_management.ActorMovie.Movie;
 import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
 
 public class ExampleCompositionAndAssociationWithQualifierExample {

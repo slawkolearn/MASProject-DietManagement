@@ -13,7 +13,7 @@ public class ExampleAssociationWithAttribute {
     // TODO:SL create sample association with attribute from lecture MAS
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         // create sample employees
         Employee gregory = new Employee("Grzegorz", "Nowak");

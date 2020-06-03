@@ -1,8 +1,46 @@
 package com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyOneToManyAssociation;
 
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
+
+import java.io.IOException;
+
 public class TestOneToManyAssociationAnnotations {
 
     public static void main(String[] args) {
+
+        try {
+            ExtensionAnnotationAssociationManager.loadExtensionsFromFile();
+
+            ExtensionAnnotationAssociationManager.printExtension(Company.class);
+            ExtensionAnnotationAssociationManager.printExtension(Employee.class);
+
+            Iterable<Company> companies = ExtensionAnnotationAssociationManager.getExtension(Company.class);
+
+            for( Company company : companies) {
+                company.printRoles();
+
+                company.showLinks("Employs", System.out);
+            }
+
+            Iterable<Employee> employees = ExtensionAnnotationAssociationManager.getExtension(Employee.class);
+
+            for( Employee employee : employees ) {
+                employee.printRoles();
+
+                employee.showLinks("Works in", System.out);
+            }
+
+
+
+
+            System.exit(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
 
         // create sample employees
         //
@@ -18,10 +56,32 @@ public class TestOneToManyAssociationAnnotations {
         // add some employees to company
         // one employee can work in one company at the time
         //
-        google.hireEmployee(gregory, 4000);
-        google.hireEmployee(cristofer, 10000);
+        try {
+            google.hireEmployee(gregory, 4000);
+            google.hireEmployee(tadeo, 10000);
+            asseco.hireEmployee(cristofer, 20000);
+            google.hireEmployee(cristofer, 10000);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
 
-        asseco.hireEmployee(tadeo, 2000);
+        google.printRoles();
+        gregory.printRoles();
+        cristofer.printRoles();
+
+        try {
+            google.showLinks("Employs", System.out);
+            cristofer.showLinks("Works in", System.out);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+        try {
+            ExtensionAnnotationAssociationManager.saveExtensionCurrentState();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

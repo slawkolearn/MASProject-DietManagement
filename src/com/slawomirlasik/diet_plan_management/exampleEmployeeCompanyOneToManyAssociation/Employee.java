@@ -2,6 +2,7 @@ package com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyOneToManyAs
 
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
+import com.slawomirlasik.diet_plan_management.util.ManyToOneAssociation;
 
 @ManyToOneAssociation(
         role = "Works in",

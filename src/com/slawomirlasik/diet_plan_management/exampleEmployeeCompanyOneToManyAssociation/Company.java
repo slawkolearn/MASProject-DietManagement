@@ -36,12 +36,13 @@ public class Company extends ExtensionAnnotationAssociationManager {
                 '}';
     }
 
-    public void hireEmployee(Employee employee, float salary) {
+    public void hireEmployee(Employee employee, float salary) throws Exception {
 
         // set salary for employee
         employee.setSalary(salary);
 
         // add link to your system
+        addLink(employee);
 
     }
 }
