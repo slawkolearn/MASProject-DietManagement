@@ -151,7 +151,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         // if so thech if the flag of this annotation is qualified is true
         // if so retrieve the qualifier from the owner object of this annotation
         if (annotation1.annotationType().equals(OneToManyAssociation.class)) {
-            System.out.println("Yep : " + annotation1 + " " + object1);
+            System.out.println("Yep1 : " + annotation1 + " " + object1);
 
             // if so thech if the flag of this annotation is qualified is true
             OneToManyAssociation oneToManyAssociationAnnotation1 = (OneToManyAssociation) annotation1;
@@ -171,7 +171,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
             }
         }
         if (annotation2.annotationType().equals(OneToManyAssociation.class)) {
-            System.out.println("Yep : " + annotation2 + " " + object2);
+            System.out.println("Yep2 : " + annotation2 + " " + object2);
 
             // if so thech if the flag of this annotation is qualified is true
             OneToManyAssociation oneToManyAssociationAnnotation2 = (OneToManyAssociation) annotation2;

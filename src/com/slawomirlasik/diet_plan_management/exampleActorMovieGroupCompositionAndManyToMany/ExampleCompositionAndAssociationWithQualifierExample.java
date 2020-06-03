@@ -83,13 +83,23 @@ public class ExampleCompositionAndAssociationWithQualifierExample {
             arnold.addLink(terminator);
 
             robert.addLink(topgun);
+            mark.addLink(topgun);
+
+            // add links many to many between actors and movies
+//            avengers.addLink
 
 
             // show links
             robert.showLinks("movies", System.out);
+            mark.showLinks("movies", System.out);
+
 
             topgun.printRoles();
+            // TODO:SL add method to ExtensionAnnotationAssociationManager to prevent calling getLinkedObject on  objects that does not belong to qualified association side (like mark does not but topgun yes)
             System.out.println(topgun.getLinkedObject("actor", robert.getQualifier()));
+            System.out.println(topgun.getLinkedObject("actor", mark.getQualifier()));
+            System.out.println(terminator.getLinkedObject("actor", arnold.getQualifier()));
+
 
 
         } catch (Exception e) {
