@@ -47,8 +47,6 @@ public class Group extends ExtensionAnnotationAssociationManager {
             // create actor object
             Actor actor = Actor.createActor(this, firstName, lastName);
 
-            // add this actor (part) to the Group (whole)
-
             // return this actor
             return actor;
     }

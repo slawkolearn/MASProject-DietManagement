@@ -1,8 +1,6 @@
 package com.slawomirlasik.diet_plan_management.exampleActorMovieGroupCompositionAndManyToMany;
 
-import com.slawomirlasik.diet_plan_management.util.CompositionPart;
-import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
-import com.slawomirlasik.diet_plan_management.util.ManyToOneAssociation;
+import com.slawomirlasik.diet_plan_management.util.*;
 
 import java.util.Objects;
 
@@ -11,17 +9,12 @@ import java.util.Objects;
         target = Group.class,
         role = "group"
 )
+@OneToManyAssociation(
+        target = Movie.class,
+        role = "movies",
+        qualified = true
+)
 public class Actor extends ExtensionAnnotationAssociationManager {
-
-    public static final String ASSOCIATION_MANY_TO_MANY_ROLE_ACTORS = "actor_movies";
-    public static final String COMPOSITION_ROLE_GROUP = "actor_group";
-
-    public enum associations {
-        ACTOR_MOVIES,
-        ACTOR_GROUP
-    }
-
-    ;
 
 
     private String firstName;
@@ -58,7 +51,9 @@ public class Actor extends ExtensionAnnotationAssociationManager {
         Actor actor = new Actor(firstName, lastName);
 
         // add actor to the parts -> throw exception if part already exists
-        addPart(whole, actor);
+        if(addPart(whole, actor)){
+            System.out.println();
+        };
 
         // return actor
         return actor;
@@ -88,6 +83,7 @@ public class Actor extends ExtensionAnnotationAssociationManager {
                 '}';
     }
 
+    @Qualfier
     public String getQualifier() {
         return String.valueOf(firstName.toUpperCase().charAt(0)) + String.valueOf(lastName.toUpperCase().charAt(0));
     }
@@ -105,4 +101,5 @@ public class Actor extends ExtensionAnnotationAssociationManager {
     public int hashCode() {
         return Objects.hash(firstName, lastName);
     }
+
 }

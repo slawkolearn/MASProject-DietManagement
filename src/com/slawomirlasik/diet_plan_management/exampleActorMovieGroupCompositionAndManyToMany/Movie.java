@@ -1,12 +1,11 @@
 package com.slawomirlasik.diet_plan_management.exampleActorMovieGroupCompositionAndManyToMany;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
-import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociation;
+import com.slawomirlasik.diet_plan_management.util.ManyToOneAssociation;
 
-@ManyToManyAssociation(
+@ManyToOneAssociation(
         target = Actor.class,
-        role = "actors",
-        middleClass = ActorMovie.class
+        role = "actor"
 )
 public class Movie extends ExtensionAnnotationAssociationManager {
 

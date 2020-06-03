@@ -40,10 +40,15 @@ public class ExampleCompositionAndAssociationWithQualifierExample {
                     "Ruffalo"
             );
 
+            // print links between group and actor composition
+
             g1.printRoles();
             g2.printRoles();
 
             g1.showLinks("actors", System.out);
+
+            arnold.printRoles();
+            arnold.showLinks("group", System.out);
 
 
             // create sample movies
@@ -51,10 +56,24 @@ public class ExampleCompositionAndAssociationWithQualifierExample {
             Movie avengers = new Movie("Avengers");
             Movie topgun = new Movie("Top Gun");
 
-            // add links
+            // add links between actors and movies
+            // Its with qualifier
+            //
+            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
+            avengers.addLink(robert);
+
+            arnold.addLink(terminator);
+
+            robert.addLink(topgun);
+
 
 
             // show links
+            robert.showLinks("movies", System.out);
+
+            topgun.printRoles();
+            System.out.println(topgun.getLinkedObject("actor", robert.getQualifier()));
+
 
 
             } catch (Exception e) {

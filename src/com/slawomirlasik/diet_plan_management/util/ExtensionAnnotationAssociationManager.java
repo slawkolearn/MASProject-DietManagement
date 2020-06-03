@@ -10,6 +10,7 @@ import java.util.Arrays;
 // TODO:SL implement association with attribute
 // TODO:SL implement association with qualifier
 // TODO:SL handle many TO Many Associations
+// TODO:SL check whether multiple association are handled properly
 
 public class ExtensionAnnotationAssociationManager extends ExtensionAssociationManager
         implements Serializable {
@@ -80,6 +81,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         //
         // check cardinality
         //
+        // TODO:SL returns always true - imlement this feature in the future :)
         if (!cardinalityAreMet(associatedAnnotationsFromSourceAndTarget.get(0))) {
             throw new Exception(
                     String.format("Cardinality are not met between %s and %s. ",
@@ -99,8 +101,98 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                 getMethod("role").
                 invoke(associatedAnnotationsFromSourceAndTarget.get(0)[1]);
 
-        addLink(sourceRoleName, targetRoleName, target);
+        // get the possible qualifier - for now always String type
+        boolean qualifiedAssociationCreated = ifPossibleMakeQualifiedAssociationBetweenObjects(
+                this,
+                target,
+                associatedAnnotationsFromSourceAndTarget.get(0)[0],
+                associatedAnnotationsFromSourceAndTarget.get(0)[1],
+                sourceRoleName,
+                targetRoleName
+        );
 
+        // if qualifier association created do not create normal associaoin
+
+        if (!qualifiedAssociationCreated) {
+            System.out.println("Created Normal Binary association");
+            addLink(sourceRoleName, targetRoleName, target);
+        } else {
+            System.out.println("Created Qualified association");
+        } ;
+
+
+    }
+
+
+    /**
+     * Tries to created qualified association between given objects, and if created return true
+     * using roles given if not possible return false;
+     *
+     * @param object1
+     * @param object2
+     * @param annotation1
+     * @param annotation2
+     * @param sourceRoleName
+     * @param targetRoleName
+     * @return
+     */
+    private <T extends ExtensionAnnotationAssociationManager> boolean ifPossibleMakeQualifiedAssociationBetweenObjects(
+            T object1,
+            T object2,
+            Annotation annotation1,
+            Annotation annotation2,
+            String sourceRoleName,
+            String targetRoleName
+    ) throws InvocationTargetException, IllegalAccessException {
+
+
+        // check if one of them contains OneToManyAssociation annotation
+        // if so thech if the flag of this annotation is qualified is true
+        // if so retrieve the qualifier from the owner object of this annotation
+        if (annotation1.annotationType().equals(OneToManyAssociation.class)) {
+            System.out.println("Yep : " + annotation1 + " " + object1);
+
+            // if so thech if the flag of this annotation is qualified is true
+            OneToManyAssociation oneToManyAssociationAnnotation1 = (OneToManyAssociation) annotation1;
+            if (oneToManyAssociationAnnotation1.qualified()) {
+                // if so retrieve the qualifier from the owner object of this annotation
+                // get annotated method by @Qualifier annotation
+                Method[] object1Methods = object1.getClass().getMethods();
+                for (Method method : object1Methods) {
+                    if (method.isAnnotationPresent(Qualfier.class)) {
+                        // make qualified association
+                        // from object2
+                        object2.addLink(targetRoleName, sourceRoleName, object1, method.invoke(object1));
+                        // return true
+                        return true;
+                    }
+                }
+            }
+        }
+        if (annotation2.annotationType().equals(OneToManyAssociation.class)) {
+            System.out.println("Yep : " + annotation2 + " " + object2);
+
+            // if so thech if the flag of this annotation is qualified is true
+            OneToManyAssociation oneToManyAssociationAnnotation2 = (OneToManyAssociation) annotation2;
+            if (oneToManyAssociationAnnotation2.qualified()) {
+                // if so retrieve the qualifier from the owner object of this annotation
+                // get annotated method by @Qualifier annotation
+                Method[] object2Methods = object2.getClass().getMethods();
+                for (Method method : object2Methods) {
+                    if (method.isAnnotationPresent(Qualfier.class)) {
+                        // make qualified association
+                        // from object
+                        object1.addLink(sourceRoleName, targetRoleName, object2, method.invoke(object2));
+                        // return true
+                        return true;
+                    }
+                }
+            }
+
+        }
+
+        // return false if no qualified association created
+        return false;
 
     }
 
@@ -110,6 +202,24 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         return true;
     }
 
+
+    /**
+     * Returns ArrayList with proper association types
+     * Like OneToMany - ManyToOne
+     * ManyToOne - OneToMany
+     * ManyToMany - ManyToMany
+     * ManyToManyAssociationWithAttribute - ManyToManyAssociationWithAttribute
+     * <p>
+     * pairs
+     * <p>
+     * After this method user knows that returned association pairs have something in common..
+     * Also when returning size is more than one there is ambiguity of association at this point and user must be
+     * more specific (use different method to create appropriate association between object)
+     *
+     * @param sourceClass
+     * @param targetClass
+     * @return
+     */
     private ArrayList<Annotation[]> getAssociatedAnnotationsFromSourceAndTarget(
             Class<? extends ExtensionAnnotationAssociationManager> sourceClass,
             Class<? extends ExtensionAnnotationAssociationManager> targetClass) {
@@ -120,7 +230,8 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         System.out.println(targetClass);
 
         for (Annotation sourceAnnotation : sourceClass.getAnnotations()) {
-            System.out.println(sourceAnnotation.annotationType().getSimpleName());
+            System.out.println(sourceAnnotation.annotationType().getSimpleName()
+                    + " " + sourceAnnotation);
             switch (sourceAnnotation.annotationType().getSimpleName()) {
                 case "ManyToManyAssociation":
                     // so n target must be ManyToMany Association
@@ -138,6 +249,8 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                                 sourceManyToManyAssociationAnnotation.target().equals(targetClass) &&
                                         targetManyToManyAssociationAnnotation.target().equals(sourceClass)
                         ) {
+                            System.out.println("added");
+
                             correspondedAnnotationPairs.add(new Annotation[]{
                                     sourceManyToManyAssociationAnnotation,
                                     targetManyToManyAssociationAnnotation
@@ -162,6 +275,8 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                                 sourceManyToOneAssociationAnnotation.target().equals(targetClass) &&
                                         targetOneToManyAssociationAnnotation.target().equals(sourceClass)
                         ) {
+                            System.out.println("added");
+
                             // if so add the pair for returning
                             correspondedAnnotationPairs.add(new Annotation[]{
                                     sourceManyToOneAssociationAnnotation,
@@ -187,6 +302,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                                 sourceOneToManyAssociationAnnotation.target().equals(targetClass) &&
                                         targetManyToOneAssociationAnnotation.target().equals(sourceClass)
                         ) {
+                            System.out.println("added");
                             correspondedAnnotationPairs.add(new Annotation[]{
                                     sourceOneToManyAssociationAnnotation,
                                     targetManyToOneAssociationAnnotation
@@ -212,6 +328,8 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                                 sourceManyToManyAssociationWithAttributeAnnotation.target().equals(targetClass) &&
                                         targetManyToManyAssociationWithAttributeAnnotation.target().equals(sourceClass)
                         ) {
+                            System.out.println("added");
+
                             correspondedAnnotationPairs.add(new Annotation[]{
                                     sourceManyToManyAssociationWithAttributeAnnotation,
                                     targetManyToManyAssociationWithAttributeAnnotation
@@ -316,8 +434,10 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         System.out.println(partRoleName);
 
         // now we have roles
-        whole.addPart(wholeRoleName,  partRoleName, part);
+        whole.addPart(wholeRoleName, partRoleName, part);
 
+
+        System.out.println("Created Composition between " + whole + "  " + part);
 
         return true;
     }
