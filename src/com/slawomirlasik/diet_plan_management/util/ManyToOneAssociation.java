@@ -15,5 +15,9 @@ public @interface ManyToOneAssociation {
 
     String role();
     Class<? extends ExtensionAnnotationAssociationManager> target();
+    // if one gives a qualifier this association is association with qualifier type
+    String qualifier() default ""; // each time when constructing an association
+                                        // with this annotation we must check for this method
+                                        // if it is not empty we must add link as a qualified association
 
 }

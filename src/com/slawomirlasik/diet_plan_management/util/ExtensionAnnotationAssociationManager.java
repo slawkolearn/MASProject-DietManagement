@@ -7,6 +7,10 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+// TODO:SL implement association with attribute
+// TODO:SL implement association with qualifier
+// TODO:SL handle many TO Many Associations
+
 public class ExtensionAnnotationAssociationManager extends ExtensionAssociationManager
         implements Serializable {
 
@@ -14,17 +18,19 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         super();
     }
 
+    // TODO:SL add a way for using the same role names for different associations (role names should be not unique)
+
     public static <T extends ExtensionAnnotationAssociationManager> String getRoleNameForTarget(
             T source,
             Class<? extends ExtensionAnnotationAssociationManager> targetClass) {
         Annotation[] sourceAnnotations = source.getClass().getAnnotations();
 
-        for(Annotation annotation : sourceAnnotations){
+        for (Annotation annotation : sourceAnnotations) {
             try {
                 Method targetMethod = annotation.annotationType().getMethod("target");
                 Class<?> sourceTargetClass = (Class<?>) targetMethod.invoke(annotation);
 
-                if(sourceTargetClass.equals(targetClass)){
+                if (sourceTargetClass.equals(targetClass)) {
                     System.out.println("sourceTargetClass : " + sourceTargetClass);
                     return (String) annotation.annotationType().getMethod("role").invoke(annotation);
                 }
@@ -58,14 +64,14 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
         System.out.println("---------------------------------------------------");
 
-        if(associatedAnnotationsFromSourceAndTarget.size() > 1){
+        if (associatedAnnotationsFromSourceAndTarget.size() > 1) {
             // throw Excption -> multpiple variants of associations between classes. User must be more specific
             // (different methods)
             throw new Exception(
                     String.format("Multiple associations options between %s and %s. " +
-                    "Specify which association should be used!",
-                    sourceClass.getSimpleName(),
-                    targetClass.getSimpleName())
+                                    "Specify which association should be used!",
+                            sourceClass.getSimpleName(),
+                            targetClass.getSimpleName())
             );
         }
 
@@ -74,7 +80,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         //
         // check cardinality
         //
-        if(!cardinalityAreMet(associatedAnnotationsFromSourceAndTarget.get(0))){
+        if (!cardinalityAreMet(associatedAnnotationsFromSourceAndTarget.get(0))) {
             throw new Exception(
                     String.format("Cardinality are not met between %s and %s. ",
                             sourceClass.getSimpleName(),
@@ -96,13 +102,12 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         addLink(sourceRoleName, targetRoleName, target);
 
 
-
     }
 
     // TODO:SL Implement cardinalityAreMet method
     private boolean cardinalityAreMet(Annotation[] annotations) {
 
-           return true;
+        return true;
     }
 
     private ArrayList<Annotation[]> getAssociatedAnnotationsFromSourceAndTarget(
@@ -120,7 +125,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                 case "ManyToManyAssociation":
                     // so n target must be ManyToMany Association
                     ManyToManyAssociation sourceManyToManyAssociationAnnotation = (ManyToManyAssociation) sourceAnnotation;
-                    if ( targetClass.isAnnotationPresent(ManyToManyAssociation.class)){
+                    if (targetClass.isAnnotationPresent(ManyToManyAssociation.class)) {
                         System.out.println("Yes it is ManyToManyAssociation present");
                         ManyToManyAssociation targetManyToManyAssociationAnnotation = targetClass.getAnnotation(ManyToManyAssociation.class);
 
@@ -129,10 +134,10 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
                         // check if those annoations concerns each other
 
-                        if(
+                        if (
                                 sourceManyToManyAssociationAnnotation.target().equals(targetClass) &&
                                         targetManyToManyAssociationAnnotation.target().equals(sourceClass)
-                        ){
+                        ) {
                             correspondedAnnotationPairs.add(new Annotation[]{
                                     sourceManyToManyAssociationAnnotation,
                                     targetManyToManyAssociationAnnotation
@@ -144,7 +149,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                 case "ManyToOneAssociation":
                     // so n target must be OneToMany Association
                     ManyToOneAssociation sourceManyToOneAssociationAnnotation = (ManyToOneAssociation) sourceAnnotation;
-                    if ( targetClass.isAnnotationPresent(OneToManyAssociation.class)){
+                    if (targetClass.isAnnotationPresent(OneToManyAssociation.class)) {
                         System.out.println("Yes it is OneToManyAssociation present");
                         OneToManyAssociation targetOneToManyAssociationAnnotation = targetClass.getAnnotation(OneToManyAssociation.class);
 
@@ -153,12 +158,12 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
                         // check if those annoations concerns each other
 
-                        if(
+                        if (
                                 sourceManyToOneAssociationAnnotation.target().equals(targetClass) &&
                                         targetOneToManyAssociationAnnotation.target().equals(sourceClass)
-                        ){
+                        ) {
                             // if so add the pair for returning
-                            correspondedAnnotationPairs.add(new Annotation[] {
+                            correspondedAnnotationPairs.add(new Annotation[]{
                                     sourceManyToOneAssociationAnnotation,
                                     targetOneToManyAssociationAnnotation
                             });
@@ -168,7 +173,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                     break;
                 case "OneToManyAssociation":
                     OneToManyAssociation sourceOneToManyAssociationAnnotation = (OneToManyAssociation) sourceAnnotation;
-                    if ( targetClass.isAnnotationPresent(ManyToOneAssociation.class)){
+                    if (targetClass.isAnnotationPresent(ManyToOneAssociation.class)) {
                         System.out.println("Yes it is ManyToOneAssociation present");
                         ManyToOneAssociation targetManyToOneAssociationAnnotation = targetClass.getAnnotation(ManyToOneAssociation.class);
 
@@ -178,7 +183,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
                         // check if those annoations concerns each other
 
-                        if(
+                        if (
                                 sourceOneToManyAssociationAnnotation.target().equals(targetClass) &&
                                         targetManyToOneAssociationAnnotation.target().equals(sourceClass)
                         ) {
@@ -192,7 +197,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                 case "ManyToManyAssociationWithAttribute":
                     ManyToManyAssociationWithAttribute sourceManyToManyAssociationWithAttributeAnnotation =
                             (ManyToManyAssociationWithAttribute) sourceAnnotation;
-                    if ( targetClass.isAnnotationPresent(ManyToManyAssociationWithAttribute.class)){
+                    if (targetClass.isAnnotationPresent(ManyToManyAssociationWithAttribute.class)) {
                         System.out.println("Yes it is ManyToManyAssociationWithAttribute present");
                         ManyToManyAssociationWithAttribute targetManyToManyAssociationWithAttributeAnnotation =
                                 targetClass.getAnnotation(ManyToManyAssociationWithAttribute.class);
@@ -203,7 +208,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
                         // check if those annoations concerns each other
 
-                        if(
+                        if (
                                 sourceManyToManyAssociationWithAttributeAnnotation.target().equals(targetClass) &&
                                         targetManyToManyAssociationWithAttributeAnnotation.target().equals(sourceClass)
                         ) {
@@ -222,6 +227,99 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
         return correspondedAnnotationPairs;
 
+    }
+
+    public static <T extends ExtensionAnnotationAssociationManager> boolean wholeIsValid(
+            Class<? extends ExtensionAnnotationAssociationManager> partClass,
+            T wholeObject) {
+
+        // check if whole is not null
+        if (wholeObject == null) {
+            return false;
+        }
+
+        // check if whole is appriopiate class type
+        if (partClass.equals(wholeObject.getClass().getAnnotation(CompositionWhole.class).partTarget())
+                &&
+                wholeObject.getClass().getAnnotation(CompositionWhole.class).partTarget().equals(partClass)) {
+
+            return true;
+        }
+
+        return false;
+
+    }
+
+    public static <T extends ExtensionAnnotationAssociationManager> boolean addPart(
+            T whole,
+            T part
+    ) throws Exception {
+
+        Class<? extends ExtensionAnnotationAssociationManager> wholeClass = whole.getClass();
+        Class<? extends ExtensionAnnotationAssociationManager> partClass = part.getClass();
+
+        String wholeRoleName = null;
+        String partRoleName = null;
+
+        boolean assumeTheWorst = true;
+
+        // whole must have the proper OneToManyAssociation annotation type if not there is an error
+        if (wholeClass.isAnnotationPresent(OneToManyAssociation.class)) {
+
+            Annotation[] wholeClassAnnotations = wholeClass.getAnnotations();
+            for (Annotation wholeClassAnnotation : wholeClassAnnotations) {
+
+                if (wholeClassAnnotation.annotationType().equals(OneToManyAssociation.class)
+                        && ((OneToManyAssociation) wholeClassAnnotation).target().equals(partClass)) {
+                    wholeRoleName = ((OneToManyAssociation) wholeClassAnnotation).role();
+                    assumeTheWorst = false;
+                    break;
+                }
+
+            }
+        }
+
+        if (assumeTheWorst) {
+            throw new Exception(String.format(
+                    "There is no appropriate OneToManyAssociation between %s and %s",
+                    wholeClass.getSimpleName(),
+                    partClass.getSimpleName()));
+        }
+
+        // part must have the proper ManyToOneAssociation annotation type if not there is an error
+        assumeTheWorst = true;
+
+        if (partClass.isAnnotationPresent(ManyToOneAssociation.class)) {
+
+            Annotation[] partClassAnnotations = partClass.getAnnotations();
+            for (Annotation partClassAnnotation : partClassAnnotations) {
+
+                if (partClassAnnotation.annotationType().equals(ManyToOneAssociation.class)
+                        && ((ManyToOneAssociation) partClassAnnotation).target().equals(wholeClass)) {
+                    partRoleName = ((ManyToOneAssociation) partClassAnnotation).role();
+                    assumeTheWorst = false;
+                    break;
+                }
+
+            }
+        }
+
+        if (assumeTheWorst) {
+            throw new Exception(String.format(
+                    "There is no appropriate ManyToOneAssociation between %s and %s",
+                    wholeClass.getSimpleName(),
+                    partClass.getSimpleName()));
+        }
+
+
+        System.out.println(wholeRoleName);
+        System.out.println(partRoleName);
+
+        // now we have roles
+        whole.addPart(wholeRoleName,  partRoleName, part);
+
+
+        return true;
     }
 
 

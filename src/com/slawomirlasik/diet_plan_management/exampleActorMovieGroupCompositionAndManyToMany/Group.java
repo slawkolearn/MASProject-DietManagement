@@ -1,8 +1,13 @@
-package com.slawomirlasik.diet_plan_management.exampleActorMovieGroupComposition;
+package com.slawomirlasik.diet_plan_management.exampleActorMovieGroupCompositionAndManyToMany;
 
-import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
+import com.slawomirlasik.diet_plan_management.util.CompositionWhole;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
+import com.slawomirlasik.diet_plan_management.util.OneToManyAssociation;
 
-public class Group extends ExtensionAssociationManager {
+
+@CompositionWhole(partTarget = Actor.class)
+@OneToManyAssociation(target = Actor.class, role = "actors")
+public class Group extends ExtensionAnnotationAssociationManager {
 
     public static final String COMPOSITION_ROLE_ACTORS = "group_actors";
 
@@ -39,11 +44,10 @@ public class Group extends ExtensionAssociationManager {
 
     public Actor addActor(String firstName, String lastName) throws Exception {
 
-            // create actor
-            Actor actor = Actor.createActor(firstName, lastName);
+            // create actor object
+            Actor actor = Actor.createActor(this, firstName, lastName);
 
-            // add actor as a part (we now that it does not exists anywhere)
-            this.addPart(Actor.COMPOSITION_ROLE_GROUP, Group.COMPOSITION_ROLE_ACTORS, actor);
+            // add this actor (part) to the Group (whole)
 
             // return this actor
             return actor;

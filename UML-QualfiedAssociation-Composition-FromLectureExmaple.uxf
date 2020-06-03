@@ -67,8 +67,8 @@ r2=actors</panel_attributes>
     <panel_attributes>lt=[initials]-
 m1=   n
 r1=   movies
-m2=n
-r2=actors
+m2=1
+r2=actor
 </panel_attributes>
     <additional_attributes>30.0;20.0;280.0;20.0</additional_attributes>
   </element>
