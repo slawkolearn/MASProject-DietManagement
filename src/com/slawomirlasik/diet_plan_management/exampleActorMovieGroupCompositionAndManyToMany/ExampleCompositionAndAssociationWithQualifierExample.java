@@ -86,7 +86,7 @@ public class ExampleCompositionAndAssociationWithQualifierExample {
             mark.addLink(topgun);
 
             // add links many to many between actors and movies
-//            avengers.addLink
+            avengers.addManyToManyLink(mark);
 
 
             // show links

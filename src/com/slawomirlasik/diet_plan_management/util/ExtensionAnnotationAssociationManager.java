@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 // TODO:SL implement association with attribute
-// TODO:SL implement association with qualifier
 // TODO:SL handle many TO Many Associations
 // TODO:SL check whether multiple association are handled properly
+// TODO:SL separate adding association by type -> one associationType one method
+// TODO:SL add method that add all possible associations between given two objects
 
 public class ExtensionAnnotationAssociationManager extends ExtensionAssociationManager
         implements Serializable {
@@ -231,7 +232,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         System.out.println(targetClass);
 
         for (Annotation sourceAnnotation : sourceClass.getAnnotations()) {
-            System.out.println(sourceAnnotation.annotationType().getSimpleName()
+            System.out.println("sourceAnnotation after for: " + sourceAnnotation.annotationType().getSimpleName()
                     + " " + sourceAnnotation);
             switch (sourceAnnotation.annotationType().getSimpleName()) {
                 case "ManyToManyAssociation":
@@ -445,5 +446,36 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         return true;
     }
 
+    /**
+     * Adds ManyToMany association between THIS object and targetObject if possible
+     * Throws exception otherwise
+     * @param targetObject
+     * @param <T>
+     */
 
+    public <T extends ExtensionAnnotationAssociationManager> void addManyToManyLink(
+            T targetObject
+    ) throws Exception {
+        // check whether the objects can have this association type (Many To Many)
+        ArrayList<Annotation[]> associatedAnnotationsFromSourceAndTarget = getAssociatedAnnotationsFromSourceAndTarget(this.getClass(), targetObject.getClass());
+
+        System.out.println("#############################################################");
+        for(Annotation[] annotations : associatedAnnotationsFromSourceAndTarget){
+
+            // check if this is a valid association pair
+            if(annotations.length != 2) continue;
+
+            // if so add links between appropriate classes
+            // create association class
+
+
+
+            // add link between association class and THIS and Target class
+        }
+
+        // if objects cannot have many to many association type throw exception (after the fors we know that it isnt)
+        throw new Exception(String.format("Cannot link %s and %s in many to many association"));
+
+
+    }
 }

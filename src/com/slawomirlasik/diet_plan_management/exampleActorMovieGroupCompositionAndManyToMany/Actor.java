@@ -14,6 +14,11 @@ import java.util.Objects;
         role = "movies",
         qualified = true
 )
+@ManyToManyAssociation(
+        target = Movie.class,
+        middleClass = ActorMovie.class,
+        role = "stars in"
+)
 public class Actor extends ExtensionAnnotationAssociationManager {
 
 
