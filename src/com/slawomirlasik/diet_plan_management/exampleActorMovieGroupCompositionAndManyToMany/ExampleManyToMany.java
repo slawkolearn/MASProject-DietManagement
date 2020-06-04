@@ -37,10 +37,28 @@ public class ExampleManyToMany {
                     "Ruffalo"
             );
 
-
+            System.out.println("////////////////////////////////////////////");
             // add many to many link
             tom.addManyToManyLink(topgun);
+            topgun.addManyToManyLink(robert);
+            mark.addManyToManyLink(topgun);
 
+            terminator.addManyToManyLink(arnold);
+            tom.addManyToManyLink(terminator);
+
+            boolean testLinks = true;
+
+            if (testLinks) {
+
+
+                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                // print links for movies
+                System.out.println("Movie `" + topgun.getTitle() + "'");
+                topgun.showLinks("has actors", System.out);
+
+//                 print links for actors
+
+            }
 
 
         } catch (Exception exception) {

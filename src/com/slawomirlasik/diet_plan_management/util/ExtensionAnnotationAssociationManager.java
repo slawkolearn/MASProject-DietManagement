@@ -1,7 +1,11 @@
 package com.slawomirlasik.diet_plan_management.util;
 
+import com.slawomirlasik.diet_plan_management.exampleActorMovieGroupCompositionAndManyToMany.Actor;
+import com.slawomirlasik.diet_plan_management.exampleActorMovieGroupCompositionAndManyToMany.Movie;
+
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -234,7 +238,11 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         for (Annotation sourceAnnotation : sourceClass.getAnnotations()) {
             System.out.println("sourceAnnotation after for: " + sourceAnnotation.annotationType().getSimpleName()
                     + " " + sourceAnnotation);
+            // TODO:SL here must be second loop to check the targetAnnotations for possible pair - loop must be for possible multpiple association types on one object
+            // TODO:SL THIS WORKS ONLY WHEN A CLASS HAS ONE ASSOCIATION TYPE MAXIMUM - another loop needed for many possible pairs
             switch (sourceAnnotation.annotationType().getSimpleName()) {
+                // many to many has two possibilities on the other side (many to many , or AttributeClass)
+//                case "AttributeClass":
                 case "ManyToManyAssociation":
                     // so n target must be ManyToMany Association
                     ManyToManyAssociation sourceManyToManyAssociationAnnotation = (ManyToManyAssociation) sourceAnnotation;
@@ -361,8 +369,8 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         // check if whole is appriopiate class type
         if (
                 wholeObject.getClass().isAnnotationPresent(CompositionWhole.class) &&
-                partClass.equals(wholeObject.getClass().getAnnotation(CompositionWhole.class).partTarget()) &&
-                wholeObject.getClass().getAnnotation(CompositionWhole.class).partTarget().equals(partClass)
+                        partClass.equals(wholeObject.getClass().getAnnotation(CompositionWhole.class).partTarget()) &&
+                        wholeObject.getClass().getAnnotation(CompositionWhole.class).partTarget().equals(partClass)
         ) {
 
             return true;
@@ -449,6 +457,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
     /**
      * Adds ManyToMany association between THIS object and targetObject if possible
      * Throws exception otherwise
+     *
      * @param targetObject
      * @param <T>
      */
@@ -456,25 +465,152 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
     public <T extends ExtensionAnnotationAssociationManager> void addManyToManyLink(
             T targetObject
     ) throws Exception {
-        // check whether the objects can have this association type (Many To Many)
-        ArrayList<Annotation[]> associatedAnnotationsFromSourceAndTarget = getAssociatedAnnotationsFromSourceAndTarget(this.getClass(), targetObject.getClass());
+        // check if THIS and target class has the same ManyToMany association class type
+        if (!(this.getClass().isAnnotationPresent(ManyToManyAssociation.class) &&
+                targetObject.getClass().isAnnotationPresent(ManyToManyAssociation.class))) {
+            throw new Exception(String.format("Cannot link %s <-> %s in manyToMany association",
+                    this.getClass().getSimpleName(),
+                    targetObject.getClass().getSimpleName()));
+        }
 
+        // check whether the objects can have this association type (Many To Many)
+        // whether do they have the same attribute class
+        ArrayList<Annotation[]> associatedAnnotationsFromSourceAndTarget =
+                getAssociatedAnnotationsFromSourceAndTarget(this.getClass(), targetObject.getClass());
+
+        // TODO:SL WARING! - getAssociatedAnnotationsFromSourceAndTarget for now assumes that One class can have one association of each type max
+        // TODO:SL this method however will assume (for future) that One class can have many association of each type
         System.out.println("#############################################################");
-        for(Annotation[] annotations : associatedAnnotationsFromSourceAndTarget){
+        boolean manyToManyLinkCreated = false;
+        for (Annotation[] annotations : associatedAnnotationsFromSourceAndTarget) {
+
+            System.out.println(annotations[0]);
+            System.out.println(annotations[1]);
+            System.out.println("--");
 
             // check if this is a valid association pair
-            if(annotations.length != 2) continue;
+            if (annotations.length != 2) continue;
+
+
+            // check if pairs are many to many
+//            System.out.println(annotations[0].annotationType());
+//            System.out.println(ManyToManyAssociation.class);
+//            System.out.println(ManyToManyAssociation.class.equals(annotations[0].annotationType()));
+//            System.out.println(ManyToManyAssociation.class.equals(annotations[1].annotationType()));
+            if (!(
+                    ManyToManyAssociation.class.equals(annotations[0].annotationType()) &&
+                            ManyToManyAssociation.class.equals(annotations[1].annotationType())
+            )) {
+                continue;
+            }
+
+            // both annotations[0] and annotations[1] are ManyToMany so cast them
+            ManyToManyAssociation thisManyToManyAssociation = (ManyToManyAssociation) annotations[0];
+            ManyToManyAssociation targetManyToManyAssociation = (ManyToManyAssociation) annotations[1];
+
+            // check if annotation pair have the same attribute class
+//            System.out.println(annotations[0].annotationType().getMethod("middleClass").invoke(annotations[0]));
+//            System.out.println(annotations[1].annotationType().getMethod("middleClass").invoke(annotations[1]));
+//            System.out.println(annotations[0].annotationType().getMethod("middleClass").invoke(annotations[0]).equals(
+//                    annotations[1].annotationType().getMethod("middleClass").invoke(annotations[1])
+//            ));
+            if (!(thisManyToManyAssociation.annotationType().getMethod("middleClass").invoke(annotations[0]).equals(
+                    targetManyToManyAssociation.annotationType().getMethod("middleClass").invoke(annotations[1])
+            )
+            )
+            ) continue;
+            ;
+
+            System.out.println("Lets GOOOOO");
+
+            // create this instance of this association class
+            // determining which is target1 of association class (THIS or target)
+
+            // get the middleCLass type
+            Class<?> middleClass = (Class<?>) targetManyToManyAssociation.annotationType().getMethod("middleClass").invoke(targetManyToManyAssociation);
+//            System.out.println(middleClass);
+//            System.out.println(middleClass.getConstructor(
+//                    new Class[]{
+//                            middleClass.getAnnotation(AttributeClass.class).target1(),
+//                            middleClass.getAnnotation(AttributeClass.class).target2()
+//                    })
+//
+//            );
+
+            // get the constructor of that class
+            Constructor middleClassConstructor = middleClass.getConstructor(
+                    new Class[]{
+                            middleClass.getAnnotation(AttributeClass.class).target1(),
+                            middleClass.getAnnotation(AttributeClass.class).target2()
+                    }
+            );
+
+            // create middleObject
+            ExtensionAnnotationAssociationManager middleObject =
+                    (ExtensionAnnotationAssociationManager) middleClassConstructor.newInstance(
+                            (this.getClass().equals(Actor.class) ? this : targetObject ),
+                            (this.getClass().equals(Movie.class) ? this : targetObject )
+                    );
+
+            System.out.println(middleObject);
+
+            // get middleMovie annotation - we know it must be AttributeClass
+            AttributeClass middleAttributeClassAnnotation = middleClass.getAnnotation(AttributeClass.class);
+
+            // add links
+            // if THIS is AttributeClass's target1 class object then create link with role1 between THIS and middleObject
+            // if not use role 2
+            if( this.getClass().equals(middleClass.getAnnotation(AttributeClass.class).target1())){
+                System.out.println(this.getClass().getSimpleName() + " role1 : " + middleClass.getAnnotation(AttributeClass.class).role1());
+                this.addLink(
+                        thisManyToManyAssociation.role(),
+                        middleAttributeClassAnnotation.role1(),
+                        middleObject);
+            }else{
+                System.out.println(this.getClass().getSimpleName() + " role2 : "  + middleClass.getAnnotation(AttributeClass.class).role2());
+                this.addLink(
+                        thisManyToManyAssociation.role(),
+                        middleAttributeClassAnnotation.role2(),
+                        middleObject);
+            }
+
+            // if targetObject is AttributeClass's target1 class object then create link with role1 between targetObject and middleObject
+            // if not use role 2
+            if( targetObject.getClass().equals(middleClass.getAnnotation(AttributeClass.class).target1())){
+                System.out.println(targetObject.getClass().getSimpleName() + " role1 : " + middleClass.getAnnotation(AttributeClass.class).role1());
+                targetObject.addLink(
+                        targetManyToManyAssociation.role(),
+                        middleAttributeClassAnnotation.role1(),
+                        middleObject);
+            }else{
+                System.out.println(targetObject.getClass().getSimpleName() + " role2 : "  + middleClass.getAnnotation(AttributeClass.class).role2());
+                targetObject.addLink(
+                        targetManyToManyAssociation.role(),
+                        middleAttributeClassAnnotation.role2(),
+                        middleObject);
+            }
+
+
+            manyToManyLinkCreated = true;
+
+            // for the second assume the latter (the THIS or target whatever is not set to be target1)
+            // determine if THIS class and targetClass objects are appriopiate type given in AssociationT
 
             // if so add links between appropriate classes
             // create association class
 
 
-
             // add link between association class and THIS and Target class
+
+
         }
 
-        // if objects cannot have many to many association type throw exception (after the fors we know that it isnt)
-        throw new Exception(String.format("Cannot link %s and %s in many to many association"));
+
+        // if objects cannot have many to many association type throw exception (after the for we know that it isnt)
+        if (!manyToManyLinkCreated)
+            throw new Exception(String.format("Cannot link %s and %s in many to many association",
+                    this.getClass().getSimpleName(),
+                    targetObject.getClass().getSimpleName()));
 
 
     }

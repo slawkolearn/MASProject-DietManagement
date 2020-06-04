@@ -4,10 +4,10 @@ import com.slawomirlasik.diet_plan_management.util.AttributeClass;
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 
 @AttributeClass(
-        role1 = "movie middle",
-        role2 = "actor middle",
-        target1 = Movie.class,
-        target2 = Actor.class
+        role1 = "actor middle",
+        role2 = "movie middle",
+        target1 = Actor.class,
+        target2 = Movie.class
 )
 public class ActorMovie extends ExtensionAnnotationAssociationManager {
 
