@@ -49,7 +49,8 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         return "";
     }
 
-    public <T extends ExtensionAnnotationAssociationManager> void addLink(
+    @Deprecated
+    private <T extends ExtensionAnnotationAssociationManager> void addLink(
             T target
     ) throws Exception {
         Class<? extends ExtensionAnnotationAssociationManager> sourceClass = this.getClass();
