@@ -1,6 +1,7 @@
 package com.slawomirlasik.diet_plan_management.mp1;
 
 import com.slawomirlasik.diet_plan_management.model.*;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class Mp1 {
             // próbujemy wczytać ze standarowego pliku zawartość poprzedniej extensji (wszystkich)
         try {
             System.out.println("Próba wczytania poprzedniego statnu...");
-            if(ExtensionManager.loadExtensionsFromFile()){
+            if(ExtensionAnnotationAssociationManager.loadExtensionsFromFile()){
                 System.out.println("Wczytano poprzedni stan ekstensji...");
             }else{
                 System.out.println("Nie udało się wczytać poprzedniego stanu ekstensji...");
@@ -149,7 +150,7 @@ public class Mp1 {
         // ektstensje trwałość - zapis
         System.out.println("Zapisujemy stan ekstensji - dane mogą być zapisane ponownie te same podczas testowania!!!");
         try {
-            ExtensionManager.saveExtensionCurrentState();
+            ExtensionAnnotationAssociationManager.saveExtensionCurrentState();
             System.out.println("Zapisano pomyślnie do pliku  " + ExtensionManager.EXTENSION_FILE + " !");
         } catch (IOException e) {
             e.printStackTrace();

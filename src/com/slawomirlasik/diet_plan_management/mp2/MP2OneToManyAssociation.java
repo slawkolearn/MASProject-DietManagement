@@ -2,8 +2,8 @@ package com.slawomirlasik.diet_plan_management.mp2;
 
 import com.slawomirlasik.diet_plan_management.model.DietAdministrator;
 import com.slawomirlasik.diet_plan_management.model.DietUser;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
-import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -19,7 +19,7 @@ public class MP2OneToManyAssociation {
 
         try {
             System.out.println("Próba wczytania poprzedniego statnu...");
-            if (ExtensionManager.loadExtensionsFromFile()) {
+            if (ExtensionAnnotationAssociationManager.loadExtensionsFromFile()) {
                 System.out.println("Wczytano poprzedni stan ekstensji...");
             } else {
                 System.out.println("Nie udało się wczytać poprzedniego stanu ekstensji...");

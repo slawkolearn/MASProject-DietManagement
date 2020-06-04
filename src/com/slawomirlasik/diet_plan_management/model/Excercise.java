@@ -1,8 +1,10 @@
 package com.slawomirlasik.diet_plan_management.model;
 
-import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 
-public class Excercise extends ExtensionManager {
+import java.io.Serializable;
+
+public class Excercise extends ExtensionAnnotationAssociationManager implements Serializable {
 
     private String name;
 

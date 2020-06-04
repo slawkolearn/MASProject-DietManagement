@@ -2,8 +2,8 @@ package com.slawomirlasik.diet_plan_management.mp2;
 
 import com.slawomirlasik.diet_plan_management.model.DietType;
 import com.slawomirlasik.diet_plan_management.model.Recipe;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
-import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
@@ -19,7 +19,7 @@ public class MP2ManyToManyAssociation {
         // load extension
         try {
             System.out.println("Próba wczytania poprzedniego statnu...");
-            if (ExtensionManager.loadExtensionsFromFile()) {
+            if (ExtensionAnnotationAssociationManager.loadExtensionsFromFile()) {
                 System.out.println("Wczytano poprzedni stan ekstensji...");
             } else {
                 System.out.println("Nie udało się wczytać poprzedniego stanu ekstensji...");
@@ -36,7 +36,7 @@ public class MP2ManyToManyAssociation {
             // generate OneToMany assocations
             generateManyToManyLinks();
 
-        // show association
+            // show association
         } else {
 
             // show links
@@ -62,41 +62,34 @@ public class MP2ManyToManyAssociation {
             // show Recipes
             ExtensionAssociationManager.printExtension(Recipe.class);
 
+            // Show links for role "concerns" for all DietTypes
+            Iterable<DietType> dietTypes = ExtensionAnnotationAssociationManager.getExtension(DietType.class);
+
+            for (DietType dietType : dietTypes) {
+                dietType.printRoles();
+                if (dietType.getRoles().contains("concerns")) {
+                    dietType.showLinks("concerns", System.out);
+                }
+
+            }
+
+            // SHow links for role "is Type of" for all Recipes
+
+            Iterable<Recipe> recipes = ExtensionAnnotationAssociationManager.getExtension(Recipe.class);
+
+            for (Recipe recipe : recipes) {
+                recipe.printRoles();
+                if (recipe.getRoles().contains("is of a type")) {
+                    recipe.showLinks("is of a type", System.out);
+                }
+
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
-        // Show links for role "concerns" for all DietTypes
-        Iterable<DietType> dietTypes = ExtensionAssociationManager.getExtension(DietType.class);
-
-        System.out.println("\n========================================");
-        System.out.println("Printing all association for each DietType for role `concerns`:");
-
-        for( DietType dietType : dietTypes ) {
-
-            try {
-                dietType.showLinks("concerns", System.out);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        // SHow links for role "is Type of" for all Recipes
-
-        System.out.println("\n========================================");
-        System.out.println("Printing all association for each DietType for role `is Type of`:");
-
-        Iterable<Recipe> recipes = ExtensionAssociationManager.getExtension(Recipe.class);
-
-        for( Recipe recipe : recipes ) {
-
-            try {
-                recipe.showLinks("is Type of", System.out);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
 
     }
 
@@ -117,20 +110,26 @@ public class MP2ManyToManyAssociation {
 
         // create links
 
-        muscleTrainingDietType.addLink("concerns", "is Type of", curryChicken);
-        muscleTrainingDietType.addLink("concerns", "is Type of", chickenSalad);
+        try {
 
-        fatReductionDietType.addLink("concerns", "is Type of", chickenSalad);
-        fatReductionDietType.addLink("concerns", "is Type of", curryChicken);
-        fatReductionDietType.addLink("concerns", "is Type of", yogurtPancakes);
+            curryChicken.addDietType(muscleTrainingDietType);
+            curryChicken.addDietType(fatReductionDietType);
+            curryChicken.addDietType(glutenFreeDietType);
 
-        glutenFreeDietType.addLink("concerns", "is Type of", chickenSalad);
-        glutenFreeDietType.addLink("concerns", "is Type of", yogurtPancakes);
+            chickenSalad.addManyToManyLink(fatReductionDietType);
+            chickenSalad.addManyToManyLink(glutenFreeDietType);
+
+            yogurtPancakes.addManyToManyLink(fatReductionDietType);
+            yogurtPancakes.addManyToManyLink(muscleTrainingDietType);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
 
 
         // save extensions
         try {
-            ExtensionAssociationManager.saveExtensionCurrentState();
+            ExtensionAnnotationAssociationManager.saveExtensionCurrentState();
         } catch (IOException e) {
             e.printStackTrace();
         }

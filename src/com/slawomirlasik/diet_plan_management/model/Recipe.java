@@ -1,10 +1,17 @@
 package com.slawomirlasik.diet_plan_management.model;
 
-import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
+import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociation;
 
 import java.io.Serializable;
 
-public class Recipe extends ExtensionAssociationManager implements Serializable {
+
+@ManyToManyAssociation(
+        target = DietType.class,
+        middleClass = RecipeDietType.class,
+        role = "is of a type"
+)
+public class Recipe extends ExtensionAnnotationAssociationManager implements Serializable {
 
     private String recipeName;
 
@@ -30,5 +37,11 @@ public class Recipe extends ExtensionAssociationManager implements Serializable 
         return "Recipe{" +
                 "recipeName='" + recipeName + '\'' +
                 '}';
+    }
+
+    public void addDietType(DietType muscleTrainingDietType) throws Exception {
+
+        addManyToManyLink(muscleTrainingDietType);
+
     }
 }
