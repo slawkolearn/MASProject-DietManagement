@@ -261,6 +261,21 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
         }
     }
 
+    public Set<String> getRoles(){
+        return links.keySet();
+    }
+
+
+    public void printAssociations(PrintStream stream) throws Exception {
+
+        Set<String> roles = getRoles();
+
+        for (String role : roles ) {
+            showLinks(role, stream);
+        }
+
+    }
+
 
 
 }

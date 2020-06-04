@@ -1,8 +1,6 @@
 package com.slawomirlasik.diet_plan_management.util;
 
-import com.slawomirlasik.diet_plan_management.exampleActorMovieGroupCompositionAndManyToMany.Actor;
-import com.slawomirlasik.diet_plan_management.exampleActorMovieGroupCompositionAndManyToMany.Movie;
-
+import java.io.PrintStream;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
@@ -11,14 +9,12 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-// TODO:SL implement association with attribute
-// TODO:SL handle many TO Many Associations
+// TODO:SL TODO ASAP!! separate adding association by type -> one associationType one method
 // TODO:SL check whether multiple association are handled properly
-// TODO:SL separate adding association by type -> one associationType one method
 // TODO:SL add method that add all possible associations between given two objects
+// TODO:SL make all methods from util classes at least proteted / package private so the classes that extends them or are in the same packge can use them (we assume that they know what they will do)
 
-public class ExtensionAnnotationAssociationManager extends ExtensionAssociationManager
-        implements Serializable {
+public class ExtensionAnnotationAssociationManager extends ExtensionAssociationManager implements Serializable {
 
     public ExtensionAnnotationAssociationManager() {
         super();
@@ -70,6 +66,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
         System.out.println("---------------------------------------------------");
 
+        // TODO:SL make possible to create multiple associations between given objects at a time (try to call all association creattion methods)
         if (associatedAnnotationsFromSourceAndTarget.size() > 1) {
             // throw Excption -> multpiple variants of associations between classes. User must be more specific
             // (different methods)
@@ -540,34 +537,37 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
             // get the constructor of that class
             Constructor middleClassConstructor = middleClass.getConstructor(
                     new Class[]{
-                            middleClass.getAnnotation(AttributeClass.class).target1(),
-                            middleClass.getAnnotation(AttributeClass.class).target2()
+                            middleClass.getAnnotation(AssociationClass.class).target1(),
+                            middleClass.getAnnotation(AssociationClass.class).target2()
                     }
             );
 
             // create middleObject
+            System.out.println("THIS : " + this.getClass().getSimpleName());
+            System.out.println("target : " + targetObject.getClass().getSimpleName());
+
             ExtensionAnnotationAssociationManager middleObject =
                     (ExtensionAnnotationAssociationManager) middleClassConstructor.newInstance(
-                            (this.getClass().equals(Actor.class) ? this : targetObject ),
-                            (this.getClass().equals(Movie.class) ? this : targetObject )
+                            (this.getClass().equals(middleClass.getAnnotation(AssociationClass.class).target1()) ? this : targetObject),
+                            (this.getClass().equals(middleClass.getAnnotation(AssociationClass.class).target2()) ? this : targetObject)
                     );
 
             System.out.println(middleObject);
 
             // get middleMovie annotation - we know it must be AttributeClass
-            AttributeClass middleAttributeClassAnnotation = middleClass.getAnnotation(AttributeClass.class);
+            AssociationClass middleAttributeClassAnnotation = middleClass.getAnnotation(AssociationClass.class);
 
             // add links
             // if THIS is AttributeClass's target1 class object then create link with role1 between THIS and middleObject
             // if not use role 2
-            if( this.getClass().equals(middleClass.getAnnotation(AttributeClass.class).target1())){
-                System.out.println(this.getClass().getSimpleName() + " role1 : " + middleClass.getAnnotation(AttributeClass.class).role1());
+            if (this.getClass().equals(middleClass.getAnnotation(AssociationClass.class).target1())) {
+                System.out.println(this.getClass().getSimpleName() + " role1 : " + middleClass.getAnnotation(AssociationClass.class).role1());
                 this.addLink(
                         thisManyToManyAssociation.role(),
                         middleAttributeClassAnnotation.role1(),
                         middleObject);
-            }else{
-                System.out.println(this.getClass().getSimpleName() + " role2 : "  + middleClass.getAnnotation(AttributeClass.class).role2());
+            } else {
+                System.out.println(this.getClass().getSimpleName() + " role2 : " + middleClass.getAnnotation(AssociationClass.class).role2());
                 this.addLink(
                         thisManyToManyAssociation.role(),
                         middleAttributeClassAnnotation.role2(),
@@ -576,14 +576,14 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
             // if targetObject is AttributeClass's target1 class object then create link with role1 between targetObject and middleObject
             // if not use role 2
-            if( targetObject.getClass().equals(middleClass.getAnnotation(AttributeClass.class).target1())){
-                System.out.println(targetObject.getClass().getSimpleName() + " role1 : " + middleClass.getAnnotation(AttributeClass.class).role1());
+            if (targetObject.getClass().equals(middleClass.getAnnotation(AssociationClass.class).target1())) {
+                System.out.println(targetObject.getClass().getSimpleName() + " role1 : " + middleClass.getAnnotation(AssociationClass.class).role1());
                 targetObject.addLink(
                         targetManyToManyAssociation.role(),
                         middleAttributeClassAnnotation.role1(),
                         middleObject);
-            }else{
-                System.out.println(targetObject.getClass().getSimpleName() + " role2 : "  + middleClass.getAnnotation(AttributeClass.class).role2());
+            } else {
+                System.out.println(targetObject.getClass().getSimpleName() + " role2 : " + middleClass.getAnnotation(AssociationClass.class).role2());
                 targetObject.addLink(
                         targetManyToManyAssociation.role(),
                         middleAttributeClassAnnotation.role2(),
@@ -613,5 +613,120 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                     targetObject.getClass().getSimpleName()));
 
 
+    }
+
+    public <T extends ExtensionAnnotationAssociationManager> ExtensionAssociationManager getAssociationAttributeClass(
+            String roleName,
+            T target) throws Exception {
+
+        ExtensionAssociationManager[] attributeClasses = getLinks("Employs");
+
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        // check if there are any association attributes
+        if (attributeClasses.length > 0) {
+
+            for (ExtensionAssociationManager attributeClass : attributeClasses) {
+
+
+                // check whether it is association attribute class and it has association class annotation present
+                if(!attributeClass.getClass().isAnnotationPresent(AttributeClass.class) ||
+                !attributeClass.getClass().isAnnotationPresent(AssociationClass.class)){
+
+                    // if not something gone wrong . Log this and move on
+                   continue;
+                }
+
+
+                AssociationClass associationClassAnnotation = attributeClass.getClass().getAnnotation(AssociationClass.class);
+
+                // check if any target values of associationClass is the same as target class type
+                if(associationClassAnnotation.target1().equals(target.getClass()) ||
+                associationClassAnnotation.target2().equals(target.getClass())){
+                    System.out.println("YEP IT HAS!!!");
+
+                    // if so return this association class
+                    return attributeClass;
+                }
+
+            }
+        }
+
+        throw new Exception(String.format("There is no association attribute classs available between " +
+                        "these to objects : \n%s\n%s for this %s role name",
+                this,
+                target,
+                roleName));
+
+
+    }
+
+    @Override
+    public void showLinks(String roleName, PrintStream stream) throws Exception {
+
+        ExtensionAssociationManager[] links = getLinks(roleName);
+
+        System.out.println("_____________________________________");
+
+        // print whole manyTo Many association
+
+
+        System.out.printf("%s \n   %s:\n",
+                this,
+                roleName);
+        for(ExtensionAssociationManager target : links){
+
+//            System.out.println(target);
+            if(target.getClass().isAnnotationPresent(AssociationClass.class)){
+
+                // if with attribute class print attributes for this associations as well
+                boolean attributeClassFlag = target.getClass().isAnnotationPresent(AttributeClass.class);
+
+
+//                System.out.println("WW");
+
+                // show the real target
+                // get assocation annotation from target link
+                // if target1 for this annotation is THIS class than show target2 if not the opposite
+                // AT THIS POINT THERE COULD BE ONE THIS KIND OF ANNOTATION OF THIS TYPE
+                AssociationClass associationClassAnnotation = target.getClass().getAnnotation(AssociationClass.class);
+
+                if(attributeClassFlag){
+                    System.out.print("   association attributes { ");
+                    for(Method method : target.getClass().getMethods()){
+                        if(method.isAnnotationPresent(Attribute.class)){
+                            method.setAccessible(true);
+                            System.out.print(method.invoke(target) + " ");
+                        }
+                    }
+                    System.out.print("} ");
+                }
+
+                if( associationClassAnnotation.target1().equals(this.getClass())){
+                    for(Method method : target.getClass().getMethods()){
+                        if(method.isAnnotationPresent(Target2Getter.class)){
+//                            System.out.println("present  Target2Getter :)");
+                            method.setAccessible(true);
+                            System.out.print("   "+ method.invoke(target));
+                        }
+                    }
+                }else {
+                    for(Method method : target.getClass().getMethods()){
+                        if(method.isAnnotationPresent(Target1Getter.class)){
+//                            System.out.println("present  Target1Getter :)");
+                            method.setAccessible(true);
+                            System.out.print("   "+ method.invoke(target));
+                        }
+                    }
+                }
+
+
+                System.out.println();
+
+
+            }else {
+                System.out.println("   " + target);
+            }
+
+        }
     }
 }

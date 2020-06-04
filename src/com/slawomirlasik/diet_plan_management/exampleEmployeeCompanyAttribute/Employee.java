@@ -1,12 +1,12 @@
 package com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyAttribute;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
-import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociationWithAttribute;
+import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociation;
 
-@ManyToManyAssociationWithAttribute(
+@ManyToManyAssociation(
         role = "Works in",
         target = Company.class,
-        attributeClass = WorksIn.class,
+        middleClass = WorksIn.class,
         cardinality = Integer.MAX_VALUE
 )
 public class Employee extends ExtensionAnnotationAssociationManager {

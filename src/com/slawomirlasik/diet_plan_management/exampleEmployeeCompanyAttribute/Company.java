@@ -1,13 +1,16 @@
 package com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyAttribute;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
-import com.slawomirlasik.diet_plan_management.util.OneToManyAssociation;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
+import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociation;
 
 import java.time.LocalDate;
 
-@OneToManyAssociation(
+@ManyToManyAssociation(
         role = "Employs",
-        target = Employee.class
+        middleClass = WorksIn.class,
+        target = Employee.class,
+        cardinality = Integer.MAX_VALUE
 )
 public class Company extends ExtensionAnnotationAssociationManager {
 
@@ -38,17 +41,33 @@ public class Company extends ExtensionAnnotationAssociationManager {
                 '}';
     }
 
-    public void hireEmployee(Employee employee, float salary) {
+    public void hireEmployee(Employee employee, float salary) throws Exception {
+        // add link many to many between them
+        addManyToManyLink(employee);
 
-        WorksIn employment = new WorksIn();
+        // get association class created between THIS object and employee
+        ExtensionAssociationManager associationAttributeClass = getAssociationAttributeClass("Employs", employee);
 
-        employment.setSalary(10000f);
-        employment.setDateFrom(LocalDate.now());
+        System.out.println(associationAttributeClass);
 
-        // add link to employee in employment
+        // we know what kind of attribute class it is but we may as well check
+        if(associationAttributeClass.getClass().equals(WorksIn.class)){
 
+            WorksIn associationClass = (WorksIn) associationAttributeClass;
 
-        // add link to company in employment;
+            // set salary for this attribute class
+            associationClass.setSalary(salary);
+
+            // set hire date for this class
+            associationClass.setDateFrom(LocalDate.now());
+
+        }else {
+            // throw exceptio. soemthiing gone horribly wrong. You have worng association class at this point
+            throw new Exception(String.format("Worng association class {%s} for the class {%s}",
+                    associationAttributeClass.getClass().getSimpleName(),
+                    this.getClass().getSimpleName()));
+        }
+
 
 
     }

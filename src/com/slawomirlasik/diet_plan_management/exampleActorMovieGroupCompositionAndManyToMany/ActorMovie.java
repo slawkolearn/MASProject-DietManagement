@@ -1,9 +1,9 @@
 package com.slawomirlasik.diet_plan_management.exampleActorMovieGroupCompositionAndManyToMany;
 
-import com.slawomirlasik.diet_plan_management.util.AttributeClass;
+import com.slawomirlasik.diet_plan_management.util.AssociationClass;
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 
-@AttributeClass(
+@AssociationClass(
         role1 = "actor middle",
         role2 = "movie middle",
         target1 = Actor.class,

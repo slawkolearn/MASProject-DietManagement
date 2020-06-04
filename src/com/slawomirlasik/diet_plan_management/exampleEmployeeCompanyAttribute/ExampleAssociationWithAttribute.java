@@ -1,7 +1,5 @@
 package com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyAttribute;
 
-import com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyOneToManyAssociation.Company;
-import com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyOneToManyAssociation.Employee;
 
 public class ExampleAssociationWithAttribute {
 
@@ -26,8 +24,12 @@ public class ExampleAssociationWithAttribute {
 
         // associate them using association with attribute
         google.hireEmployee(gregory, 10000);
+        gregory.addManyToManyLink(asseco);
 
         // print assocations for role "employs"
+        google.printAssociations(System.out);
+
+        gregory.printAssociations(System.out);
 
 
     }
