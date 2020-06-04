@@ -629,19 +629,19 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
 
                 // check whether it is association attribute class and it has association class annotation present
-                if(!attributeClass.getClass().isAnnotationPresent(AttributeClass.class) ||
-                !attributeClass.getClass().isAnnotationPresent(AssociationClass.class)){
+                if (!attributeClass.getClass().isAnnotationPresent(AttributeClass.class) ||
+                        !attributeClass.getClass().isAnnotationPresent(AssociationClass.class)) {
 
                     // if not something gone wrong . Log this and move on
-                   continue;
+                    continue;
                 }
 
 
                 AssociationClass associationClassAnnotation = attributeClass.getClass().getAnnotation(AssociationClass.class);
 
                 // check if any target values of associationClass is the same as target class type
-                if(associationClassAnnotation.target1().equals(target.getClass()) ||
-                associationClassAnnotation.target2().equals(target.getClass())){
+                if (associationClassAnnotation.target1().equals(target.getClass()) ||
+                        associationClassAnnotation.target2().equals(target.getClass())) {
                     System.out.println("YEP IT HAS!!!");
 
                     // if so return this association class
@@ -673,10 +673,10 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         System.out.printf("%s \n   %s:\n",
                 this,
                 roleName);
-        for(ExtensionAssociationManager target : links){
+        for (ExtensionAssociationManager target : links) {
 
 //            System.out.println(target);
-            if(target.getClass().isAnnotationPresent(AssociationClass.class)){
+            if (target.getClass().isAnnotationPresent(AssociationClass.class)) {
 
                 // if with attribute class print attributes for this associations as well
                 boolean attributeClassFlag = target.getClass().isAnnotationPresent(AttributeClass.class);
@@ -690,10 +690,10 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                 // AT THIS POINT THERE COULD BE ONE THIS KIND OF ANNOTATION OF THIS TYPE
                 AssociationClass associationClassAnnotation = target.getClass().getAnnotation(AssociationClass.class);
 
-                if(attributeClassFlag){
+                if (attributeClassFlag) {
                     System.out.print("   association attributes { ");
-                    for(Method method : target.getClass().getMethods()){
-                        if(method.isAnnotationPresent(Attribute.class)){
+                    for (Method method : target.getClass().getMethods()) {
+                        if (method.isAnnotationPresent(Attribute.class)) {
                             method.setAccessible(true);
                             System.out.print(method.invoke(target) + " ");
                         }
@@ -701,20 +701,20 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                     System.out.print("} ");
                 }
 
-                if( associationClassAnnotation.target1().equals(this.getClass())){
-                    for(Method method : target.getClass().getMethods()){
-                        if(method.isAnnotationPresent(Target2Getter.class)){
+                if (associationClassAnnotation.target1().equals(this.getClass())) {
+                    for (Method method : target.getClass().getMethods()) {
+                        if (method.isAnnotationPresent(Target2Getter.class)) {
 //                            System.out.println("present  Target2Getter :)");
                             method.setAccessible(true);
-                            System.out.print("   "+ method.invoke(target));
+                            System.out.print("   " + method.invoke(target));
                         }
                     }
-                }else {
-                    for(Method method : target.getClass().getMethods()){
-                        if(method.isAnnotationPresent(Target1Getter.class)){
+                } else {
+                    for (Method method : target.getClass().getMethods()) {
+                        if (method.isAnnotationPresent(Target1Getter.class)) {
 //                            System.out.println("present  Target1Getter :)");
                             method.setAccessible(true);
-                            System.out.print("   "+ method.invoke(target));
+                            System.out.print("   " + method.invoke(target));
                         }
                     }
                 }
@@ -723,10 +723,56 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                 System.out.println();
 
 
-            }else {
+            } else {
                 System.out.println("   " + target);
             }
 
         }
+    }
+
+    /**
+     * creates a many to one association with attribute from the caller (THIS) perspective.
+     *
+     * @param target
+     */
+    public <T extends ExtensionAnnotationAssociationManager> void addManyToOneAssociationWithAttribute(T target) throws Exception {
+
+        // check if manyTo one exists in the caller (THIS) (Many To one wih target set to target)
+        if (this.getClass().isAnnotationPresent(ManyToOneAssociation.class)) {
+            ManyToOneAssociation sourceQualifiedAssociationAnnotation = this.getClass().getAnnotation(ManyToOneAssociation.class);
+            if (sourceQualifiedAssociationAnnotation.target().equals(target.getClass())) {
+
+                // check if the exists correspond on the target side (Many to One with qualfied flag on with target set to caller)
+                if (target.getClass().isAnnotationPresent(OneToManyAssociation.class)) {
+                    OneToManyAssociation targetQualifiedAssociationAnnotation = target.getClass().getAnnotation(OneToManyAssociation.class);
+
+                    if (targetQualifiedAssociationAnnotation.qualified() && targetQualifiedAssociationAnnotation.target().equals(this.getClass())) {
+                        // we are good to go
+
+                        // add link with qualifier between classes
+
+                        // get roles
+                        String sourceRoleName = sourceQualifiedAssociationAnnotation.role();
+                        String targetRoleName = targetQualifiedAssociationAnnotation.role();
+
+                        ifPossibleMakeQualifiedAssociationBetweenObjects(
+                                this,
+                                target,
+                                sourceQualifiedAssociationAnnotation,
+                                targetQualifiedAssociationAnnotation,
+                                sourceRoleName,
+                                targetRoleName);
+
+
+                    }
+                }
+            }
+        }else {
+            throw new Exception(String.format("Unable to create Qualified Association between %s and %s",
+                    this.getClass().getSimpleName(),
+                    target.getClass().getSimpleName()));
+        }
+
+
     }
 }

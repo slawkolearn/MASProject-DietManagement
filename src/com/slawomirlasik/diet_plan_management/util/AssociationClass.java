@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface AssociationClass {
+public @interface  AssociationClass {
 
     // add roles for each sides
     String role1();
