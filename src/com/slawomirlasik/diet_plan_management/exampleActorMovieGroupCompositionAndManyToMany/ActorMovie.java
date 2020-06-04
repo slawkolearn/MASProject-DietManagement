@@ -2,6 +2,8 @@ package com.slawomirlasik.diet_plan_management.exampleActorMovieGroupComposition
 
 import com.slawomirlasik.diet_plan_management.util.AssociationClass;
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
+import com.slawomirlasik.diet_plan_management.util.Target1Getter;
+import com.slawomirlasik.diet_plan_management.util.Target2Getter;
 
 @AssociationClass(
         role1 = "actor middle",
@@ -21,6 +23,7 @@ public class ActorMovie extends ExtensionAnnotationAssociationManager {
         this.movie = movie;
     }
 
+    @Target1Getter
     public Actor getActor() {
         return actor;
     }
@@ -29,6 +32,7 @@ public class ActorMovie extends ExtensionAnnotationAssociationManager {
         this.actor = actor;
     }
 
+    @Target2Getter
     public Movie getMovie() {
         return movie;
     }
