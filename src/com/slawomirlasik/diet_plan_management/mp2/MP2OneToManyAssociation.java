@@ -59,14 +59,18 @@ public class MP2OneToManyAssociation {
 
 
             // show links
-            showOneToManyLinks();
+            try {
+                showOneToManyLinks();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
 
         }
 
     }
 
-    private static void showOneToManyLinks() {
+    private static void showOneToManyLinks() throws Exception {
 
         System.out.println("\n========================================");
         System.out.println("   Printing DietUsers And DietAdministartors Association (OneToMany) ");
@@ -74,33 +78,21 @@ public class MP2OneToManyAssociation {
         // ===========================================
         // show links for DietUsers
 
-        // get DietUsers
-        Iterable<DietUser> dietUsers = ExtensionAssociationManager.getExtension(DietUser.class);
+        Iterable<DietUser> dietUsers = ExtensionAnnotationAssociationManager.getExtension(DietUser.class);
 
-        // Print links for each DietUser
-        for (DietUser dietUser : dietUsers) {
-            try {
-                dietUser.showLinks("mentor", System.out);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        for(DietUser dietUser : dietUsers){
+            dietUser.printAssociations(System.out);
         }
-        System.out.println("\n========================================");
+
         // ===========================================
         // show links for DietAdmins
 
-        // get DietUsers
-        Iterable<DietAdministrator> dietAdmins = ExtensionAssociationManager.getExtension(DietAdministrator.class);
+        Iterable<DietAdministrator> dietAdministrators = ExtensionAnnotationAssociationManager.getExtension(DietAdministrator.class);
 
-
-        // Print links for each DietUser
-        for (DietAdministrator dietAdmin : dietAdmins) {
-            try {
-                dietAdmin.showLinks("mentors", System.out);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        for(DietAdministrator dietAdministrator : dietAdministrators){
+            dietAdministrator.printAssociations(System.out);
         }
+
     }
 
     private static void generateOneToManyLinks() {
@@ -139,9 +131,9 @@ public class MP2OneToManyAssociation {
 
             // ===========================================
             // ad links between them
-            dietUser1.addLink("mentor", "mentors", dietAdministrator1);
-            dietUser2.addLink("mentor", "mentors", dietAdministrator1);
-            dietUser3.addLink("mentor", "mentors", dietAdministrator2);
+            dietUser1.addManyToOneLink(dietAdministrator1);
+            dietAdministrator1.addOneToManyLink(dietUser2);
+            dietUser3.addManyToOneLink(dietAdministrator2);
 
 
             // save extensions

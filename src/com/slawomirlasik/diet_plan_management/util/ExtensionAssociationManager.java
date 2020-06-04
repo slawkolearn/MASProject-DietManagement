@@ -329,5 +329,7 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
     }
 
 
-
+    protected boolean hasRole(String role) {
+        return links.keySet().contains(role);
+    }
 }

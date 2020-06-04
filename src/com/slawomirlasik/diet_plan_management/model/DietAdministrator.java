@@ -1,8 +1,14 @@
 package com.slawomirlasik.diet_plan_management.model;
 
+import com.slawomirlasik.diet_plan_management.util.OneToManyAssociation;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
+@OneToManyAssociation(
+        target = DietUser.class,
+        role = "mentors"
+)
 public class DietAdministrator extends Person implements Serializable {
 
 
