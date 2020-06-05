@@ -48,10 +48,47 @@ public class MP2Composition {
 
     }
 
-    private static void printData() {
+    private static void printData() throws Exception {
+
+
+
+        System.out.println("----------------------------------------------");
+        System.out.println("--------Printing all DietPlanDays-------------");
+        System.out.println("----------------------------------------------");
+
+        ExtensionAnnotationAssociationManager.printExtension(DietPlanDay.class);
+
+
+        System.out.println("----------------------------------------------");
+        System.out.println("--------Printing all DietPlan-----------------");
+        System.out.println("----------------------------------------------");
+
+        ExtensionAnnotationAssociationManager.printExtension(DietPlan.class);
+
+        System.out.println("---------------------------------------------------------");
+        System.out.println("------Printing all associations for all DietPlans--------");
+        System.out.println("---------------------------------------------------------");
+
+        Iterable<DietPlan> dietPlans = ExtensionAnnotationAssociationManager.getExtension(DietPlan.class);
+
+        for(DietPlan dietPlan : dietPlans){
+            dietPlan.printAssociations(System.out);
+        }
+
+        System.out.println("---------------------------------------------------------");
+        System.out.println("------Printing all associations for all DietPlanDays-----");
+        System.out.println("---------------------------------------------------------");
+
+        Iterable<DietPlanDay> dietPlanDays = ExtensionAnnotationAssociationManager.getExtension(DietPlanDay.class);
+
+        for(DietPlanDay dietPlanDay : dietPlanDays){
+            dietPlanDay.printAssociations(System.out);
+        }
+
+
     }
 
-    private static void generateData() {
+    private static void generateData() throws IOException {
 
 
         // create sample DietPlan objects
@@ -66,16 +103,13 @@ public class MP2Composition {
             DietPlanDay day3 = DietPlanDay.createDietPlanDay(dietPlan,100f, 100f, 100f, dietPlan.getFrom().plusDays(2) );
             DietPlanDay day4 = DietPlanDay.createDietPlanDay(dietPlan,100f, 100f, 100f, dietPlan.getFrom().plusDays(3) );
 
+            printData();
 
-            ExtensionAnnotationAssociationManager.printExtension(DietPlan.class);
-            ExtensionAnnotationAssociationManager.printExtension(DietPlanDay.class);
-
-            dietPlan.printAssociations(System.out);
-
-            day1.printAssociations(System.out);
 
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            ExtensionAnnotationAssociationManager.saveExtensionCurrentState();
         }
 
 
