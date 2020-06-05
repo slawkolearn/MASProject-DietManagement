@@ -166,6 +166,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                     if (method.isAnnotationPresent(Qualfier.class)) {
                         // make qualified association
                         // from object2
+                        System.out.println("Ok creating with qualidier : " +method.invoke(object1) + " for role name : " + targetRoleName);
                         object2.addLink(targetRoleName, sourceRoleName, object1, method.invoke(object1));
                         // return true
                         return true;
@@ -186,6 +187,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                     if (method.isAnnotationPresent(Qualfier.class)) {
                         // make qualified association
                         // from object
+                        System.out.println("Ok creating with qualidier : " +method.invoke(object2)+ " for role name : " + sourceRoleName);
                         object1.addLink(sourceRoleName, targetRoleName, object2, method.invoke(object2));
                         // return true
                         return true;
@@ -873,39 +875,47 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
      *
      * @param target
      */
-    public <T extends ExtensionAnnotationAssociationManager> void addManyToOneAssociationWithAttribute(T target) throws Exception {
+    public <T extends ExtensionAnnotationAssociationManager> void addManyToOneAssociationWithQualifier(T target) throws Exception {
 
+        boolean manyToOneWithQualifierCreated = false;
         // check if manyTo one exists in the caller (THIS) (Many To one wih target set to target)
-        if (this.getClass().isAnnotationPresent(ManyToOneAssociation.class)) {
-            ManyToOneAssociation sourceQualifiedAssociationAnnotation = this.getClass().getAnnotation(ManyToOneAssociation.class);
-            if (sourceQualifiedAssociationAnnotation.target().equals(target.getClass())) {
-
-                // check if the exists correspond on the target side (Many to One with qualfied flag on with target set to caller)
-                if (target.getClass().isAnnotationPresent(OneToManyAssociation.class)) {
-                    OneToManyAssociation targetQualifiedAssociationAnnotation = target.getClass().getAnnotation(OneToManyAssociation.class);
-
-                    if (targetQualifiedAssociationAnnotation.qualified() && targetQualifiedAssociationAnnotation.target().equals(this.getClass())) {
-                        // we are good to go
-
-                        // add link with qualifier between classes
-
-                        // get roles
-                        String sourceRoleName = sourceQualifiedAssociationAnnotation.role();
-                        String targetRoleName = targetQualifiedAssociationAnnotation.role();
-
-                        ifPossibleMakeQualifiedAssociationBetweenObjects(
-                                this,
-                                target,
-                                sourceQualifiedAssociationAnnotation,
-                                targetQualifiedAssociationAnnotation,
-                                sourceRoleName,
-                                targetRoleName);
+        if (this.getClass().getAnnotationsByType(ManyToOneAssociation.class).length > 0) {
+//            ManyToOneAssociation sourceQualifiedAssociationAnnotation = this.getClass().getAnnotation(ManyToOneAssociation.class);
+            for (ManyToOneAssociation sourceQualifiedAssociationAnnotation : this.getClass().getAnnotationsByType(ManyToOneAssociation.class)) {
+                if (sourceQualifiedAssociationAnnotation.target().equals(target.getClass())) {
 
 
+                    // check if the exists correspond on the target side (Many to One with qualfied flag on with target set to caller)
+                    if (target.getClass().getAnnotationsByType(OneToManyAssociation.class).length > 0) {
+//                        OneToManyAssociation targetQualifiedAssociationAnnotation = target.getClass().getAnnotation(OneToManyAssociation.class);
+
+                        for (OneToManyAssociation targetQualifiedAssociationAnnotation : target.getClass().getAnnotationsByType(OneToManyAssociation.class)) {
+                            if (targetQualifiedAssociationAnnotation.qualified() && targetQualifiedAssociationAnnotation.target().equals(this.getClass())) {
+                                // we are good to go
+
+                                // add link with qualifier between classes
+
+                                // get roles
+                                String sourceRoleName = sourceQualifiedAssociationAnnotation.role();
+                                String targetRoleName = targetQualifiedAssociationAnnotation.role();
+
+                                manyToOneWithQualifierCreated = ifPossibleMakeQualifiedAssociationBetweenObjects(
+                                        this,
+                                        target,
+                                        sourceQualifiedAssociationAnnotation,
+                                        targetQualifiedAssociationAnnotation,
+                                        sourceRoleName,
+                                        targetRoleName);
+
+
+                            }
+                        }
                     }
                 }
             }
-        } else {
+        }
+
+        if(!manyToOneWithQualifierCreated) {
             throw new Exception(String.format("Unable to create Qualified Association between %s and %s",
                     this.getClass().getSimpleName(),
                     target.getClass().getSimpleName()));
@@ -1018,7 +1028,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         // -> if none return false
         for (ManyToManyAssociation sourceManyToManyAssociationAnnotation : source.getClass().getAnnotationsByType(ManyToManyAssociation.class)) {
 
-            if(sourceManyToManyAssociationAnnotation.middleClass().equals(attributeClass.getClass())){
+            if (sourceManyToManyAssociationAnnotation.middleClass().equals(attributeClass.getClass())) {
                 return true;
             }
         }

@@ -2,9 +2,14 @@ package com.slawomirlasik.diet_plan_management.model;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociation;
+import com.slawomirlasik.diet_plan_management.util.ManyToOneAssociation;
 
 import java.io.Serializable;
 
+@ManyToOneAssociation(
+        target = Recipe.class,
+        role = "is part of by name"
+)
 @ManyToManyAssociation(
         target = Recipe.class,
         role = "is part of",

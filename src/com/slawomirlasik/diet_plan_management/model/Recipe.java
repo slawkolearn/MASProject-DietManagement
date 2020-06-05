@@ -2,10 +2,16 @@ package com.slawomirlasik.diet_plan_management.model;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociation;
+import com.slawomirlasik.diet_plan_management.util.OneToManyAssociation;
+import com.slawomirlasik.diet_plan_management.util.Qualfier;
 
 import java.io.Serializable;
 
-
+@OneToManyAssociation(
+        target = Ingredient.class,
+        role = "contains by name",
+        qualified = true
+)
 @ManyToManyAssociation(
         target = DietType.class,
         middleClass = RecipeDietType.class,
@@ -29,6 +35,7 @@ public class Recipe extends ExtensionAnnotationAssociationManager implements Ser
         this.recipeName = recipeName;
     }
 
+    @Qualfier
     public String getRecipeName() {
         return recipeName;
     }

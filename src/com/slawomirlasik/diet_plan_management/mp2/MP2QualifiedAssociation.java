@@ -3,13 +3,11 @@ package com.slawomirlasik.diet_plan_management.mp2;
 import com.slawomirlasik.diet_plan_management.model.Ingredient;
 import com.slawomirlasik.diet_plan_management.model.MeasurementUnits;
 import com.slawomirlasik.diet_plan_management.model.Recipe;
-import com.slawomirlasik.diet_plan_management.model.RecipeIngredient;
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
-import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
 
 import java.io.IOException;
 
-public class MP2AssociationWithAttribute {
+public class MP2QualifiedAssociation {
 
     public static void main(String[] args) {
 
@@ -32,8 +30,6 @@ public class MP2AssociationWithAttribute {
         if(flag == 0){
             try {
                 generateData();
-            } catch (IOException e) {
-                e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -44,47 +40,58 @@ public class MP2AssociationWithAttribute {
                 e.printStackTrace();
             }
         }
-        
+
 
     }
 
     private static void printData() throws Exception {
 
-
         System.out.println("----------------------------------------------");
-        System.out.println("--------Printing all RecipeIngredients--------");
+        System.out.println("--------Printing all Recipes------------------");
         System.out.println("----------------------------------------------");
-
-        ExtensionAnnotationAssociationManager.printExtension(RecipeIngredient.class);
-
-        System.out.println("------------------------------------");
-        System.out.println("--------Printing all recipes--------");
-        System.out.println("------------------------------------");
 
         ExtensionAnnotationAssociationManager.printExtension(Recipe.class);
 
 
 
         System.out.println("---------------------------------------------------------");
-        System.out.println("--------Printing all associations for all recopies--------");
+        System.out.println("--------Printing all associations for all Recipes--------");
         System.out.println("---------------------------------------------------------");
 
-        Iterable<Recipe> recipes = ExtensionAssociationManager.getExtension(Recipe.class);
 
-        for(Recipe recipe : recipes){
+        Iterable<Recipe> recipes = ExtensionAnnotationAssociationManager.getExtension(Recipe.class);
+
+        for (Recipe recipe : recipes){
             recipe.printAssociations(System.out);
         }
+        System.out.println("----------------------------------------------");
+        System.out.println("--------Printing all Ingredients--------------");
+        System.out.println("----------------------------------------------");
+
+        ExtensionAnnotationAssociationManager.printExtension(Ingredient.class);
+
+
 
         System.out.println("---------------------------------------------------------");
-        System.out.println("------Printing all associations for all Ingredients------");
+        System.out.println("-------Printing all associations for all Ingredient------");
         System.out.println("---------------------------------------------------------");
 
 
-        Iterable<Ingredient> ingredients = ExtensionAssociationManager.getExtension(Ingredient.class);
+        Iterable<Ingredient> ingredients = ExtensionAnnotationAssociationManager.getExtension(Ingredient.class);
 
-        for(Ingredient ingredient : ingredients){
+        for (Ingredient ingredient : ingredients){
             ingredient.printAssociations(System.out);
+            try {
+                ingredient.showQualifiers("is part of by name", System.out);
+            }catch (Exception e){
+                System.out.println("No qualidiers for  : " + ingredient);
+            }
         }
+
+
+
+
+
 
     }
 
@@ -104,8 +111,6 @@ public class MP2AssociationWithAttribute {
         Ingredient flour = new Ingredient("Mąka",20f, 30f, 10f, MeasurementUnits.MILLILITERS, 10f);
         Ingredient yogurt = new Ingredient("Jogurt Naturalny",20f, 30f, 10f, MeasurementUnits.GRAMS, 100f);
         Ingredient salad = new Ingredient("Sałata",20f, 30f, 10f, MeasurementUnits.GRAMS);
-
-
         try {
             // add ingredients to Curry Chicken recipe
             curryChicken.addIngredient(chicken, 200f);
@@ -126,6 +131,10 @@ public class MP2AssociationWithAttribute {
             yogurtPancakes.addIngredient(whiteCheese, 50f);
 
             // add some qualified association between ingredient (name)
+            chicken.addManyToOneAssociationWithQualifier(chickenSalad);
+            chicken.addManyToOneAssociationWithQualifier(curryChicken);
+
+//            System.out.println("========= Qualified association =======");
 
 
         } catch (Exception e) {
@@ -134,14 +143,14 @@ public class MP2AssociationWithAttribute {
 
 
             System.out.println("----------------------------------------------");
-            System.out.println("--------Printing all RecipeIngredients--------");
+            System.out.println("--------Printing all Recipes-------------------");
             System.out.println("----------------------------------------------");
 
-            ExtensionAnnotationAssociationManager.printExtension(RecipeIngredient.class);
+            ExtensionAnnotationAssociationManager.printExtension(Recipe.class);
 
             ExtensionAnnotationAssociationManager.saveExtensionCurrentState();
         }
 
-
     }
+
 }

@@ -79,7 +79,7 @@ public class ExampleCompositionAndAssociationWithQualifierExample {
             // Its with qualifier
             //
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
-            avengers.addManyToOneAssociationWithAttribute(robert);
+            avengers.addManyToOneAssociationWithQualifier(robert);
 
 
             // add links many to many between actors and movies
@@ -92,6 +92,7 @@ public class ExampleCompositionAndAssociationWithQualifierExample {
 
             topgun.printRoles();
             // TODO:SL add method to ExtensionAnnotationAssociationManager to prevent calling getLinkedObject on  objects that does not belong to qualified association side (like mark does not but topgun yes)
+            System.out.println("\n-------Qualified links--------_");
             System.out.println(avengers.getLinkedObject("actor", robert.getQualifier()));
 
 

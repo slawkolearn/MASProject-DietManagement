@@ -83,15 +83,15 @@ generateNewDietForGivenUser(dietUser)
     </coordinates>
     <panel_attributes>Recipe
 --
-
+name{Unique}
 --</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>936</x>
-      <y>896</y>
+      <x>1000</x>
+      <y>904</y>
       <w>144</w>
       <h>136</h>
     </coordinates>
@@ -110,22 +110,22 @@ onOneUnit
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>968</x>
-      <y>728</y>
-      <w>112</w>
-      <h>184</h>
+      <x>1040</x>
+      <y>672</y>
+      <w>152</w>
+      <h>248</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..n
 r1=is part of
 m2=1..n
 r2=contains</panel_attributes>
-    <additional_attributes>60.0;10.0;10.0;210.0</additional_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0;110.0;290.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1144</x>
+      <x>1160</x>
       <y>800</y>
       <w>128</w>
       <h>152</h>
@@ -140,13 +140,13 @@ r2=contains</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>992</x>
+      <x>1096</x>
       <y>808</y>
-      <w>168</w>
+      <w>80</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;30.0;190.0;10.0</additional_attributes>
+    <additional_attributes>10.0;30.0;80.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -309,12 +309,12 @@ r2=mentors</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>800</x>
-      <y>928</y>
-      <w>152</w>
-      <h>152</h>
+      <y>936</y>
+      <w>216</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>170.0;10.0;10.0;170.0</additional_attributes>
+    <additional_attributes>250.0;10.0;10.0;160.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -330,13 +330,13 @@ r2=mentors</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1264</x>
+      <x>1280</x>
       <y>824</y>
-      <w>136</w>
+      <w>120</w>
       <h>152</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;150.0;170.0</additional_attributes>
+    <additional_attributes>10.0;10.0;130.0;170.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -399,7 +399,7 @@ skills
     <id>UMLClass</id>
     <coordinates>
       <x>616</x>
-      <y>176</y>
+      <y>152</y>
       <w>96</w>
       <h>96</h>
     </coordinates>
@@ -416,9 +416,9 @@ name
     <id>Relation</id>
     <coordinates>
       <x>608</x>
-      <y>264</y>
+      <y>240</y>
       <w>96</w>
-      <h>304</h>
+      <h>328</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=n
@@ -427,7 +427,7 @@ m2=n
 r2=part of
 
 </panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;170.0;60.0;170.0;60.0;360.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;200.0;60.0;200.0;60.0;390.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -565,7 +565,7 @@ This tells us that for example in Recipe "chicken soup" we have 5xchicken, which
       <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;130.0;10.0;20.0;40.0;10.0</additional_attributes>
+    <additional_attributes>30.0;130.0;10.0;20.0;40.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -584,9 +584,9 @@ series</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>528</x>
+      <x>456</x>
       <y>808</y>
-      <w>112</w>
+      <w>184</w>
       <h>96</h>
     </coordinates>
     <panel_attributes>TimeOfDayPreference
@@ -611,5 +611,21 @@ r2=concerns
 
 </panel_attributes>
     <additional_attributes>10.0;120.0;10.0;20.0;430.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>976</x>
+      <y>728</y>
+      <w>136</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>lt=[name]-&gt;
+m2=0..1
+r2=is part of by name
+m1=0..n
+r1=contains by name
+</panel_attributes>
+    <additional_attributes>30.0;220.0;30.0;10.0</additional_attributes>
   </element>
 </diagram>
