@@ -63,9 +63,11 @@ public class Recipe extends ExtensionAnnotationAssociationManager implements Ser
 
         // we know what kind of attribute class it is but we may as well check
         if (amount != null && isValidAttributeClass(this, attributeClassObject)) {
+            System.out.println("Setting amount " + amount + " for " + ingredient.getName());
             // ok se we know what kind of class is attributeClassObject and we cast it
             RecipeIngredient recipeIngredientAttributeClassObject =
                     (RecipeIngredient) attributeClassObject;
+            System.out.println("for " + recipeIngredientAttributeClassObject);
 
             // then  we set tup amount if it not null
             recipeIngredientAttributeClassObject.setAmountOfIngredient(amount);

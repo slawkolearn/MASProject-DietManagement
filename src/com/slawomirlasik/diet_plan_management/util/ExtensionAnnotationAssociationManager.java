@@ -467,32 +467,33 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
             T targetObject
     ) throws Exception {
 
-        addManyToManyLink(targetObject);
-
-        this.printRoles();
-
-        targetObject.printRoles();
-
-        // get association class created between THIS object and targetObject
-        ExtensionAnnotationAssociationManager associationAttributeClass = getAssociationAttributeClass(
-                targetObject
-        );
-
-        System.out.println(associationAttributeClass);
-
-
-        return associationAttributeClass;
+         return addManyToManyLink(targetObject);
+//
+//        this.printRoles();
+//
+//        targetObject.printRoles();
+//
+//        // get association class created between THIS object and targetObject
+//        ExtensionAnnotationAssociationManager associationAttributeClass = getAssociationAttributeClass(
+//                targetObject
+//        );
+//
+//        System.out.println(associationAttributeClass);
+//
+//
+//        return associationAttributeClass;
     }
 
     /**
      * Adds ManyToMany association between THIS object and targetObject if possible
      * Throws exception otherwise
      *
-     * @param targetObject
      * @param <T>
+     * @param targetObject
+     * @return
      */
 
-    public <T extends ExtensionAnnotationAssociationManager> void addManyToManyLink(
+    public <T extends ExtensionAnnotationAssociationManager> ExtensionAnnotationAssociationManager addManyToManyLink(
             T targetObject
     ) throws Exception {
         // check if THIS and target class has the same ManyToMany association class type
@@ -626,6 +627,8 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
             manyToManyLinkCreated = true;
 
+
+            return middleObject;
             // for the second assume the latter (the THIS or target whatever is not set to be target1)
             // determine if THIS class and targetClass objects are appriopiate type given in AssociationT
 
@@ -646,6 +649,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                     targetObject.getClass().getSimpleName()));
 
 
+        return null;
     }
 
     public <T extends ExtensionAnnotationAssociationManager> ExtensionAnnotationAssociationManager getAssociationAttributeClass(

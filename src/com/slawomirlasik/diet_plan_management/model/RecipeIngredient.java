@@ -61,6 +61,6 @@ public class RecipeIngredient extends ExtensionAnnotationAssociationManager impl
         // TODO:SL add unit type in printing of amount the ingredient from ingredient class
         return "RecipeIngredient{" +
                 "amountOfIngredient=" + (checkIfAmountOfIngredientPresent() ? getAmountOfIngredient()  : "ilość dowolna") +
-                '}';
+                '}' + this.ingredient;
     }
 }
