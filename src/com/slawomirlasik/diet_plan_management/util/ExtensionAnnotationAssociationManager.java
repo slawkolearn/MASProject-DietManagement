@@ -469,10 +469,14 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
         addManyToManyLink(targetObject);
 
-        // get association class created between THIS object and employee
+        this.printRoles();
+
+        targetObject.printRoles();
+
+        // get association class created between THIS object and targetObject
         ExtensionAnnotationAssociationManager associationAttributeClass = getAssociationAttributeClass(
-                this.getClass().getAnnotation(ManyToManyAssociation.class).role(),
-                targetObject);
+                targetObject
+        );
 
         System.out.println(associationAttributeClass);
 
@@ -645,10 +649,15 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
     }
 
     public <T extends ExtensionAnnotationAssociationManager> ExtensionAnnotationAssociationManager getAssociationAttributeClass(
-            String roleName,
             T target) throws Exception {
 
-        ExtensionAssociationManager[] attributeClasses = getLinks("Employs");
+        if(!target.getClass().isAnnotationPresent(ManyToManyAssociation.class)){
+            throw new Exception(String.format("In %s there in no required ManyToManyAssociationAnnotation",
+            target.getClass().getSimpleName()));
+        }
+        ExtensionAssociationManager[] attributeClasses = getLinks(
+                this.getClass().getAnnotation(ManyToManyAssociation.class).role()
+        );
 
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         // check if there are any association attributes
@@ -684,7 +693,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                         "these to objects : \n%s\n%s for this %s role name",
                 this,
                 target,
-                roleName));
+                target.getClass().getAnnotation(ManyToManyAssociation.class).role()));
 
 
     }

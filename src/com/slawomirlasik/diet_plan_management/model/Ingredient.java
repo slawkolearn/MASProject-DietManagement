@@ -1,9 +1,15 @@
 package com.slawomirlasik.diet_plan_management.model;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
+import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociation;
 
 import java.io.Serializable;
 
+@ManyToManyAssociation(
+        target = Recipe.class,
+        role = "is part of",
+        middleClass = RecipeIngredient.class
+)
 public class Ingredient extends ExtensionAnnotationAssociationManager implements Serializable {
 
     private String name;
