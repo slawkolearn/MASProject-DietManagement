@@ -320,34 +320,34 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                         }
                     }
                     break;
-                case "ManyToManyAssociationWithAttribute":
-                    ManyToManyAssociationWithAttribute sourceManyToManyAssociationWithAttributeAnnotation =
-                            (ManyToManyAssociationWithAttribute) sourceAnnotation;
-                    if (targetClass.isAnnotationPresent(ManyToManyAssociationWithAttribute.class)) {
-                        System.out.println("Yes it is ManyToManyAssociationWithAttribute present");
-                        ManyToManyAssociationWithAttribute targetManyToManyAssociationWithAttributeAnnotation =
-                                targetClass.getAnnotation(ManyToManyAssociationWithAttribute.class);
-
-                        System.out.println(sourceManyToManyAssociationWithAttributeAnnotation);
-                        System.out.println(targetManyToManyAssociationWithAttributeAnnotation);
-
-
-                        // check if those annoations concerns each other
-
-                        if (
-                                sourceManyToManyAssociationWithAttributeAnnotation.target().equals(targetClass) &&
-                                        targetManyToManyAssociationWithAttributeAnnotation.target().equals(sourceClass)
-                        ) {
-                            System.out.println("added");
-
-                            correspondedAnnotationPairs.add(new Annotation[]{
-                                    sourceManyToManyAssociationWithAttributeAnnotation,
-                                    targetManyToManyAssociationWithAttributeAnnotation
-                            });
-                        }
-
-                    }
-                    break;
+//                case "ManyToManyAssociationWithAttribute":
+//                    ManyToManyAssociationWithAttribute sourceManyToManyAssociationWithAttributeAnnotation =
+//                            (ManyToManyAssociationWithAttribute) sourceAnnotation;
+//                    if (targetClass.isAnnotationPresent(ManyToManyAssociationWithAttribute.class)) {
+//                        System.out.println("Yes it is ManyToManyAssociationWithAttribute present");
+//                        ManyToManyAssociationWithAttribute targetManyToManyAssociationWithAttributeAnnotation =
+//                                targetClass.getAnnotation(ManyToManyAssociationWithAttribute.class);
+//
+//                        System.out.println(sourceManyToManyAssociationWithAttributeAnnotation);
+//                        System.out.println(targetManyToManyAssociationWithAttributeAnnotation);
+//
+//
+//                        // check if those annoations concerns each other
+//
+//                        if (
+//                                sourceManyToManyAssociationWithAttributeAnnotation.target().equals(targetClass) &&
+//                                        targetManyToManyAssociationWithAttributeAnnotation.target().equals(sourceClass)
+//                        ) {
+//                            System.out.println("added");
+//
+//                            correspondedAnnotationPairs.add(new Annotation[]{
+//                                    sourceManyToManyAssociationWithAttributeAnnotation,
+//                                    targetManyToManyAssociationWithAttributeAnnotation
+//                            });
+//                        }
+//
+//                    }
+//                    break;
                 default:
                     break;
             }
@@ -366,14 +366,19 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
             return false;
         }
 
-        // check if whole is appriopiate class type
+        // check if whole is appropriate class type
         if (
-                wholeObject.getClass().isAnnotationPresent(CompositionWhole.class) &&
-                        partClass.equals(wholeObject.getClass().getAnnotation(CompositionWhole.class).partTarget()) &&
-                        wholeObject.getClass().getAnnotation(CompositionWhole.class).partTarget().equals(partClass)
+                wholeObject.getClass().getAnnotationsByType(CompositionWhole.class).length > 0
         ) {
+            //     partClass.equals(wholeObject.getClass().getAnnotation(CompositionWhole.class).partTarget())
+            // wholeObject.getClass().getAnnotation(CompositionWhole.class).partTarget().equals(partClass)
+            for (CompositionWhole compositionWhole : wholeObject.getClass().getAnnotationsByType(CompositionWhole.class)) {
+                System.out.println(compositionWhole);
+                if (compositionWhole.partTarget().equals(partClass)) {
+                    return true;
+                }
+            }
 
-            return true;
         }
 
         return false;
@@ -394,14 +399,12 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         boolean assumeTheWorst = true;
 
         // whole must have the proper OneToManyAssociation annotation type if not there is an error
-        if (wholeClass.isAnnotationPresent(OneToManyAssociation.class)) {
+        if (wholeClass.getAnnotationsByType(OneToManyAssociation.class).length > 0) {
 
-            Annotation[] wholeClassAnnotations = wholeClass.getAnnotations();
-            for (Annotation wholeClassAnnotation : wholeClassAnnotations) {
+            for (OneToManyAssociation wholeClassAnnotation : wholeClass.getAnnotationsByType(OneToManyAssociation.class)) {
 
-                if (wholeClassAnnotation.annotationType().equals(OneToManyAssociation.class)
-                        && ((OneToManyAssociation) wholeClassAnnotation).target().equals(partClass)) {
-                    wholeRoleName = ((OneToManyAssociation) wholeClassAnnotation).role();
+                if (wholeClassAnnotation.target().equals(partClass)) {
+                    wholeRoleName = wholeClassAnnotation.role();
                     assumeTheWorst = false;
                     break;
                 }
@@ -419,14 +422,13 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         // part must have the proper ManyToOneAssociation annotation type if not there is an error
         assumeTheWorst = true;
 
-        if (partClass.isAnnotationPresent(ManyToOneAssociation.class)) {
+        if (partClass.getAnnotationsByType(ManyToOneAssociation.class).length > 0) {
 
             Annotation[] partClassAnnotations = partClass.getAnnotations();
-            for (Annotation partClassAnnotation : partClassAnnotations) {
+            for (ManyToOneAssociation partClassAnnotation : partClass.getAnnotationsByType(ManyToOneAssociation.class)) {
 
-                if (partClassAnnotation.annotationType().equals(ManyToOneAssociation.class)
-                        && ((ManyToOneAssociation) partClassAnnotation).target().equals(wholeClass)) {
-                    partRoleName = ((ManyToOneAssociation) partClassAnnotation).role();
+                if (partClassAnnotation.target().equals(wholeClass)) {
+                    partRoleName = partClassAnnotation.role();
                     assumeTheWorst = false;
                     break;
                 }
@@ -644,7 +646,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
             }
 
 
-            manyToManyLinkCreated = true;
+//            manyToManyLinkCreated = true;
 
 
             return middleObject;
@@ -726,9 +728,9 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                         )
 
 
-                ){
-                    associationsByGivenType.add(new Annotation[] {
-                            sourceAnnotationByGivenType,targetAnnotationByGivenType
+                ) {
+                    associationsByGivenType.add(new Annotation[]{
+                            sourceAnnotationByGivenType, targetAnnotationByGivenType
                     });
                 }
 
@@ -738,7 +740,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         }
 
         System.out.println("))");
-        for (Annotation[] associations : associationsByGivenType){
+        for (Annotation[] associations : associationsByGivenType) {
             System.out.println(associations[0]);
             System.out.println(associations[1]);
         }
@@ -996,20 +998,31 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
             A attributeClass
     ) {
         // check if source has ManyToMany association -> otherwise return false;
-        if (!source.getClass().isAnnotationPresent(ManyToManyAssociation.class)) {
+        if (!(source.getClass().getAnnotationsByType(ManyToManyAssociation.class).length > 0)) {
             return false;
         }
 
-        // get ManyToMany Association annotation from source
-        ManyToManyAssociation sourceManyToManyAssociationAnnotation =
-                source.getClass().getAnnotation(ManyToManyAssociation.class);
+//        // get ManyToMany Association annotation from source
+//        ManyToManyAssociation sourceManyToManyAssociationAnnotation =
+//                source.getClass().getAnnotation(ManyToManyAssociation.class);
+//
+//        // check the middleClass from this annotation against attributeClass type -> if they match return true otherwise return false
+//        if (sourceManyToManyAssociationAnnotation.middleClass().equals(attributeClass.getClass())) {
+//            return true;
+//        } else {
+//            return false;
+//        }
 
-        // check the middleClass from this annotation against attributeClass type -> if they match return true otherwise return false
-        if (sourceManyToManyAssociationAnnotation.middleClass().equals(attributeClass.getClass())) {
-            return true;
-        } else {
-            return false;
+        // check if middleClass of ManyToManyAssociation points to the attributeClass type
+        // -> if any return true
+        // -> if none return false
+        for (ManyToManyAssociation sourceManyToManyAssociationAnnotation : source.getClass().getAnnotationsByType(ManyToManyAssociation.class)) {
+
+            if(sourceManyToManyAssociationAnnotation.middleClass().equals(attributeClass.getClass())){
+                return true;
+            }
         }
+        return false;
 
     }
 

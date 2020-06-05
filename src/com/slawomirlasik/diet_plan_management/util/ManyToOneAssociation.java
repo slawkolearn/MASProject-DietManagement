@@ -1,10 +1,8 @@
 package com.slawomirlasik.diet_plan_management.util;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+@Repeatable(ManyToOneAssociations.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface ManyToOneAssociation {

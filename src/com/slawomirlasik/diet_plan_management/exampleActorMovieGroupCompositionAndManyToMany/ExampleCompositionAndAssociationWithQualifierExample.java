@@ -54,11 +54,12 @@ public class ExampleCompositionAndAssociationWithQualifierExample {
             */
 
             // trying to create actor that aleady exists with proper whole
-/*            Actor robert2 = Actor.createActor(g1, "Robert", "Downey Jr.");
+/*
+            Actor robert2 = Actor.createActor(g1, "Robert", "Downey Jr.");
             System.out.println(robert2);
-            OUTPUT: java.lang.Exception: The part is already connected to a whole!
+//            OUTPUT: java.lang.Exception: The part is already connected to a whole!
+*/
 
-            */
 
             // trying to create actor (that does not exists) with proper whole outside the whole
             Actor drNo = Actor.createActor(g2, "Dr.", "No");

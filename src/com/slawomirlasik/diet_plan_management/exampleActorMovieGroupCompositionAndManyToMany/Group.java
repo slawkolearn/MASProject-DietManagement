@@ -5,8 +5,10 @@ import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociatio
 import com.slawomirlasik.diet_plan_management.util.OneToManyAssociation;
 
 
+@CompositionWhole(partTarget = Designer.class)
 @CompositionWhole(partTarget = Actor.class)
 @OneToManyAssociation(target = Actor.class, role = "actors")
+@OneToManyAssociation(target = Designer.class, role = "designers")
 public class Group extends ExtensionAnnotationAssociationManager {
 
     public static final String COMPOSITION_ROLE_ACTORS = "group_actors";
