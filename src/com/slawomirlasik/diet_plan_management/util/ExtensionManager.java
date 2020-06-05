@@ -1,11 +1,9 @@
 package com.slawomirlasik.diet_plan_management.util;
 
-import com.slawomirlasik.diet_plan_management.model.DietUser;
-
 import java.io.*;
 import java.util.*;
 
-public class ExtensionManager {
+public class ExtensionManager implements Serializable {
 
     // TODO:SL make util class extending? this extensionmanager class for showing errors etc
     // simple label for showing the same staring message for errors
@@ -13,7 +11,8 @@ public class ExtensionManager {
     // file name for storing extensions
     public static final String EXTENSION_FILE = "extensionData.dtd";
     // main container for applications extensions storage
-    private static Map<Class, List<ExtensionManager>> extensions = new HashMap<>();
+    // TODO:SL it is not safe because all business logic class inherits this class and have direct access to it
+    protected static Map<Class, List<ExtensionManager>> extensions = new HashMap<>();
 
     public ExtensionManager() {
         // this constructor adds the creating at the moment object to extensions conainter
@@ -34,41 +33,7 @@ public class ExtensionManager {
         extensionList.add(this);
     }
 
-    // saving logic
 
-    public static void saveExtensionCurrentState() throws IOException {
-        saveExtensionsToFile(EXTENSION_FILE);
-    }
-
-    public static void saveExtensionsToFile(String filePath) throws IOException {
-        // add some basic security for not getting null pointer exception
-        if (filePath == null) filePath = EXTENSION_FILE;
-        //Create Stream for writing to a file
-        FileOutputStream fileOutputStream = new FileOutputStream(new File(filePath));
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        // write object to a file and close a stream
-        objectOutputStream.writeObject(extensions);
-        objectOutputStream.close();
-    }
-
-    // loading logic
-
-    public static Boolean loadExtensionsFromFile() throws IOException, ClassNotFoundException {
-        return loadExtensionsFromFile(EXTENSION_FILE);
-    }
-
-    public static Boolean loadExtensionsFromFile(String filePath) throws IOException, ClassNotFoundException {
-        // ad some basic security for not getting null pointer exception
-        if (filePath == null) filePath = EXTENSION_FILE;
-
-        //create Stream for reading from a file
-        File dataFile = new File(filePath);
-        if (!dataFile.exists()) return false;
-        FileInputStream fi = new FileInputStream(dataFile);
-        ObjectInputStream oi = new ObjectInputStream(fi);
-        return
-                ((extensions = (Map<Class, List<ExtensionManager>>) oi.readObject()) != null ? true : false);
-    }
 
 
     public static void printExtension(Class extensionKey) throws Exception {

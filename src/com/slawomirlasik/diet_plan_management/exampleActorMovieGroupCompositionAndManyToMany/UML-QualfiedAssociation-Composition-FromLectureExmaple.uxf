@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>190</x>
+      <y>290</y>
+      <w>100</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Movie
+--
+title</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>290</y>
+      <w>110</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Actor
+--
+firstName
+lastName
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>550</x>
+      <y>490</y>
+      <w>100</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Group
+--
+id</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>310</y>
+      <w>150</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+r1=group
+m2=n
+r2=actors</panel_attributes>
+    <additional_attributes>10.0;230.0;130.0;230.0;130.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>300</y>
+      <w>300</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=[initials]-
+m1=   n
+r1=   movies
+m2=n
+r2=actors
+</panel_attributes>
+    <additional_attributes>30.0;20.0;280.0;20.0</additional_attributes>
+  </element>
+</diagram>

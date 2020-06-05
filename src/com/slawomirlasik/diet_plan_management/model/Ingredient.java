@@ -1,10 +1,10 @@
 package com.slawomirlasik.diet_plan_management.model;
 
-import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 
 import java.io.Serializable;
 
-public class Ingredient extends ExtensionManager implements Serializable {
+public class Ingredient extends ExtensionAnnotationAssociationManager implements Serializable {
 
     private Float numberOfProtein;
     private Float numberOfCarbohydrates;

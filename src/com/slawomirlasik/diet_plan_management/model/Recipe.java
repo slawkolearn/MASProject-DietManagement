@@ -1,47 +1,47 @@
 package com.slawomirlasik.diet_plan_management.model;
 
-import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
+import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociation;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
-public class Recipe extends ExtensionManager implements Serializable {
 
-    private List<DietType> dietPlans;
+@ManyToManyAssociation(
+        target = DietType.class,
+        middleClass = RecipeDietType.class,
+        role = "is of a type"
+)
+public class Recipe extends ExtensionAnnotationAssociationManager implements Serializable {
+
+    private String recipeName;
 
     public Recipe() {
         super();
-        this.dietPlans = new ArrayList<>();
     }
 
-    public Recipe(DietType ...dietTypes){
+    public Recipe(String recipeName) {
         super();
-        this.dietPlans = new ArrayList<>();
-        for (DietType dietType : dietTypes){
-            this.dietPlans.add(dietType);
-        }
+        this.recipeName = recipeName;
     }
 
-    public void addTypeOfDietForRecipe(DietType dietType){
-        if(!checkIfRecipeIsOfDietType(dietType))
-            this.dietPlans.add(dietType);
+    public String getRecipeName() {
+        return recipeName;
     }
 
-    private boolean checkIfRecipeIsOfDietType(DietType dietType) {
-        return this.dietPlans.contains(dietType);
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
     }
 
     @Override
     public String toString() {
         return "Recipe{" +
-                "dietPlans=" + String.join(", ", getAllDietPlans()
-                .stream().map(DietType::toString).collect(Collectors.joining(", "))) +
+                "recipeName='" + recipeName + '\'' +
                 '}';
     }
 
-    private List<DietType> getAllDietPlans() {
-        return this.dietPlans;
+    public void addDietType(DietType muscleTrainingDietType) throws Exception {
+
+        addManyToManyLink(muscleTrainingDietType);
+
     }
 }

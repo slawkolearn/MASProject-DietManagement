@@ -1,11 +1,11 @@
 package com.slawomirlasik.diet_plan_management.model;
 
-import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class DietPlanDay extends ExtensionManager implements Serializable {
+public class DietPlanDay extends ExtensionAnnotationAssociationManager implements Serializable {
 
     private Integer proteinPerDay;
     private Integer carbohydratesPerDay;

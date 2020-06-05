@@ -1,11 +1,11 @@
 package com.slawomirlasik.diet_plan_management.model;
 
-import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
+import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Person extends ExtensionManager implements Serializable {
+public abstract class Person extends ExtensionAnnotationAssociationManager implements Serializable {
     private static Integer MINIMAL_AGE = 18;
 
     private String name;
@@ -54,9 +54,9 @@ public abstract class Person extends ExtensionManager implements Serializable {
 
     /**
      * the method sets the users current @param birthdate field.
-     *
+     * <p>
      * used only when some to update incorrect data, and when creating first Person.
-     *
+     * <p>
      * Throws exception when users age is under 18.
      *
      * @param birthDate
