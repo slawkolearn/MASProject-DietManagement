@@ -77,6 +77,7 @@ public class MP2OneToManyAssociation {
         System.out.println("\n========================================");
         // ===========================================
         // show links for DietUsers
+        System.out.println("--------- Links for DietUsers ------------");
 
         Iterable<DietUser> dietUsers = ExtensionAnnotationAssociationManager.getExtension(DietUser.class);
 
@@ -86,6 +87,7 @@ public class MP2OneToManyAssociation {
 
         // ===========================================
         // show links for DietAdmins
+        System.out.println("---------- Links for dietAdmins --------");
 
         Iterable<DietAdministrator> dietAdministrators = ExtensionAnnotationAssociationManager.getExtension(DietAdministrator.class);
 

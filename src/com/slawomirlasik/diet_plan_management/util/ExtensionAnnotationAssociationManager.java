@@ -838,7 +838,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
             if(targetManyToOneAssociationAnnotation.target().equals(source.getClass())){
                 // TODO:SL what to do when OneToMany on the one side exists already? now we throw exception
 
-                if(source.hasRole(callerOneToManyAssociationAnnotation.role())){
+                if(target.hasRole(targetManyToOneAssociationAnnotation.role())){
                     throw new Exception(String.format("Sorry for now we do not support for changing current ONE side in OneToMany association. Becouse already OneToMany Association exists between %s and %s associaotion new cannot be created",
                             source.getClass().getSimpleName(),
                             target.getClass().getSimpleName()));
@@ -849,7 +849,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                 String sourceRoleName = callerOneToManyAssociationAnnotation.role();
                 String targetRoleName = targetManyToOneAssociationAnnotation.role();
 
-                addLink(sourceRoleName, targetRoleName, target);
+                source.addLink(sourceRoleName, targetRoleName, target);
             }
         }
 
