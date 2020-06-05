@@ -6,11 +6,11 @@ import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociation;
 import java.io.Serializable;
 
 
-/*@ManyToManyAssociation(
+@ManyToManyAssociation(
         target = DietType.class,
         middleClass = RecipeDietType.class,
         role = "is of a type"
-)*/
+)
 @ManyToManyAssociation(
         target = Ingredient.class,
         middleClass = RecipeIngredient.class,

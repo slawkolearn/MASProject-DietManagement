@@ -233,11 +233,13 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         System.out.println(sourceClass);
         System.out.println(targetClass);
 
+
         for (Annotation sourceAnnotation : sourceClass.getAnnotations()) {
             System.out.println("sourceAnnotation after for: " + sourceAnnotation.annotationType().getSimpleName()
                     + " " + sourceAnnotation);
             // TODO:SL here must be second loop to check the targetAnnotations for possible pair - loop must be for possible multpiple association types on one object
             // TODO:SL THIS WORKS ONLY WHEN A CLASS HAS ONE ASSOCIATION TYPE MAXIMUM - another loop needed for many possible pairs
+
             switch (sourceAnnotation.annotationType().getSimpleName()) {
                 // many to many has two possibilities on the other side (many to many , or AttributeClass)
 //                case "AttributeClass":
@@ -454,7 +456,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
     /**
      * makes many to many association with middleClass technique
-     *
+     * <p>
      * returns Association class if the middleClass is marked as one
      *
      * @param targetObject
@@ -467,7 +469,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
             T targetObject
     ) throws Exception {
 
-         return addManyToManyLink(targetObject);
+        return addManyToManyLink(targetObject);
 //
 //        this.printRoles();
 //
@@ -497,8 +499,19 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
             T targetObject
     ) throws Exception {
         // check if THIS and target class has the same ManyToMany association class type
-        if (!(this.getClass().isAnnotationPresent(ManyToManyAssociation.class) &&
-                targetObject.getClass().isAnnotationPresent(ManyToManyAssociation.class))) {
+        // because there can be multiple association types on the same class declared
+        // you must check when one association type is declared
+        // or many of the same type
+//        if (!(
+//                (this.getClass().isAnnotationPresent(ManyToManyAssociation.class) ||
+//                        this.getClass().isAnnotationPresent(ManyToManyAssociations.class)
+//                )
+//                        &&
+//                        (targetObject.getClass().isAnnotationPresent(ManyToManyAssociation.class) |
+//                                targetObject.getClass().isAnnotationPresent(ManyToManyAssociations.class)
+//                        ))) {
+        if (!(this.getClass().getAnnotationsByType(ManyToManyAssociation.class).length > 0 &&
+                targetObject.getClass().getAnnotationsByType(ManyToManyAssociation.class).length > 0)) {
             throw new Exception(String.format("Cannot link %s <-> %s in manyToMany association",
                     this.getClass().getSimpleName(),
                     targetObject.getClass().getSimpleName()));
@@ -506,8 +519,14 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
         // check whether the objects can have this association type (Many To Many)
         // whether do they have the same attribute class
+//        ArrayList<Annotation[]> associatedAnnotationsFromSourceAndTarget =
+//                getAssociatedAnnotationsFromSourceAndTarget(this.getClass(), targetObject.getClass());
         ArrayList<Annotation[]> associatedAnnotationsFromSourceAndTarget =
-                getAssociatedAnnotationsFromSourceAndTarget(this.getClass(), targetObject.getClass());
+                getAssociationsByGivenType(
+                        this.getClass(),
+                        targetObject.getClass(),
+                        ManyToManyAssociation.class
+                );
 
         // TODO:SL WARING! - getAssociatedAnnotationsFromSourceAndTarget for now assumes that One class can have one association of each type max
         // TODO:SL this method however will assume (for future) that One class can have many association of each type
@@ -652,12 +671,87 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         return null;
     }
 
+    private ArrayList<Annotation[]> getAssociationsByGivenType(
+            Class<? extends ExtensionAnnotationAssociationManager> source,
+            Class<? extends ExtensionAnnotationAssociationManager> target,
+            Class<ManyToManyAssociation> associationTypeAnnotation) throws Exception {
+
+        System.out.println(source.getAnnotationsByType(associationTypeAnnotation).length);
+        System.out.println(target.getAnnotationsByType(associationTypeAnnotation).length);
+
+        if (!(source.getAnnotationsByType(associationTypeAnnotation).length > 0
+                && target.getAnnotationsByType(associationTypeAnnotation).length > 0)) {
+            throw new Exception(String.format("there is no association between %s and %s for a given Association Type %s",
+                    source.getSimpleName(), target.getSimpleName(), associationTypeAnnotation.getSimpleName()));
+        }
+
+        ArrayList<Annotation[]> associationsByGivenType = new ArrayList<>();
+        System.out.println(associationTypeAnnotation.getSimpleName().equals(ManyToManyAssociation.class.getSimpleName()));
+
+        // loop through all annotations of a given type on source
+        // and compare in loop with all annotations with a given type from Target
+        System.out.println("--");
+        for (Annotation sourceAnnotationByGivenType : source.getAnnotationsByType(associationTypeAnnotation)) {
+            System.out.println(sourceAnnotationByGivenType);
+            for (Annotation targetAnnotationByGivenType : target.getAnnotationsByType(associationTypeAnnotation)) {
+
+                // now there are many possible options
+                // we know that sourceAnnotationsByGivenType and targetAnnotationsByGivenType
+                // are
+                // the same Type
+                // all we need to do is to check the if the association point at eachothers target
+                // if so it means they are related
+                // we add them if they are related to the associationsByGivenType array list as a pair
+                // of annotations sourceAnnotation targetAnnotation
+                System.out.println(targetAnnotationByGivenType);
+                System.out.println(
+                        target.equals(
+                                sourceAnnotationByGivenType.getClass()
+                                        .getMethod("target").invoke(sourceAnnotationByGivenType)
+                        )
+                );
+                System.out.println(
+                        source.equals(
+                                targetAnnotationByGivenType.getClass()
+                                        .getMethod("target").invoke(targetAnnotationByGivenType)
+                        )
+                );
+                if (
+                        target.equals(
+                                sourceAnnotationByGivenType.getClass()
+                                        .getMethod("target").invoke(sourceAnnotationByGivenType)
+                        ) && source.equals(
+                                targetAnnotationByGivenType.getClass()
+                                        .getMethod("target").invoke(targetAnnotationByGivenType)
+                        )
+
+
+                ){
+                    associationsByGivenType.add(new Annotation[] {
+                            sourceAnnotationByGivenType,targetAnnotationByGivenType
+                    });
+                }
+
+
+            }
+            System.out.println("--");
+        }
+
+        System.out.println("))");
+        for (Annotation[] associations : associationsByGivenType){
+            System.out.println(associations[0]);
+            System.out.println(associations[1]);
+        }
+
+        return associationsByGivenType;
+    }
+
     public <T extends ExtensionAnnotationAssociationManager> ExtensionAnnotationAssociationManager getAssociationAttributeClass(
             T target) throws Exception {
 
-        if(!target.getClass().isAnnotationPresent(ManyToManyAssociation.class)){
+        if (!target.getClass().isAnnotationPresent(ManyToManyAssociation.class)) {
             throw new Exception(String.format("In %s there in no required ManyToManyAssociationAnnotation",
-            target.getClass().getSimpleName()));
+                    target.getClass().getSimpleName()));
         }
         ExtensionAssociationManager[] attributeClasses = getLinks(
                 this.getClass().getAnnotation(ManyToManyAssociation.class).role()
@@ -900,9 +994,9 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
     boolean isValidAttributeClass(
             S source,
             A attributeClass
-    ){
+    ) {
         // check if source has ManyToMany association -> otherwise return false;
-        if(!source.getClass().isAnnotationPresent(ManyToManyAssociation.class)){
+        if (!source.getClass().isAnnotationPresent(ManyToManyAssociation.class)) {
             return false;
         }
 
@@ -911,9 +1005,9 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                 source.getClass().getAnnotation(ManyToManyAssociation.class);
 
         // check the middleClass from this annotation against attributeClass type -> if they match return true otherwise return false
-        if(sourceManyToManyAssociationAnnotation.middleClass().equals(attributeClass.getClass())){
+        if (sourceManyToManyAssociationAnnotation.middleClass().equals(attributeClass.getClass())) {
             return true;
-        }else{
+        } else {
             return false;
         }
 

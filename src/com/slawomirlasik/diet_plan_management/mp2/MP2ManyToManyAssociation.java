@@ -116,11 +116,11 @@ public class MP2ManyToManyAssociation {
             curryChicken.addDietType(fatReductionDietType);
             curryChicken.addDietType(glutenFreeDietType);
 
-            chickenSalad.addManyToManyLink(fatReductionDietType);
-            chickenSalad.addManyToManyLink(glutenFreeDietType);
+            chickenSalad.addDietType(fatReductionDietType);
+            chickenSalad.addDietType(glutenFreeDietType);
 
-            yogurtPancakes.addManyToManyLink(fatReductionDietType);
-            yogurtPancakes.addManyToManyLink(muscleTrainingDietType);
+            yogurtPancakes.addDietType(fatReductionDietType);
+            yogurtPancakes.addDietType(muscleTrainingDietType);
 
         } catch (Exception exception) {
             exception.printStackTrace();
