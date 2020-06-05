@@ -8,9 +8,6 @@ public class RecipeIngredient extends ExtensionAnnotationAssociationManager impl
 
     private Float amountOfIngredient;
 
-    private MeasurementUnits unitType;
-
-
     public RecipeIngredient(Float amountOfIngredientFloat, MeasurementUnits unitType) {
         super();
         this.amountOfIngredient = amountOfIngredientFloat;
@@ -34,18 +31,13 @@ public class RecipeIngredient extends ExtensionAnnotationAssociationManager impl
         this.amountOfIngredient = amountOfIngredient;
     }
 
-    public MeasurementUnits getUnitType() {
-        return unitType;
-    }
 
-    public void setUnitType(MeasurementUnits unitType) {
-        this.unitType = unitType;
-    }
 
     @Override
     public String toString() {
+        // TODO:SL add unit type in printing of amount the ingredient from ingredient class
         return "RecipeIngredient{" +
-                "amountOfIngredient=" + (checkIfAmountOfIngredientPresent() ? getAmountOfIngredient() + " " + getUnitType() : "ilość dowolna") +
+                "amountOfIngredient=" + (checkIfAmountOfIngredientPresent() ? getAmountOfIngredient()  : "ilość dowolna") +
                 '}';
     }
 }

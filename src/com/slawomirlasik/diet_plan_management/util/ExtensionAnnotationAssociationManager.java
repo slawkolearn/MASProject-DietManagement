@@ -884,7 +884,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
     }
 
     protected <S extends ExtensionAnnotationAssociationManager, A extends ExtensionAnnotationAssociationManager>
-    boolean checkIfValidAttributeClass(
+    boolean isValidAttributeClass(
             S source,
             A attributeClass
     ){

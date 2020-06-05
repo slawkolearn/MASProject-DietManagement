@@ -45,13 +45,25 @@ public class Recipe extends ExtensionAnnotationAssociationManager implements Ser
 
     }
 
-    public void addIngredient(Ingredient ingredient, float amount) throws Exception {
+
+    public void addIngredient(Ingredient ingredient) throws Exception {
+        addIngredient(ingredient, null);
+    }
+
+
+    public void addIngredient(Ingredient ingredient, Float amount) throws Exception {
 
         ExtensionAnnotationAssociationManager attributeClassObject = addManyToManyLinkWithAttributeClass(ingredient);
 
 
         // we know what kind of attribute class it is but we may as well check
-        if(checkIfValidAttributeClass(this, attributeClassObject)){
+        if (amount != null && isValidAttributeClass(this, attributeClassObject)) {
+            // ok se we know what kind of class is attributeClassObject and we cast it
+            RecipeIngredient recipeIngredientAttributeClassObject =
+                    (RecipeIngredient) attributeClassObject;
+
+            // then  we set tup amount if it not null
+            recipeIngredientAttributeClassObject.setAmountOfIngredient(amount);
 
         }
 

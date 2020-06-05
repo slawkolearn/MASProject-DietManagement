@@ -98,11 +98,11 @@ generateNewDietForGivenUser(dietUser)
     <panel_attributes>Ingredient
 --
 name {Unique}
-noOfProtain
+noOfProtain 
 noOfCarbohydrates
 noOfFat
 measurementUnit
-measurementType
+onOneUnit
 --
 </panel_attributes>
     <additional_attributes/>
@@ -133,7 +133,6 @@ r2=contains</panel_attributes>
     <panel_attributes>RecipeIngredient
 --
 /amountOfIngredient/
-/measurementType/
 
 --</panel_attributes>
     <additional_attributes/>

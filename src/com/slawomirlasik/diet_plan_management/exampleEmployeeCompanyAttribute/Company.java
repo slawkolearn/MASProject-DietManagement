@@ -50,7 +50,7 @@ public class Company extends ExtensionAnnotationAssociationManager {
 //        System.out.println(associationAttributeClass);
 
         // we know what kind of attribute class it is but we may as well check
-        if(checkIfValidAttributeClass(this,associationAttributeClass )){
+        if(isValidAttributeClass(this,associationAttributeClass )){
 
             WorksIn associationClass = (WorksIn) associationAttributeClass;
 
