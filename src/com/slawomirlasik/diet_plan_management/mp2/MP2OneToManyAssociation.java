@@ -37,12 +37,12 @@ public class MP2OneToManyAssociation {
 
 
         } else {
-            System.out.println("\n========================================");
-            System.out.println("   Printing DietUsers And DietAdministartors   ");
+            System.out.println("\n===============================================");
+            System.out.println("   Printing DietUsers And DietAdministrators   ");
             try {
                 // ===========================================
                 // show DietUser
-                System.out.println("\n========================================");
+                System.out.println("\n===============================================");
                 ExtensionAssociationManager.printExtension(DietUser.class);
 
                 // ===========================================
@@ -73,11 +73,14 @@ public class MP2OneToManyAssociation {
     private static void showOneToManyLinks() throws Exception {
 
         System.out.println("\n========================================");
-        System.out.println("   Printing DietUsers And DietAdministartors Association (OneToMany) ");
+        System.out.println("   Printing DietUsers And DietAdministrators Association (OneToMany) ");
         System.out.println("\n========================================");
         // ===========================================
+
         // show links for DietUsers
-        System.out.println("--------- Links for DietUsers ------------");
+        System.out.println("---------------------------------------------------------");
+        System.out.println("----Printing all associations for all DietUsers ---------");
+        System.out.println("---------------------------------------------------------");
 
         Iterable<DietUser> dietUsers = ExtensionAnnotationAssociationManager.getExtension(DietUser.class);
 
@@ -87,7 +90,9 @@ public class MP2OneToManyAssociation {
 
         // ===========================================
         // show links for DietAdmins
-        System.out.println("---------- Links for dietAdmins --------");
+        System.out.println("---------------------------------------------------------");
+        System.out.println("--Printing all associations for all DietAdministrator----");
+        System.out.println("---------------------------------------------------------");
 
         Iterable<DietAdministrator> dietAdministrators = ExtensionAnnotationAssociationManager.getExtension(DietAdministrator.class);
 

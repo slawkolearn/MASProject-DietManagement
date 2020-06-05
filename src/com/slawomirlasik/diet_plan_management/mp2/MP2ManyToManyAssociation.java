@@ -49,19 +49,29 @@ public class MP2ManyToManyAssociation {
 
     private static void showManyToManyLinks() {
 
-        System.out.println("\n========================================");
+        System.out.println("\n==========================+++++++++++++++==============");
         System.out.println("   Printing Recipe And DietType Association (ManyToMany) ");
-        System.out.println("\n========================================");
+        System.out.println("\n=======================================================");
         // ===========================================
 
         try {
+            System.out.println("----------------------------------------------");
+            System.out.println("--------Printing all DietTypes----------------");
+            System.out.println("----------------------------------------------");
 
             // show DietTypes
             ExtensionAssociationManager.printExtension(DietType.class);
 
+            System.out.println("----------------------------------------------");
+            System.out.println("--------Printing all Recipe-------------------");
+            System.out.println("----------------------------------------------");
             // show Recipes
             ExtensionAssociationManager.printExtension(Recipe.class);
 
+
+            System.out.println("---------------------------------------------------------");
+            System.out.println("------Printing all associations for all DietTypes--------");
+            System.out.println("---------------------------------------------------------");
             // Show links for role "concerns" for all DietTypes
             Iterable<DietType> dietTypes = ExtensionAnnotationAssociationManager.getExtension(DietType.class);
 
@@ -73,8 +83,11 @@ public class MP2ManyToManyAssociation {
 
             }
 
-            // SHow links for role "is Type of" for all Recipes
+            System.out.println("---------------------------------------------------------");
+            System.out.println("------Printing all associations for all Recipes ---------");
+            System.out.println("---------------------------------------------------------");
 
+            // SHow links for role "is Type of" for all Recipes
             Iterable<Recipe> recipes = ExtensionAnnotationAssociationManager.getExtension(Recipe.class);
 
             for (Recipe recipe : recipes) {
