@@ -28,7 +28,7 @@ public class MP2AssociationWithAttribute {
             e.printStackTrace();
         }
 
-        int flag = 0;
+        int flag = 1;
         if(flag == 0){
             try {
                 generateData();

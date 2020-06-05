@@ -87,14 +87,14 @@ public class Mp1 {
             // użytkownika diety obiekt klasy DietPLan, który odpowiada planowi diety użytkownika. W niej
                 // będą przechowywane DietPlanDays odpowiadające odpowiednim dniom w diecie
         // Tworzymy Listę z konkretnymi dniami. dla ułatwienia wszyskie dni mają taką samą wartość odżywczą
-        List<DietPlanDay> dietPlanDayList1 = generateDietPlanDayListStub(10);
-        List<DietPlanDay> dietPlanDayList2 = generateDietPlanDayListStub(20);
+/*        List<DietPlanDay> dietPlanDayList1 = generateDietPlanDayListStub(10);
+        List<DietPlanDay> dietPlanDayList2 = generateDietPlanDayListStub(20);*/
         // Tworzymy nową dietę dla jakiegoś użytkownika (każda dieta będzie indywidualna dla użytkonika)
-        DietPlan dietPlan1 = new DietPlan(dietPlanDayList1);
-        DietPlan dietPlan2 = new DietPlan(dietPlanDayList1);
+//        DietPlan dietPlan1 = new DietPlan(dietPlanDayList1);
+//        DietPlan dietPlan2 = new DietPlan(dietPlanDayList1);
         // wyświetlamy wszyskie dostępne diety jakie mamy dostępne w systemie
         System.out.println("Oto wszystkie dostępne diety w systemie wszystkich użytkowników:");
-        DietPlan.getAllDietPlans().forEach(System.out::println);
+//        DietPlan.getAllDietPlans().forEach(System.out::println);
         System.out.println("-----------------------------");
         // atrybut złożony
          // atrybut diploma w klasie DietAdministrator jest to klasa opisująca, w tym przypadku, dyplom
@@ -179,7 +179,7 @@ public class Mp1 {
                 LocalDate.now()
         );
     }
-
+/*
 
     private static List<DietPlanDay> generateDietPlanDayListStub(int startAmount) {
         List<DietPlanDay> resultList = new ArrayList<>();
@@ -190,7 +190,7 @@ public class Mp1 {
             ));
         }
         return resultList;
-    }
+    }*/
 
     public static String getYearStringPolish(Integer age) {
         return

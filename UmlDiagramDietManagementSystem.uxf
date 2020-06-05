@@ -3,7 +3,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1064</x>
+      <x>1176</x>
       <y>128</y>
       <w>128</w>
       <h>152</h>
@@ -22,7 +22,7 @@ getAge()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>864</x>
+      <x>976</x>
       <y>408</y>
       <w>224</w>
       <h>216</h>
@@ -38,7 +38,7 @@ showDietStatistics(period)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1264</x>
+      <x>1376</x>
       <y>400</y>
       <w>184</w>
       <h>64</h>
@@ -54,7 +54,7 @@ generateNewDietForGivenUser(dietUser)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1104</x>
+      <x>1216</x>
       <y>272</y>
       <w>176</w>
       <h>168</h>
@@ -65,7 +65,7 @@ generateNewDietForGivenUser(dietUser)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1064</x>
+      <x>1176</x>
       <y>272</y>
       <w>64</w>
       <h>152</h>
@@ -76,7 +76,7 @@ generateNewDietForGivenUser(dietUser)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>936</x>
+      <x>1048</x>
       <y>632</y>
       <w>112</w>
       <h>104</h>
@@ -90,7 +90,7 @@ generateNewDietForGivenUser(dietUser)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>936</x>
+      <x>1048</x>
       <y>896</y>
       <w>144</w>
       <h>136</h>
@@ -110,7 +110,7 @@ onOneUnit
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>968</x>
+      <x>1080</x>
       <y>728</y>
       <w>112</w>
       <h>184</h>
@@ -125,7 +125,7 @@ r2=contains</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1144</x>
+      <x>1256</x>
       <y>800</y>
       <w>128</w>
       <h>152</h>
@@ -140,7 +140,7 @@ r2=contains</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>992</x>
+      <x>1104</x>
       <y>808</y>
       <w>168</w>
       <h>40</h>
@@ -151,7 +151,7 @@ r2=contains</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>696</x>
+      <x>808</x>
       <y>800</y>
       <w>112</w>
       <h>168</h>
@@ -165,7 +165,7 @@ Description</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>480</x>
+      <x>592</x>
       <y>1032</y>
       <w>120</w>
       <h>56</h>
@@ -176,7 +176,7 @@ Description</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>512</x>
+      <x>624</x>
       <y>960</y>
       <w>264</w>
       <h>88</h>
@@ -187,7 +187,7 @@ Description</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>864</x>
+      <x>976</x>
       <y>232</y>
       <w>120</w>
       <h>56</h>
@@ -198,7 +198,7 @@ Description</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
+      <x>968</x>
       <y>280</y>
       <w>80</w>
       <h>144</h>
@@ -209,7 +209,7 @@ Description</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>584</x>
+      <x>696</x>
       <y>552</y>
       <w>160</w>
       <h>136</h>
@@ -227,7 +227,7 @@ _getAllDietPlans()_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>736</x>
+      <x>848</x>
       <y>480</y>
       <w>144</w>
       <h>104</h>
@@ -242,7 +242,7 @@ r2=has diet plans</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>440</x>
+      <x>552</x>
       <y>0</y>
       <w>176</w>
       <h>168</h>
@@ -260,7 +260,7 @@ dateOfMeasurement
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>248</x>
+      <x>360</x>
       <y>192</y>
       <w>120</w>
       <h>56</h>
@@ -271,7 +271,7 @@ dateOfMeasurement
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
+      <x>472</x>
       <y>88</y>
       <w>96</w>
       <h>168</h>
@@ -282,7 +282,7 @@ dateOfMeasurement
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1080</x>
+      <x>1192</x>
       <y>448</y>
       <w>240</w>
       <h>160</h>
@@ -297,7 +297,7 @@ r2=mentors</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>752</x>
+      <x>864</x>
       <y>1064</y>
       <w>280</w>
       <h>120</h>
@@ -308,7 +308,7 @@ r2=mentors</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>800</x>
+      <x>912</x>
       <y>928</y>
       <w>152</w>
       <h>152</h>
@@ -319,7 +319,7 @@ r2=mentors</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1384</x>
+      <x>1496</x>
       <y>824</y>
       <w>152</w>
       <h>136</h>
@@ -330,7 +330,7 @@ r2=mentors</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1264</x>
+      <x>1376</x>
       <y>824</y>
       <w>136</w>
       <h>152</h>
@@ -341,7 +341,7 @@ r2=mentors</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>264</x>
+      <x>376</x>
       <y>528</y>
       <w>216</w>
       <h>64</h>
@@ -352,7 +352,7 @@ r2=mentors</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>472</x>
+      <x>584</x>
       <y>568</y>
       <w>128</w>
       <h>32</h>
@@ -363,7 +363,7 @@ r2=mentors</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>128</x>
+      <x>240</x>
       <y>272</y>
       <w>144</w>
       <h>160</h>
@@ -381,7 +381,7 @@ day
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1392</x>
+      <x>1504</x>
       <y>224</y>
       <w>80</w>
       <h>136</h>
@@ -398,7 +398,7 @@ skills
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
+      <x>728</x>
       <y>176</y>
       <w>96</w>
       <h>96</h>
@@ -415,7 +415,7 @@ name
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>608</x>
+      <x>720</x>
       <y>264</y>
       <w>96</w>
       <h>304</h>
@@ -432,7 +432,7 @@ r2=part of
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>792</x>
+      <x>904</x>
       <y>728</y>
       <w>208</w>
       <h>96</h>
@@ -449,7 +449,7 @@ r2=concerns
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>264</x>
+      <x>376</x>
       <y>296</y>
       <w>392</w>
       <h>272</h>
@@ -464,7 +464,7 @@ r2=contains</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
+      <x>112</x>
       <y>624</y>
       <w>144</w>
       <h>120</h>
@@ -480,7 +480,7 @@ fatsPerMeal</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1320</x>
+      <x>1432</x>
       <y>232</y>
       <w>88</w>
       <h>184</h>
@@ -497,7 +497,7 @@ r2=belongs to
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>608</x>
+      <x>720</x>
       <y>48</y>
       <w>496</w>
       <h>376</h>
@@ -514,7 +514,7 @@ r2=belongs to
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>24</x>
+      <x>136</x>
       <y>352</y>
       <w>120</w>
       <h>288</h>
@@ -531,7 +531,7 @@ r2=consists
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>136</x>
+      <x>248</x>
       <y>680</y>
       <w>816</w>
       <h>40</h>
@@ -546,7 +546,7 @@ r2=contains</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1176</x>
+      <x>1288</x>
       <y>592</y>
       <w>248</w>
       <h>192</h>
@@ -559,7 +559,7 @@ This tells us that for example in Recipe "chicken soup" we have 5xchicken, which
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1144</x>
+      <x>1256</x>
       <y>696</y>
       <w>48</w>
       <h>120</h>
@@ -570,8 +570,8 @@ This tells us that for example in Recipe "chicken soup" we have 5xchicken, which
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>472</x>
-      <y>384</y>
+      <x>512</x>
+      <y>408</y>
       <w>104</w>
       <h>88</h>
     </coordinates>
@@ -584,7 +584,7 @@ series</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>528</x>
+      <x>640</x>
       <y>808</y>
       <w>112</w>
       <h>96</h>
@@ -598,7 +598,7 @@ Description</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>592</x>
+      <x>704</x>
       <y>712</y>
       <w>360</w>
       <h>112</h>
