@@ -35,8 +35,8 @@ public class Mp1 {
         // atrybut opcjonalny
         System.out.println("-----------------------------");
         System.out.println("Przykład atrybutu opcjonalnego");
-        RecipeIngredient recipeIngredientPresent = new RecipeIngredient(10f);
-        RecipeIngredient recipeIngredientAbsent = new RecipeIngredient();
+        RecipeIngredient recipeIngredientPresent = new RecipeIngredient(10f,MeasurementUnits.GRAMS );
+        RecipeIngredient recipeIngredientAbsent = new RecipeIngredient(MeasurementUnits.MILLILITERS);
 
 
         System.out.println(recipeIngredientPresent);

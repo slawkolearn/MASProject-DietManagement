@@ -453,6 +453,34 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
     }
 
     /**
+     * makes many to many association with middleClass technique
+     *
+     * returns Association class if the middleClass is marked as one
+     *
+     * @param targetObject
+     * @param <T>
+     * @return
+     */
+
+    public <T extends ExtensionAnnotationAssociationManager> ExtensionAnnotationAssociationManager
+    addManyToManyLinkWithAttributeClass(
+            T targetObject
+    ) throws Exception {
+
+        addManyToManyLink(targetObject);
+
+        // get association class created between THIS object and employee
+        ExtensionAnnotationAssociationManager associationAttributeClass = getAssociationAttributeClass(
+                this.getClass().getAnnotation(ManyToManyAssociation.class).role(),
+                targetObject);
+
+        System.out.println(associationAttributeClass);
+
+
+        return associationAttributeClass;
+    }
+
+    /**
      * Adds ManyToMany association between THIS object and targetObject if possible
      * Throws exception otherwise
      *
@@ -616,7 +644,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
     }
 
-    public <T extends ExtensionAnnotationAssociationManager> ExtensionAssociationManager getAssociationAttributeClass(
+    public <T extends ExtensionAnnotationAssociationManager> ExtensionAnnotationAssociationManager getAssociationAttributeClass(
             String roleName,
             T target) throws Exception {
 
@@ -646,7 +674,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                     System.out.println("YEP IT HAS!!!");
 
                     // if so return this association class
-                    return attributeClass;
+                    return (ExtensionAnnotationAssociationManager) attributeClass;
                 }
 
             }
@@ -768,7 +796,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
                     }
                 }
             }
-        }else {
+        } else {
             throw new Exception(String.format("Unable to create Qualified Association between %s and %s",
                     this.getClass().getSimpleName(),
                     target.getClass().getSimpleName()));
@@ -782,10 +810,10 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         boolean associationAdded = false;
 
         // check if the target is a One side
-        if(target.getClass().isAnnotationPresent(OneToManyAssociation.class)){
+        if (target.getClass().isAnnotationPresent(OneToManyAssociation.class)) {
             OneToManyAssociation targetOneToManyAssociationAnnotation = target.getClass().getAnnotation(OneToManyAssociation.class);
             // if so check if the exists between the two
-            if(targetOneToManyAssociationAnnotation.target().equals(this.getClass())){
+            if (targetOneToManyAssociationAnnotation.target().equals(this.getClass())) {
                 // its ok
                 // if so add link
                 addOneToManyLink(target, this);
@@ -793,7 +821,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
             }
         }
 
-        if(!associationAdded){
+        if (!associationAdded) {
             throw new Exception(String.format("Cannot create ManyToOne Association between %s and %s",
                     this.getClass().getSimpleName(),
                     target.getClass().getSimpleName()));
@@ -806,11 +834,11 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         boolean associationAdded = false;
 
         // check if the caller is a One side
-        if(this.getClass().isAnnotationPresent(OneToManyAssociation.class)){
+        if (this.getClass().isAnnotationPresent(OneToManyAssociation.class)) {
             System.out.println("WW");
             OneToManyAssociation callerOneToManyAssociationAnnotation = this.getClass().getAnnotation(OneToManyAssociation.class);
             // if so check if the exists between the two
-            if(callerOneToManyAssociationAnnotation.target().equals(target.getClass())){
+            if (callerOneToManyAssociationAnnotation.target().equals(target.getClass())) {
                 System.out.println("WWWW");
                 // its ok
                 // if so add link
@@ -819,7 +847,7 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
             }
         }
 
-        if(!associationAdded){
+        if (!associationAdded) {
             throw new Exception(String.format("Cannot create OneToMany Association between %s and %s",
                     this.getClass().getSimpleName(),
                     target.getClass().getSimpleName()));
@@ -833,12 +861,12 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         OneToManyAssociation callerOneToManyAssociationAnnotation = source.getClass().getAnnotation(OneToManyAssociation.class);
 
         // check if the target has OneToMany association annotation valid
-        if(target.getClass().isAnnotationPresent(ManyToOneAssociation.class)){
+        if (target.getClass().isAnnotationPresent(ManyToOneAssociation.class)) {
             ManyToOneAssociation targetManyToOneAssociationAnnotation = target.getClass().getAnnotation(ManyToOneAssociation.class);
-            if(targetManyToOneAssociationAnnotation.target().equals(source.getClass())){
+            if (targetManyToOneAssociationAnnotation.target().equals(source.getClass())) {
                 // TODO:SL what to do when OneToMany on the one side exists already? now we throw exception
 
-                if(target.hasRole(targetManyToOneAssociationAnnotation.role())){
+                if (target.hasRole(targetManyToOneAssociationAnnotation.role())) {
                     throw new Exception(String.format("Sorry for now we do not support for changing current ONE side in OneToMany association. Becouse already OneToMany Association exists between %s and %s associaotion new cannot be created",
                             source.getClass().getSimpleName(),
                             target.getClass().getSimpleName()));
@@ -851,6 +879,29 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
                 source.addLink(sourceRoleName, targetRoleName, target);
             }
+        }
+
+    }
+
+    protected <S extends ExtensionAnnotationAssociationManager, A extends ExtensionAnnotationAssociationManager>
+    boolean checkIfValidAttributeClass(
+            S source,
+            A attributeClass
+    ){
+        // check if source has ManyToMany association -> otherwise return false;
+        if(!source.getClass().isAnnotationPresent(ManyToManyAssociation.class)){
+            return false;
+        }
+
+        // get ManyToMany Association annotation from source
+        ManyToManyAssociation sourceManyToManyAssociationAnnotation =
+                source.getClass().getAnnotation(ManyToManyAssociation.class);
+
+        // check the middleClass from this annotation against attributeClass type -> if they match return true otherwise return false
+        if(sourceManyToManyAssociationAnnotation.middleClass().equals(attributeClass.getClass())){
+            return true;
+        }else{
+            return false;
         }
 
     }

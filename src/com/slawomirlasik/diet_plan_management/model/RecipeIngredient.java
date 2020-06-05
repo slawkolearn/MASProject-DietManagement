@@ -8,15 +8,19 @@ public class RecipeIngredient extends ExtensionAnnotationAssociationManager impl
 
     private Float amountOfIngredient;
 
+    private MeasurementUnits unitType;
 
-    public RecipeIngredient(Float amountOfIngredientFloat) {
+
+    public RecipeIngredient(Float amountOfIngredientFloat, MeasurementUnits unitType) {
         super();
         this.amountOfIngredient = amountOfIngredientFloat;
     }
 
-    public RecipeIngredient() {
-        this(null);
+    public RecipeIngredient(MeasurementUnits unitType){
+        this(null, unitType);
     }
+
+
 
     public Float getAmountOfIngredient() {
         return checkIfAmountOfIngredientPresent() ? amountOfIngredient : 0f;
@@ -30,10 +34,18 @@ public class RecipeIngredient extends ExtensionAnnotationAssociationManager impl
         this.amountOfIngredient = amountOfIngredient;
     }
 
+    public MeasurementUnits getUnitType() {
+        return unitType;
+    }
+
+    public void setUnitType(MeasurementUnits unitType) {
+        this.unitType = unitType;
+    }
+
     @Override
     public String toString() {
         return "RecipeIngredient{" +
-                "amountOfIngredient=" + (checkIfAmountOfIngredientPresent() ? getAmountOfIngredient() : "ilość dowolna") +
+                "amountOfIngredient=" + (checkIfAmountOfIngredientPresent() ? getAmountOfIngredient() + " " + getUnitType() : "ilość dowolna") +
                 '}';
     }
 }

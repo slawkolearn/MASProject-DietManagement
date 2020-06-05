@@ -44,4 +44,16 @@ public class Recipe extends ExtensionAnnotationAssociationManager implements Ser
         addManyToManyLink(muscleTrainingDietType);
 
     }
+
+    public void addIngredient(Ingredient ingredient, float amount) throws Exception {
+
+        ExtensionAnnotationAssociationManager attributeClassObject = addManyToManyLinkWithAttributeClass(ingredient);
+
+
+        // we know what kind of attribute class it is but we may as well check
+        if(checkIfValidAttributeClass(this, attributeClassObject)){
+
+        }
+
+    }
 }

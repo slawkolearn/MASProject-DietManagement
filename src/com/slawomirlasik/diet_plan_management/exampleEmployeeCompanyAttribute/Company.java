@@ -1,7 +1,6 @@
 package com.slawomirlasik.diet_plan_management.exampleEmployeeCompanyAttribute;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
-import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
 import com.slawomirlasik.diet_plan_management.util.ManyToManyAssociation;
 
 import java.time.LocalDate;
@@ -43,15 +42,15 @@ public class Company extends ExtensionAnnotationAssociationManager {
 
     public void hireEmployee(Employee employee, float salary) throws Exception {
         // add link many to many between them
-        addManyToManyLink(employee);
-
-        // get association class created between THIS object and employee
-        ExtensionAssociationManager associationAttributeClass = getAssociationAttributeClass("Employs", employee);
-
-        System.out.println(associationAttributeClass);
+        ExtensionAnnotationAssociationManager associationAttributeClass =  addManyToManyLinkWithAttributeClass(employee);
+//
+//        // get association class created between THIS object and employee
+//        ExtensionAssociationManager associationAttributeClass = getAssociationAttributeClass("Employs", employee);
+//
+//        System.out.println(associationAttributeClass);
 
         // we know what kind of attribute class it is but we may as well check
-        if(associationAttributeClass.getClass().equals(WorksIn.class)){
+        if(checkIfValidAttributeClass(this,associationAttributeClass )){
 
             WorksIn associationClass = (WorksIn) associationAttributeClass;
 
