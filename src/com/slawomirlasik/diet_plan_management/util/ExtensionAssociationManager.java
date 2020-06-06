@@ -332,4 +332,11 @@ public class ExtensionAssociationManager extends ExtensionManager implements Ser
     protected boolean hasRole(String role) {
         return links.keySet().contains(role);
     }
+
+    public void removeLink(ExtensionAssociationManager elementToRemove) {
+
+        for(Map<Object, ExtensionAssociationManager> target: links.values()){
+           target.entrySet().removeIf(entry -> elementToRemove.equals(entry.getValue()));
+        }
+    }
 }
