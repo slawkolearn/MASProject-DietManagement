@@ -6,7 +6,9 @@ import com.slawomirlasik.diet_plan_management.util.ExtensionAssociationManager;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
 
 public class PersonOverlapping extends ExtensionAnnotationAssociationManager implements Serializable {
     private static Integer MINIMAL_AGE = 18;
@@ -175,6 +177,49 @@ public class PersonOverlapping extends ExtensionAnnotationAssociationManager imp
         }
     }
 
+    public String getInfo() throws Exception {
+
+        String userInfo = "-----------------------------------\n";
+
+        userInfo += this.toString() + "\n";
+
+        if(personTypes.contains(PersonType.DIET_USER)){
+            userInfo += ((DietUserOverlapping) getLinks(roleNameDietUser)[0]).getInfo();
+        }
+
+        if(personTypes.contains(PersonType.DIET_ADMINISTRATOR)){
+            userInfo += ((DietAdministratorOverlapping) getLinks(roleNameDietAdministrator)[0]).getInfo();
+        }
+
+        userInfo += "-----------------------------------\n\n";
+
+        return userInfo;
+    }
+
+    private List<String> getDiplomas() throws Exception {
+
+        ExtensionAssociationManager[] diplomas = getLinks(roleNameDietAdministrator);
+
+        List<String> diplomasList = new ArrayList<>();
+
+        for(ExtensionAssociationManager diploma : diplomas){
+            diplomasList.add(diploma.toString());
+        }
+
+        return diplomasList;
+    }
+
+    private List<String> getStatistics() throws Exception {
+        ExtensionAssociationManager[] dietUserStatistics = getLinks(roleNameDietUser);
+
+        List<String> userStatsList = new ArrayList<>();
+
+        for(ExtensionAssociationManager stat : dietUserStatistics){
+            userStatsList.add(stat.toString());
+        }
+
+        return userStatsList;
+    }
 
 
     @Override

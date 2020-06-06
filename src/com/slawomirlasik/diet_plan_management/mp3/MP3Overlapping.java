@@ -113,6 +113,12 @@ public class MP3Overlapping {
             // error
 //            robertUser.showDiplomas();
 
+            // show overlapping polymorphism
+            System.out.println("-------------- Getting persons info ------------------");
+            System.out.println(markAdminUser.getInfo());
+            System.out.println(christofferUser.getInfo());
+            System.out.println(bobAdmin.getInfo());
+
 
             // assign sample mentors for diet users
 

@@ -35,4 +35,16 @@ public class DietUserOverlapping  extends ExtensionAnnotationAssociationManager 
 
         return getLinks("has statistics");
     }
+
+    public String getInfo() throws Exception {
+
+        String dietUserInfo = "";
+
+        ExtensionAssociationManager[] userDietStats = getLinks("has statistics");
+
+        for(ExtensionAssociationManager stat : userDietStats){
+            dietUserInfo += "      " + stat.toString() + "\n";
+        }
+        return dietUserInfo;
+    }
 }

@@ -33,4 +33,16 @@ public class DietAdministratorOverlapping extends ExtensionAnnotationAssociation
         return getLinks("has");
 
     }
+
+    public String getInfo() throws Exception {
+
+        String dietAdminInfo = "";
+
+        ExtensionAssociationManager[] adminDiplomas = getLinks("has");
+
+        for(ExtensionAssociationManager diploma : adminDiplomas){
+            dietAdminInfo += "      " + diploma.toString() + "\n";
+        }
+        return dietAdminInfo;
+    }
 }
