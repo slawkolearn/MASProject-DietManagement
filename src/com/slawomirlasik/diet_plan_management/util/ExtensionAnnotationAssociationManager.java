@@ -6,6 +6,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -15,6 +16,9 @@ import java.util.Arrays;
 // TODO:SL make all methods from util classes at least proteted / package private so the classes that extends them or are in the same packge can use them (we assume that they know what they will do)
 
 public class ExtensionAnnotationAssociationManager extends ExtensionAssociationManager implements Serializable {
+
+    // public date formatter field
+    public final static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public ExtensionAnnotationAssociationManager() {
         super();
@@ -929,15 +933,17 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         boolean associationAdded = false;
 
         // check if the target is a One side
-        if (target.getClass().isAnnotationPresent(OneToManyAssociation.class)) {
-            OneToManyAssociation targetOneToManyAssociationAnnotation = target.getClass().getAnnotation(OneToManyAssociation.class);
+        if (target.getClass().getAnnotationsByType(OneToManyAssociation.class).length > 0) {
+//            OneToManyAssociation targetOneToManyAssociationAnnotation = target.getClass().getAnnotation(OneToManyAssociation.class);
             // if so check if the exists between the two
-            if (targetOneToManyAssociationAnnotation.target().equals(this.getClass())) {
-                // its ok
-                // if so add link
-                addOneToManyLink(target, this);
-                associationAdded = true;
-            }
+            for(OneToManyAssociation targetOneToManyAssociationAnnotation : target.getClass().getAnnotationsByType(OneToManyAssociation.class)){
+                if (targetOneToManyAssociationAnnotation.target().equals(this.getClass())) {
+                    // its ok
+                    // if so add link
+                    addOneToManyLink(target, this);
+                    associationAdded = true;
+                }            }
+
         }
 
         if (!associationAdded) {
@@ -953,16 +959,18 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
         boolean associationAdded = false;
 
         // check if the caller is a One side
-        if (this.getClass().isAnnotationPresent(OneToManyAssociation.class)) {
+        if (this.getClass().getAnnotationsByType(OneToManyAssociation.class).length > 0) {
             System.out.println("WW");
-            OneToManyAssociation callerOneToManyAssociationAnnotation = this.getClass().getAnnotation(OneToManyAssociation.class);
+//            OneToManyAssociation callerOneToManyAssociationAnnotation = this.getClass().getAnnotation(OneToManyAssociation.class);
             // if so check if the exists between the two
-            if (callerOneToManyAssociationAnnotation.target().equals(target.getClass())) {
-                System.out.println("WWWW");
-                // its ok
-                // if so add link
-                addOneToManyLink(this, target);
-                associationAdded = true;
+            for(OneToManyAssociation callerOneToManyAssociationAnnotation : this.getClass().getAnnotationsByType(OneToManyAssociation.class)){
+                if (callerOneToManyAssociationAnnotation.target().equals(target.getClass())) {
+                    System.out.println("WWWW");
+                    // its ok
+                    // if so add link
+                    addOneToManyLink(this, target);
+                    associationAdded = true;
+                }
             }
         }
 
@@ -978,26 +986,34 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
     void addOneToManyLink(S source, T target) throws Exception {
 
         OneToManyAssociation callerOneToManyAssociationAnnotation = source.getClass().getAnnotation(OneToManyAssociation.class);
+        for(OneToManyAssociation callerOneToManyAssociation: source.getClass().getAnnotationsByType(OneToManyAssociation.class)){
+            if( callerOneToManyAssociation.target().equals(target.getClass()) ) {
+                callerOneToManyAssociationAnnotation = callerOneToManyAssociation;
+            }
+        }
 
         // check if the target has OneToMany association annotation valid
-        if (target.getClass().isAnnotationPresent(ManyToOneAssociation.class)) {
-            ManyToOneAssociation targetManyToOneAssociationAnnotation = target.getClass().getAnnotation(ManyToOneAssociation.class);
-            if (targetManyToOneAssociationAnnotation.target().equals(source.getClass())) {
-                // TODO:SL what to do when OneToMany on the one side exists already? now we throw exception
+        if (target.getClass().getAnnotationsByType(ManyToOneAssociation.class).length > 0) {
+//            ManyToOneAssociation targetManyToOneAssociationAnnotation = target.getClass().getAnnotation(ManyToOneAssociation.class);
+            for(ManyToOneAssociation targetManyToOneAssociationAnnotation : target.getClass().getAnnotationsByType(ManyToOneAssociation.class)){
+                if (targetManyToOneAssociationAnnotation.target().equals(source.getClass())) {
+                    // TODO:SL what to do when OneToMany on the one side exists already? now we throw exception
 
-                if (target.hasRole(targetManyToOneAssociationAnnotation.role())) {
-                    throw new Exception(String.format("Sorry for now we do not support for changing current ONE side in OneToMany association. Becouse already OneToMany Association exists between %s and %s associaotion new cannot be created",
-                            source.getClass().getSimpleName(),
-                            target.getClass().getSimpleName()));
+                    if (target.hasRole(targetManyToOneAssociationAnnotation.role())) {
+                        throw new Exception(String.format("Sorry for now we do not support for changing current ONE side in OneToMany association. Becouse already OneToMany Association exists between %s and %s associaotion new cannot be created",
+                                source.getClass().getSimpleName(),
+                                target.getClass().getSimpleName()));
+                    }
+
+                    // uyes it is ok
+                    // add link :)
+                    String sourceRoleName = callerOneToManyAssociationAnnotation.role();
+                    String targetRoleName = targetManyToOneAssociationAnnotation.role();
+
+                    source.addLink(sourceRoleName, targetRoleName, target);
                 }
-
-                // uyes it is ok
-                // add link :)
-                String sourceRoleName = callerOneToManyAssociationAnnotation.role();
-                String targetRoleName = targetManyToOneAssociationAnnotation.role();
-
-                source.addLink(sourceRoleName, targetRoleName, target);
             }
+
         }
 
     }
@@ -1036,5 +1052,6 @@ public class ExtensionAnnotationAssociationManager extends ExtensionAssociationM
 
     }
 
+ // TODO:SL add method that will getLinks for a given target class (if possible)
 
 }

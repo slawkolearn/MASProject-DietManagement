@@ -15,7 +15,7 @@ import java.io.Serializable;
 @ManyToManyAssociation(
         target = DietType.class,
         middleClass = RecipeDietType.class,
-        role = "is of a type"
+        role = "is for type"
 )
 @ManyToManyAssociation(
         target = Ingredient.class,

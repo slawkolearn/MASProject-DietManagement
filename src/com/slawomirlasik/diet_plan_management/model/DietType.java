@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @ManyToManyAssociation(
         target = Recipe.class,
-        role = "concerns",
+        role = "concerns recipe",
         middleClass = RecipeDietType.class
 )
 public class DietType extends ExtensionAnnotationAssociationManager implements Serializable {

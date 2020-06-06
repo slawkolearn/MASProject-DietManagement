@@ -1,6 +1,8 @@
 package com.slawomirlasik.diet_plan_management.mp1;
 
 import com.slawomirlasik.diet_plan_management.model.*;
+import com.slawomirlasik.diet_plan_management.mp3.model.abstractpolymorphism.DietAdministratorAbstractPolymorphism;
+import com.slawomirlasik.diet_plan_management.mp3.model.abstractpolymorphism.DietUserAbstractPolymorphism;
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
 import com.slawomirlasik.diet_plan_management.util.ExtensionManager;
 
@@ -58,15 +60,15 @@ public class Mp1 {
         // atrybut klasowy
         System.out.println("Poniżej przedstawiamy przykład użycia atrybutu klasowego z klasy Person MINMAL_AGE...");
         System.out.println("Osoba posiadająca powyżej 18 lat:");
-        DietAdministrator dietAdmin1 = null;
+        DietAdministratorAbstractPolymorphism dietAdmin1 = null;
         try {
-            dietAdmin1 = new DietAdministrator(
+            dietAdmin1 = new DietAdministratorAbstractPolymorphism(
                     "Pablo", "Picasso", LocalDate.parse("11-10-1977", dateFormatter)
             );
             System.out.println(dietAdmin1);
 
             System.out.println("Próba stworzenia osoby poniżej 18 roku życia:");
-            DietAdministrator dietAdmin2 = new DietAdministrator(
+            DietAdministratorAbstractPolymorphism dietAdmin2 = new DietAdministratorAbstractPolymorphism(
                     "Krzysiu", "Laskowski", LocalDate.parse("31-12-2006", dateFormatter)
             );
             // wyjątek -> osoba Krzysiu będzie miała poniżej 18 lat dla daty 31-12-2006
@@ -105,23 +107,23 @@ public class Mp1 {
         // przesłonięcie (overriding)
          // metoda toString() w klasach DietAdministrator i DietUser
             // stwórzmy bądź weźmy jakąś obiekt klasy DietAdministrator i DietUser
-        DietUser dietUser1 = null;
-        DietAdministrator dietAdministrator1 = null;
-        if(ExtensionManager.hasExtensionType(DietUser.class)){
-            dietUser1 = ExtensionManager.getExtension(DietUser.class).iterator().next();
+        DietUserAbstractPolymorphism dietUser1 = null;
+        DietAdministratorAbstractPolymorphism dietAdministrator1 = null;
+        if(ExtensionManager.hasExtensionType(DietUserAbstractPolymorphism.class)){
+            dietUser1 = ExtensionManager.getExtension(DietUserAbstractPolymorphism.class).iterator().next();
         }else{
             try {
-                dietUser1 = new DietUser("Paweł", "Kłos", LocalDate.parse("14-11-1989", dateFormatter));
+                dietUser1 = new DietUserAbstractPolymorphism("Paweł", "Kłos", LocalDate.parse("14-11-1989", dateFormatter));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        if(ExtensionManager.hasExtensionType(DietAdministrator.class)){
-            dietAdmin1 = ExtensionManager.getExtension(DietAdministrator.class).iterator().next();
+        if(ExtensionManager.hasExtensionType(DietAdministratorAbstractPolymorphism.class)){
+            dietAdmin1 = ExtensionManager.getExtension(DietAdministratorAbstractPolymorphism.class).iterator().next();
         }else{
             try {
-                dietAdmin1 = new DietAdministrator("Grzegorz", "Nowak",
+                dietAdmin1 = new DietAdministratorAbstractPolymorphism("Grzegorz", "Nowak",
                         LocalDate.parse("11-01-2012", dateFormatter)
                 );
 
@@ -158,7 +160,7 @@ public class Mp1 {
 
     }
 
-    private static void printSkillsOfDietManager(DietAdministrator dietAdmin1) {
+    private static void printSkillsOfDietManager(DietAdministratorAbstractPolymorphism dietAdmin1) {
         System.out.printf("Administrator diety %s posiada umiejętności: [ ",
                 dietAdmin1.getName() + " " +  dietAdmin1.getLastName());
         System.out.println("].");

@@ -16,7 +16,8 @@ name
 surrname
 birthdate
 --
-getAge()</panel_attributes>
+getAge()
+&lt;&lt;abstract&gt;&gt;getInfo()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -32,6 +33,7 @@ getAge()</panel_attributes>
 
 --
 showDietStatistics(period)
+getInfo()
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -48,7 +50,7 @@ showDietStatistics(period)
 
 --
 generateNewDietForGivenUser(dietUser)
-</panel_attributes>
+getInfo()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -434,14 +436,14 @@ r2=part of
     <coordinates>
       <x>792</x>
       <y>728</y>
-      <w>208</w>
+      <w>248</w>
       <h>96</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=n
-r1=is of Type
+r1=is for Type
 m2=n
-r2=concerns
+r2=concerns recipe
 
 </panel_attributes>
     <additional_attributes>10.0;90.0;180.0;90.0;180.0;10.0</additional_attributes>
@@ -488,7 +490,7 @@ fatsPerMeal</panel_attributes>
     <panel_attributes>lt=-
 m1=n
 r1=has
-m2=n
+m2=1
 r2=belongs to
 
 </panel_attributes>
@@ -616,9 +618,9 @@ r2=concerns
     <id>Relation</id>
     <coordinates>
       <x>976</x>
-      <y>728</y>
-      <w>136</w>
-      <h>192</h>
+      <y>720</y>
+      <w>184</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>lt=[name]-&gt;
 m2=0..1
@@ -626,6 +628,23 @@ r2=is part of by name
 m1=0..n
 r1=contains by name
 </panel_attributes>
-    <additional_attributes>30.0;220.0;30.0;10.0</additional_attributes>
+    <additional_attributes>30.0;230.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>736</x>
+      <y>608</y>
+      <w>216</w>
+      <h>304</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+r1=is for Type
+m2=n
+r2=concerns diet
+
+</panel_attributes>
+    <additional_attributes>90.0;350.0;210.0;360.0;250.0;320.0;100.0;50.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>

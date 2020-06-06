@@ -1,19 +1,23 @@
-package com.slawomirlasik.diet_plan_management.model;
+package com.slawomirlasik.diet_plan_management.mp3.model.abstractpolymorphism;
 
 import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociationManager;
+import com.slawomirlasik.diet_plan_management.util.ManyToOneAssociation;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
-
-public class Diploma extends ExtensionAnnotationAssociationManager implements Serializable {
+@ManyToOneAssociation(
+        target = DietAdministratorAbstractPolymorphism.class,
+        role = "belongs to"
+)
+public class DiplomaAbstractPolymorphism extends ExtensionAnnotationAssociationManager implements Serializable {
 
     private String schoolName;
     private LocalDate finishDate;
     private Set<String> skills;
 
-    public Diploma(String schoolName, LocalDate finishDate, Set<String> skillSet) {
+    public DiplomaAbstractPolymorphism(String schoolName, LocalDate finishDate, Set<String> skillSet) {
         super();
         this.schoolName = schoolName;
         this.finishDate = finishDate;
@@ -42,5 +46,14 @@ public class Diploma extends ExtensionAnnotationAssociationManager implements Se
 
     public void setSkills(Set<String> skills) {
         this.skills = skills;
+    }
+
+    @Override
+    public String toString() {
+        return "DiplomaAbstractPolymorphism{" +
+                "schoolName='" + schoolName + '\'' +
+                ", finishDate=" + finishDate +
+                ", skills=" + skills +
+                '}';
     }
 }
