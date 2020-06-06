@@ -151,7 +151,7 @@ public class MP3AbstractClassPolymorphism {
         LocalDate startingDate = LocalDate.now().minusDays((long) (Math.random() * (900 - 0 + 1)));
 
         while (numberOfStatisticsToAdd-- > 0) {
-            dietManagementService.addStatisticToUser(
+            dietManagementService.addUserToStatistic(
                     user,
                     new DietStatisticsAbstractPolymorphism(
                             (float) Math.random() * (220 - 140 + 1) + 140,

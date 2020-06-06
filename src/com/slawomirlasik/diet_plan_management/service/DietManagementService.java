@@ -5,7 +5,7 @@ import com.slawomirlasik.diet_plan_management.util.ExtensionAnnotationAssociatio
 
 public interface DietManagementService {
 
-    void addStatisticToUser(
+    void addUserToStatistic(
             ExtensionAnnotationAssociationManager user,
             ExtensionAnnotationAssociationManager statistic
             ) throws Exception;

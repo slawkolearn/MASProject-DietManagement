@@ -7,7 +7,7 @@ public class ObjectPlusDietManagementServiceImpl implements DietManagementServic
 
 
     @Override
-    public void addStatisticToUser(ExtensionAnnotationAssociationManager user, ExtensionAnnotationAssociationManager statistic) throws Exception {
+    public void addUserToStatistic(ExtensionAnnotationAssociationManager user, ExtensionAnnotationAssociationManager statistic) throws Exception {
         System.out.printf("Adding %s to %s\n", statistic, user);
 
         statistic.addManyToOneLink(user);
